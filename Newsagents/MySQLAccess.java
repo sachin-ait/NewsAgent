@@ -14,7 +14,7 @@ public class MySQLAccess {
 	
 	final private String host ="localhost:3306";
 	final private String user = "root";
-	final private String password = "Phillyx2";
+	final private String password = "";
 	
 	
 	public MySQLAccess() throws Exception {
