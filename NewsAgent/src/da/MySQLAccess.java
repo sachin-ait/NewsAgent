@@ -3,6 +3,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+
+import base.MysqlJDBC;
+
 import java.sql.ResultSet;
 
 
@@ -13,26 +16,9 @@ public class MySQLAccess {
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	
-	final private String host ="localhost:3306";
-	final private String user = "root";
-	final private String password = "";
-	
 	
 	public MySQLAccess() throws Exception {
-		
-		try {
-			
-			//Load MySQL Driver
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			
-			//Setup the connection with the DB
-			connect = DriverManager.getConnection("jdbc:mysql://" + host + "/NewsAgents2021?" + "user=" + user + "&password=" + password);
-		}
-		catch (Exception e) {
-			throw e;
-		}
-		
-		
+		connect= MysqlJDBC.getConnection();
 	}	
 
 	public boolean insertDADetailsAccount(DA c) {
