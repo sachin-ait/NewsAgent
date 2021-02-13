@@ -6,11 +6,15 @@ public class UserTest extends TestCase {
 
     public void testUser001() {
 
-        User user = new User("tom", "a123456");
-        // Use getters to check for object creation
-        assertEquals(0, user.getId());
-        assertEquals("tom", user.getUserName());
-        assertEquals("a123456", user.getPassword());
+        try {
+            User user = new User("tom", "a123456");
+            // Use getters to check for object creation
+            assertEquals(0, user.getId());
+            assertEquals("tom", user.getUserName());
+            assertEquals("a123456", user.getPassword());
+        } catch (UserExceptionHandler userExceptionHandler) {
+            fail("Exception not expected");
+        }
 
     }
 
