@@ -5,12 +5,12 @@ public class User {
     private String userName;
     private String password;
 
-    public User(String userName, String password) {
+    public User(String userName, String password) throws UserExceptionHandler {
         try {
             validateUserName(userName);
             validateUserPassword(password);
         } catch (UserExceptionHandler userExceptionHandler) {
-            userExceptionHandler.printStackTrace();
+            throw userExceptionHandler;
         }
 
         this.id = 0;
