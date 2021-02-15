@@ -71,7 +71,7 @@ public class CommandLine {
 				functionNumber = keyboard.next();
 		
 				switch (functionNumber) {
-		
+	
 				case "1":
 					//Get Customer Details from the User
 					System.out.printf("Enter Agents Name: \n");
@@ -104,10 +104,10 @@ public class CommandLine {
 							rSet.close();
 					}
 					break;
-					
+				
 				case "3":
 					//Delete Customer Record by ID
-					System.out.println("Enter Delivery Agent Id to be deleted or -99 to Clear all Rows");
+					System.out.println("Enter Delivery Agent Id to be deleted or -99 to Clear all Rows (Option -99 is not functional)");
 					String deleteDAId = keyboard.next();
 					boolean deleteResult = dao.deleteDAById(Integer.parseInt(deleteDAId));
 					if ((deleteResult == true) && (deleteDAId.equals("-99")))

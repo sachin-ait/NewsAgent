@@ -53,7 +53,7 @@ public class MySQLAccess {
 	
 		try {
 			statement = connect.createStatement();
-			resultSet = statement.executeQuery("Select * from NewsAgents2021.DeliveryAgents");
+			resultSet = statement.executeQuery("Select * from newsagent.DeliveryAgents");
 		
 		}
 		catch (Exception e) {
@@ -67,13 +67,13 @@ public class MySQLAccess {
 		boolean deleteSucessfull = true;
 		
 		//Add Code here to call embedded SQL to insert Customer into DB
-		
+	
 		try {
 			
 			//Create prepared statement to issue SQL query to the database
 			if (DAID == -99)
 				//Delete all entries in Table
-				preparedStatement = connect.prepareStatement("delete from NewsAgents2021.DeliveryAgents");
+				preparedStatement = connect.prepareStatement("delete from newsagent.DeliveryAgents");
 			else
 				//Delete a particular Customer
 				preparedStatement = connect.prepareCall("call delete_Agent(?)");
