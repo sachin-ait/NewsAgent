@@ -58,6 +58,21 @@ public class MySQLAccess {
         return resultSet;
     }
 
+
+    public ResultSet retrieveUser(String userName,String password) {
+
+        //Add Code here to call embedded SQL to view Customer Details
+
+        try {
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("Select * from newsagent.user where userName = + " + userName+"and password="+password);
+
+        } catch (Exception e) {
+            resultSet = null;
+        }
+        return resultSet;
+    }
+
     public boolean deleteCustomerById(int userId) {
 
         boolean deleteSucessfull = true;
