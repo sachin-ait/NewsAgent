@@ -2,6 +2,8 @@ package login;
 
 import java.sql.*;
 
+import base.MysqlJDBC;
+
 
 public class MySQLAccess {
 
@@ -17,17 +19,7 @@ public class MySQLAccess {
 
     public MySQLAccess() throws Exception {
 
-        try {
-
-            //Load MySQL Driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            //Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://" + host + "/newsagent?" + "user=" + user + "&password=" + password);
-        } catch (Exception e) {
-            throw e;
-        }
-
+    	connect= MysqlJDBC.getConnection();
 
     }
 

@@ -1,5 +1,5 @@
 ## Add the sql commands here (related to creting of user and database ,
-  should be run under the root user)
+##  should be run under the root user)
 
 #create newsagent user
 CREATE USER IF NOT EXISTS  'agent'@'%' IDENTIFIED BY 'password';
