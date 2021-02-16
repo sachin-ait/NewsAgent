@@ -125,6 +125,22 @@ public class CommandLine {
                             System.out.println("ERROR: user password set Unsuccess");
                         break;
 
+                    case "5":
+                        //lgoin
+                        System.out.printf("Enter userName: \n");
+                        String userName2 = keyboard.next();
+                        System.out.printf("Enter password: \n");
+                        String password2 = keyboard.next();
+                        ResultSet resultSet2 = dao.retrieveUser(userName2,password2);
+                        boolean loginFlag=false;
+                        if(resultSet2.next()){
+                            loginFlag=true;
+                        }
+                        if (loginFlag == true)
+                            System.out.println("Login success");
+                        else
+                            System.out.println("ERROR: Login Unsuccess");
+                        break;
 
                     case "99":
                         keepAppOpen = false;
