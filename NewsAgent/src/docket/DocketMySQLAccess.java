@@ -10,24 +10,12 @@ public class DocketMySQLAccess {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
-    final private String host = "localhost:3306";
-    final private String user = "root";
-    final private String password = "root1234";
+
 
 
     public DocketMySQLAccess() throws Exception {
 
-        try {
-
-            //Load MySQL Driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            //Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://" + host + "/newsagent?" + "user=" + user + "&password=" + password);
-        } catch (Exception e) {
-            throw e;
-        }
-
+       connect= base.MysqlJDBC.getConnection();
 
     }
 

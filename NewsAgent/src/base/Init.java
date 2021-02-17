@@ -34,6 +34,13 @@ public class Init {
 				break;
 			case "4":
 				cust.CommandLine.main(null);
+				break;
+			case"5":
+				publications.PublicationController.main(null);
+				break;
+			case "6":
+				docket.CommandLine.main(null);
+				break;
 			case "100":
 				running= false;
 				break;
@@ -56,6 +63,8 @@ public class Init {
 	        System.out.println("2. Delivery Agents Menu");
 	        System.out.println("3. Billing Menu");
 	        System.out.println("4. Customer Menu");
+	        System.out.println("5. View Publications Menu");
+	        System.out.println("6. Delivery Dockets Menu");
 	        System.out.println("100 Exit");
 	        System.out.println("=============================================");
 	        System.out.println(" ");
