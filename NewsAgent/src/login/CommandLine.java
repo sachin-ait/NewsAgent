@@ -17,7 +17,7 @@ public class CommandLine {
         System.out.println("2. View ALL User Records");
         System.out.println("3. Delete User Record by ID");
         System.out.println("4. Modify User password ");
-        System.out.println("99. Close the NewsAgent Application");
+        System.out.println("99. Go Back to Main Menu");
         System.out.println("=============================================");
         System.out.println(" ");
 
@@ -141,7 +141,8 @@ public class CommandLine {
             }// end while
 
             //Tidy up Resources
-            keyboard.close();
+            // not needed init.java will take care of it
+            //keyboard.close();
 
         } catch (Exception e) {
             System.out.println("PROGRAM TERMINATED - ERROR MESSAGE:" + e.getMessage());

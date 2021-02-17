@@ -16,7 +16,8 @@ public class CommandLine {
 		System.out.println("2. View ALL Customer Records");
 		System.out.println("3. Delete Customer Record by ID");
 		System.out.println("4. Update Customer Record by ID");
-		System.out.println("99. Close the NewsAgent Application");
+	//	System.out.println("99. Close the NewsAgent Application");
+        System.out.println("99. Go Back to Main Menu");
 		System.out.println("=============================================");
 		System.out.println(" ");
 		
@@ -193,7 +194,7 @@ public class CommandLine {
 			}// end while
 		
 			//Tidy up Resources
-			keyboard.close();
+		//	keyboard.close();
 		
 		}
 		catch(Exception e) {
