@@ -25,10 +25,15 @@ public class Init {
 				break;
 			case "2":
 				da.CommandLine.main(null);
+				break;
 			case "3":
 				biling.CommandLine.main(null);
+				break;
+			case "4":
+				cust.CommandLine.main(null);
 			case "100":
 				running= false;
+				break;
 			default:
 				System.out.println("Please choose correct option");
 				break;
@@ -47,6 +52,7 @@ public class Init {
 	        System.out.println("1. Edit Login users details");
 	        System.out.println("2. Delivery Agents Menu");
 	        System.out.println("3. Billing Menu");
+	        System.out.println("4. Customer Menu");
 	        System.out.println("100 Exit");
 	        System.out.println("=============================================");
 	        System.out.println(" ");
