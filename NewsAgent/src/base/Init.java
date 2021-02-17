@@ -12,12 +12,13 @@ public class Init {
 		
 		Scanner keybrd = new Scanner(System.in);
 		boolean running= true;
-		String input;
+		String input="";
 		//User login= new User(null, null);
 		while(running)
 		{
 			main_menu_show();
-			input= keybrd.next();
+			if (keybrd.hasNext())
+			  input= keybrd.next();
 			switch (input) {
 			case "1":
 				login.CommandLine.main(null);
