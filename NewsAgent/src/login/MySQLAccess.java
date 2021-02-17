@@ -65,8 +65,11 @@ public class MySQLAccess {
 
         try {
             statement = connect.createStatement();
-            resultSet = statement.executeQuery("Select * from newsagent.user where userName = + " + userName+"and password="+password);
-
+            preparedStatement = connect.prepareStatement("select * from newsagent.user where userName  = ? and password = ?");
+            preparedStatement.setString(1, userName);
+            preparedStatement.setString(2, password);
+            resultSet= preparedStatement.executeQuery();
+              
         } catch (Exception e) {
             resultSet = null;
         }
@@ -109,6 +112,7 @@ public class MySQLAccess {
             preparedStatement.setString(1, password);
             preparedStatement.setString(2, String.valueOf(id));
             preparedStatement.executeUpdate();
+            
 
         } catch (Exception e) {
             insertSucessfull = false;

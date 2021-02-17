@@ -79,6 +79,8 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8;
 
+insert into newsagent.user values(default, "sachin", "sachin");
+
 
 -- -----------------------------------------------------
 -- Table `newsagent`.`user_role`

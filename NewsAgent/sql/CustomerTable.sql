@@ -1,4 +1,5 @@
 use newsagent;
+drop table if exists Customer;
 CREATE TABLE if not exists Customer (
     CustID int NOT NULL AUTO_INCREMENT,
     Name varchar(25),

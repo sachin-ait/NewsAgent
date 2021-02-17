@@ -6,10 +6,13 @@ import login.User;
 
 public class Init {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		System.out.println("Welcome to NewsAgent Application \n"
 				+ "Please login into the system \n");
 		
+		while(true)
+		  if (login.CommandLine.login() == 0)
+			break;
 		Scanner keybrd = new Scanner(System.in);
 		boolean running= true;
 		String input="";
