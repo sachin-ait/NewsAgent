@@ -121,9 +121,9 @@ public class DI {
 		// Invalid values for specific months
 
 		if (month == "February") {
-		    if (year % 4 == 0 && year % 100 != 0 && day > 29) {
-		        throw new DIExceptionHandler("Leap year, February only has 29 days");
-		    } else if (day > 28) {
+		    if (day > 29) {
+		        throw new DIExceptionHandler("February cant have more than 29 days");
+		    } else if (year % 4 != 0 && day > 28) {
 		        throw new DIExceptionHandler("February only has 28 days");
 		    }
 		}

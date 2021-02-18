@@ -2,7 +2,7 @@ package di;
 import junit.framework.TestCase;
 public class DITest extends TestCase{
 	
-public void testDA001() {
+public void testDI001() {
 		
 		//Create the Invoice Object
 		
@@ -10,16 +10,17 @@ public void testDA001() {
 		try {
 			
 			//Call method under test
-			DI DIObj = new DI(5,"February",2021, 12, 10, 40.40);
+			DI DIObj = new DI(28,"February",2021, 12, 10, 40.40);
 			
 			// Use getters to check for object creation
 			assertEquals(0, DIObj.getId());
-			assertEquals("5/February/2021", DIObj.getDate());
+			assertEquals("28/February/2021", DIObj.getDate());
 			assertEquals(12, DIObj.getSuccess());
 			assertEquals(10, DIObj.getFailed());
 			assertEquals(40.40, DIObj.getPay());
 		}
 		catch (DIExceptionHandler e) {
+			System.out.println(e.getMessage());
 			fail("Exception not expected");
 		}
 		
@@ -136,7 +137,7 @@ public void testValidateDateSPECIAL001() {
 		fail("Exception expected");
 	}
 	catch (DIExceptionHandler e) {
-		assertEquals("Leap year, February only has 29 days", e.getMessage());	
+		assertEquals("February cant have more than 29 days", e.getMessage());	
 	}
 }
 
