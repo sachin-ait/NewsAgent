@@ -87,7 +87,7 @@ public class DI {
 			throw new DIExceptionHandler("Month is not specified");
 		else if (day <= 0 || day >= 32)
 			throw new DIExceptionHandler("Invalid amount of days");
-
+		
 	}
 	public static void validateDateMONTH(String month) throws DIExceptionHandler {
 
