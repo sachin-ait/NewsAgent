@@ -120,14 +120,13 @@ public class DI {
 		// Agree Formating Rules on "Invoice Date"
 		// Invalid values for specific months
 
-		if (month == "February")
-			if(year % 4 == 0)
-				if(day >= 30)
-					throw new DIExceptionHandler("Leap year, February only has 29 days");
-		if (month == "February")
-			if(day >= 29)
-				if(year % 4 != 0)
-					throw new DIExceptionHandler("February only has 28 days");
+		if (month == "February") {
+		    if (year % 4 == 0 && year % 100 != 0 && day > 29) {
+		        throw new DIExceptionHandler("Leap year, February only has 29 days");
+		    } else if (day > 28) {
+		        throw new DIExceptionHandler("February only has 28 days");
+		    }
+		}
 		if (month == "April")
 			if(day > 30)
 				throw new DIExceptionHandler("April only has 30 days");
