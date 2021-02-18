@@ -95,18 +95,18 @@ public class DI {
 		// Invalid values for all cases
 		// TODO: Replace handler for month to check through list for a match of the 12 months
 					String months[] = new String[] {
-							"January", "january", "Jan",
-							"February", "february", "Feb",
-							"March", "march", "Mar",
-							"April", "april", "Apr",
-							"May", "may",
-							"June", "june", "Jun",
-							"July", "july", "Jul",
-							"August", "august", "Aug",
-							"September", "september", "Sep",
-							"October", "october", "Oct",
-							"November", "november", "Nov",
-							"December", "december", "Dec"
+							"January",
+							"February",
+							"March",
+							"April",
+							"May",
+							"June",
+							"July",
+							"August",
+							"September",
+							"October",
+							"November",
+							"December"
 							};
 					boolean monthPresent = Arrays.asList(months).contains(month);
 		
@@ -124,9 +124,10 @@ public class DI {
 			if(year % 4 == 0)
 				if(day >= 30)
 					throw new DIExceptionHandler("Leap year, February only has 29 days");
-		 if (month == "February")
+		if (month == "February")
 			if(day >= 29)
-				throw new DIExceptionHandler("February only has 28 days");
+				if(year % 4 != 0)
+					throw new DIExceptionHandler("February only has 28 days");
 		if (month == "April")
 			if(day > 30)
 				throw new DIExceptionHandler("April only has 30 days");
