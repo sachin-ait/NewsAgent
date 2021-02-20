@@ -17,7 +17,7 @@ public class DeliveryOrderCommandLine {
 		System.out.println("2. View ALL Delivery Order Records");
 		System.out.println("3. Delete Delivery Order Record by ID");
 		System.out.println("4. Update Delivery Order Record by ID");
-		System.out.println("99. Close the NewsAgent Application");
+		System.out.println("99. Back To main Menu");
 		System.out.println("=============================================");
 		System.out.println(" ");
 
@@ -172,7 +172,7 @@ public class DeliveryOrderCommandLine {
 			} // end while
 
 			// Tidy up Resources
-			keyboard.close();
+			//keyboard.close();
 
 		}
 

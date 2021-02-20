@@ -1,7 +1,7 @@
 
 USE newsagent;
 
-DROP TABLE IF EXISTS DeliveryInvoices;
+DROP TABLE IF EXISTS deliveryInvoices;
 
 CREATE TABLE deliveryInvoices (
 	Invoice_ID int NOT NULL AUTO_INCREMENT,
@@ -43,7 +43,8 @@ in inv_date VARCHAR(60)
 begin
 	INSERT INTO deliveryInvoices(Invoice_Date) VALUES (inv_date);
     end
-// DELIMITER ;
+//
+DELIMITER ;
 
 Drop procedure if exists create_Manual;
 
@@ -62,7 +63,8 @@ begin
     Pay_Due= Pay_sum
     where Invoice_Date = inv_date;
 end
-// DELIMITER ;
+//
+DELIMITER ;
 
 Drop procedure if exists delete_Invoice;
 DELIMITER //
@@ -73,7 +75,8 @@ in inv_ID VARCHAR(60)
 begin
 	DELETE FROM deliveryInvoices where Invoice_ID = inv_ID;
 end
-// DELIMITER ;
+//
+DELIMITER ;
 
 Drop procedure if exists read_Invoices;
 DELIMITER //
@@ -81,7 +84,8 @@ CREATE procedure read_Invoices()
 begin
 	Select * from deliveryAgents;
 end
-// DELIMITER ;
+//
+DELIMITER ;
 
 Drop procedure if exists update_Invoice;
 
@@ -99,7 +103,8 @@ begin
     Pay_Due = Pay_sum
     where Invoice_ID = inv_ID;
 end
-// DELIMITER ;
+//
+DELIMITER ;
 
 
 

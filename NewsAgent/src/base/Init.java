@@ -44,6 +44,9 @@ public class Init {
 			case "7":
 				DeliveryOrder.DeliveryOrderCommandLine.main(null);
 				break;
+			case "8":
+				di.CommandLine.main(null);
+				break;
 			case "100":
 				running= false;
 				break;
@@ -69,6 +72,7 @@ public class Init {
 	        System.out.println("5. View Publications Menu");
 	        System.out.println("6. Delivery Dockets Menu");
 	        System.out.println("7. Delivery Order Menu");
+	        System.out.println("8. Delivery Invoice Menu");
 	        System.out.println("100 Exit");
 	        System.out.println("=============================================");
 	        System.out.println(" ");

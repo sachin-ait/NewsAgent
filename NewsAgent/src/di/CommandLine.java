@@ -17,7 +17,7 @@ public class CommandLine {
 		System.out.println("2. View ALL Invoices");
 		System.out.println("3. Delete Invoice by Date");
 		System.out.println("4. Update Invoice by Date");
-		System.out.println("99. Close the NewsAgent Application");
+		System.out.println("99. Go back to Main Menu");
 		System.out.println("=============================================");
 		System.out.println(" ");
 
@@ -143,7 +143,7 @@ public class CommandLine {
 
 				case "99":
 					keepAppOpen = false;
-					System.out.println("Closing the Application");
+					System.out.println("Back to Main Menu");
 					break;
 
 				default:
@@ -154,7 +154,7 @@ public class CommandLine {
 			} // end while
 
 			// Tidy up Resources
-			keyboard.close();
+			//keyboard.close();
 
 		}
 

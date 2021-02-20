@@ -130,7 +130,7 @@ public class CommandLine {
 
                     case "99":
                         keepAppOpen = false;
-                        System.out.println("Closing the Application");
+                        System.out.println("Main Menu");
                         break;
 
                     default:
