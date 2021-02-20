@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import base.MysqlJDBC;
+
 public class MySQLAccess {
 	
 	private Connection connect = null;
@@ -13,9 +15,6 @@ public class MySQLAccess {
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	
-	final private String host ="localhost:3306";
-	final private String user = "root";
-	final private String password = "1234";
 	
 	public MySQLAccess() {
 
@@ -24,10 +23,7 @@ public class MySQLAccess {
 	public Statement getConnectionStatement() {
 		try {
 
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			connect = DriverManager.getConnection("jdbc:mysql://" + host + "/newsagent?" + "user=" + user + "&password=" + password);
-
+			connect= MysqlJDBC.getConnection();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
