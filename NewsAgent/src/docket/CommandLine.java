@@ -1,10 +1,7 @@
-package biling;
+package docket;
 
 
 import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
 public class CommandLine {
@@ -16,11 +13,10 @@ public class CommandLine {
         System.out.println(" ");
         System.out.println("=============================================");
         System.out.println("Please choose ONE of the following options:");
-        System.out.println("1. Create Bill Account");
-        System.out.println("2. View Bill Records");
-        System.out.println("3. Delete Bill Record by ID");
-        System.out.println("4. Modify Bill INFO ");
-      //  System.out.println("99. Close the NewsAgent Application");
+        System.out.println("1. Create Docket Account");
+        System.out.println("2. View Docket Records");
+        System.out.println("3. Delete Docket Record by ID");
+        System.out.println("4. Modify Docket INFO ");
         System.out.println("99. Go Back to Main Menu");
         System.out.println("=============================================");
         System.out.println(" ");
@@ -40,15 +36,11 @@ public class CommandLine {
         System.out.println();
         while (rs.next()) {
             int id = rs.getInt("id");
-            String customerName = rs.getString("customerName");
-            String customerAddress = rs.getString("customerAddress");
-            String fee = rs.getString("fee");
-            String billDate = rs.getString("billDate");
+            String docketName = rs.getString("docketName");
+            String num = rs.getString("num");
             System.out.printf("%30s", id);
-            System.out.printf("%30s", customerName);
-            System.out.printf("%30s", customerAddress);
-            System.out.printf("%30s", fee);
-            System.out.printf("%30s", billDate);
+            System.out.printf("%30s", docketName);
+            System.out.printf("%30s", num);
             System.out.println();
         }// end while
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
@@ -63,7 +55,7 @@ public class CommandLine {
 
         try {
 
-            BillMySQLAccess dao = new BillMySQLAccess();
+            DocketMySQLAccess dao = new DocketMySQLAccess();
 
             // Configure System for Running
             Scanner keyboard = new Scanner(System.in);
@@ -79,31 +71,24 @@ public class CommandLine {
                 switch (functionNumber) {
 
                     case "1":
-                        //Get Customer Details from the User
-                        System.out.printf("Enter Bill Customer Name: \n");
+                        //Get docket Details from the User
+                        System.out.printf("Enter docket name: \n");
                         String userName = keyboard.next();
-                        System.out.printf("Enter Bill Customer Address: \n");
-                        String address = keyboard.next();
-                        System.out.printf("Enter Bill Fee: \n");
-                        String fee = keyboard.next();
-                        System.out.printf("Enter Bill Date: pattern: 03-12-2020 \n");
-                        String billDate1 = keyboard.next();
-                        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-                        Date billDate = dateFormat.parse(billDate1);
+                        System.out.printf("Enter docket num: \n");
+                        String num = keyboard.next();
+                        Docket docket = new Docket(userName, Integer.parseInt(num));
 
-                        Bill bill = new Bill(userName, address, Double.parseDouble(fee), billDate);
-
-                        //Insert Customer Details into the database
-                        boolean insertResult = dao.insertBill(bill);
+                        //Insert docket Details into the database
+                        boolean insertResult = dao.insertDocket(docket);
                         if (insertResult == true)
-                            System.out.println("Bill Details Saved");
+                            System.out.println("Bill docket Saved");
                         else
-                            System.out.println("ERROR: Bill Details NOT Saved");
+                            System.out.println("ERROR: docket NOT Saved");
                         break;
 
                     case "2":
-                        //Retrieve ALL Customer Records
-                        ResultSet rSet = dao.retrieveAllBills();
+                        //Retrieve ALL docket Records
+                        ResultSet rSet = dao.retrieveAllDocket();
                         if (rSet == null) {
                             System.out.println("No Records Found");
                             break;
@@ -116,38 +101,33 @@ public class CommandLine {
 
                     case "3":
                         //Delete Customer Record by ID
-                        System.out.println("Enter Bill Id to be deleted or -99 to Clear all Rows");
-                        String deleteBillId = keyboard.next();
-                        boolean deleteResult = dao.deleteBillById(Integer.parseInt(deleteBillId));
-                        if ((deleteResult == true) && (deleteBillId.equals("-99")))
-                            System.out.println("User Table Emptied");
+                        System.out.println("Enter docket Id to be deleted or -99 to Clear all Rows");
+                        String deleteDocketId = keyboard.next();
+                        boolean deleteResult = dao.deleteDocketById(Integer.parseInt(deleteDocketId));
+                        if ((deleteResult == true) && (deleteDocketId.equals("-99")))
+                            System.out.println("docket Table Emptied");
                         else if (deleteResult == true)
-                            System.out.println("Bill Deleted");
+                            System.out.println("docket Deleted");
                         else
-                            System.out.println("ERROR: Bill Details NOT Deleted or Do Not Exist");
+                            System.out.println("ERROR: docket Details NOT Deleted or Do Not Exist");
                         break;
 
                     case "4":
                         //update  Bill Info
-                        System.out.printf("Enter Bill Id: \n");
+                        System.out.printf("Enter Docket Id: \n");
                         int Id = Integer.parseInt(keyboard.next());
-                        System.out.printf("Enter customer new Name: \n");
-                        String customerName = keyboard.next();
-                        System.out.printf("Enter customer new Address: \n");
-                        String customerAddress = keyboard.next();
-                        System.out.printf("Enter customer new fee: \n");
-                        String fee1 = keyboard.next();
-                        System.out.printf("Enter customer new bill Date: pattern: 03-12-2020 \n");
-                        String billDateStr = keyboard.next();
-                        DateFormat dateFormat2 = new SimpleDateFormat("MM-dd-yyyy");
-                        Date billDate2 = dateFormat2.parse(billDateStr);
-                        Bill updateBill = new Bill(customerName, customerAddress, Double.parseDouble(fee1), billDate2);
+                        System.out.printf("Enter Docket new Name: \n");
+                        String name = keyboard.next();
+                        System.out.printf("Enter Docket new num: \n");
+                        String num1 = keyboard.next();
+
+                        Docket updateBill = new Docket(name, Integer.parseInt(num1));
                         boolean updateResult = dao.updateBill(Id, updateBill);
 
                         if (updateResult == true)
-                            System.out.println("Bill update success");
+                            System.out.println("docket update success");
                         else
-                            System.out.println("ERROR:Bill update Unsuccess");
+                            System.out.println("ERROR:Docket update Unsuccess");
                         break;
 
 
@@ -164,7 +144,7 @@ public class CommandLine {
             }// end while
 
             //Tidy up Resources
-      //      keyboard.close();
+           // keyboard.close();
 
         } catch (Exception e) {
             System.out.println("PROGRAM TERMINATED - ERROR MESSAGE:" + e.getMessage());

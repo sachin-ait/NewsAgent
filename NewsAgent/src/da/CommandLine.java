@@ -15,7 +15,8 @@ public class CommandLine {
 		System.out.println("1. Create Agent Account");
 		System.out.println("2. View ALL Agent Records");
 		System.out.println("3. Delete Agent Record by ID");
-		System.out.println("99. Close the NewsAgent Application");
+		//System.out.println("99. Close the NewsAgent Application");
+        System.out.println("99. Go Back to Main Menu");
 		System.out.println("=============================================");
 		System.out.println(" ");
 		
@@ -71,7 +72,7 @@ public class CommandLine {
 				functionNumber = keyboard.next();
 		
 				switch (functionNumber) {
-		
+	
 				case "1":
 					//Get Customer Details from the User
 					System.out.printf("Enter Agents Name: \n");
@@ -104,10 +105,10 @@ public class CommandLine {
 							rSet.close();
 					}
 					break;
-					
+				
 				case "3":
 					//Delete Customer Record by ID
-					System.out.println("Enter Delivery Agent Id to be deleted or -99 to Clear all Rows");
+					System.out.println("Enter Delivery Agent Id to be deleted or -99 to Clear all Rows (Option -99 is not functional)");
 					String deleteDAId = keyboard.next();
 					boolean deleteResult = dao.deleteDAById(Integer.parseInt(deleteDAId));
 					if ((deleteResult == true) && (deleteDAId.equals("-99")))
@@ -150,7 +151,7 @@ public class CommandLine {
 			}// end while
 		
 			//Tidy up Resources
-			keyboard.close();
+		//	keyboard.close();
 		
 		}
 	
