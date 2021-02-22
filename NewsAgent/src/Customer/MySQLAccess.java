@@ -1,5 +1,4 @@
-package DeliveryOrder;
-
+package Customer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,7 +35,7 @@ public class MySQLAccess {
 	}
 
 	
-	public boolean insertDeliveryOrderDetailsAccount(DeliveryOrder d) {
+	public boolean insertCustomerDetailsAccount(Customer c) {
 		
 		boolean insertSucessfull = true;
 	
@@ -45,11 +44,12 @@ public class MySQLAccess {
 		try {
 		
 			//Create prepared statement to issue SQL query to the database
-			preparedStatement = connect.prepareStatement("insert into DeliveryOrder values (DEFAULT, ?, ?, ?)");
-			preparedStatement.setString(1, d.getName());
-			preparedStatement.setString(2, d.getPublication());
-			preparedStatement.setString(3, d.getDate());
-
+			preparedStatement = connect.prepareStatement("insert into Customer values (DEFAULT, ?, ?, ?, ?, ?);");
+			preparedStatement.setString(1, c.getName());
+			preparedStatement.setString(2, c.getAddress());
+			preparedStatement.setString(3, c.getPhoneNumber());
+			preparedStatement.setDouble(4, c.getPayment());
+			preparedStatement.setString(5, c.getArea());
 			preparedStatement.executeUpdate();
 		
 	 
@@ -65,13 +65,13 @@ public class MySQLAccess {
 	
 
 
-	public ResultSet retrieveAllDeliveryOrderAccounts() {
+	public ResultSet retrieveAllCustomerAccounts() {
 		
 		//Add Code here to call embedded SQL to view Customer Details
 	
 		try {
 			statement = connect.createStatement();
-			resultSet = statement.executeQuery("Select * from newsagent.DeliveryOrder");
+			resultSet = statement.executeQuery("Select * from newsagent.Customer;");
 		
 		}
 		catch (Exception e) {
@@ -81,7 +81,7 @@ public class MySQLAccess {
 		return resultSet;
 	}
 	
-	public boolean deleteDeliveryOrderById(int deliveryOrderID) {
+	public boolean deleteCustomerById(int custID) {
 
 		boolean deleteSucessfull = true;
 		
@@ -90,12 +90,12 @@ public class MySQLAccess {
 		try {
 			
 			//Create prepared statement to issue SQL query to the database
-			if (deliveryOrderID == -99)
+			if (custID == -99)
 				//Delete all entries in Table
-				preparedStatement = connect.prepareStatement("delete from newsagent.DeliveryOrder");
+				preparedStatement = connect.prepareStatement("delete from newsagent.customer");
 			else
 				//Delete a particular Customer
-				preparedStatement = connect.prepareStatement("delete from newsagent.DeliveryOrder where DeliveryOrderID = " + deliveryOrderID);
+				preparedStatement = connect.prepareStatement("delete from newsagent.customer where custID = " + custID);
 			preparedStatement.executeUpdate();
 		 
 		}
@@ -107,7 +107,7 @@ public class MySQLAccess {
 		
 	}
 	
-	public boolean updateDeliveryOrderById(int deliveryOrderID,String updateChoice,String adjustion) {
+	public boolean updateCustomerById(int custID,String updateChoice,String adjustion) {
 
 		boolean updateSucessful = true;
 		
@@ -116,7 +116,7 @@ public class MySQLAccess {
 		try {
 			
 			//Create prepared statement to issue SQL query to the database
-			preparedStatement = connect.prepareStatement("update DeliveryOrder set "+ updateChoice +" = '" + adjustion + "' where DeliveryOrderID= "+deliveryOrderID);
+			preparedStatement = connect.prepareStatement("update customer set "+ updateChoice +" = '" + adjustion + "' where custID= "+custID);
 			preparedStatement.executeUpdate();
 		 
 		}
@@ -131,4 +131,3 @@ public class MySQLAccess {
 	
 	
 }
-
