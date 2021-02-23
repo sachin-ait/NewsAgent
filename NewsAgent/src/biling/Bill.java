@@ -45,12 +45,6 @@ public class Bill {
         cal1.add(java.util.Calendar.DAY_OF_MONTH, 30);
         Date targetTime1 = cal.getTime();
         int compareTo2 = billDate.compareTo(targetTime1);
-
-        if (compareTo > 0) {
-            throw new BillExceptionHandler("Fee date does not meet minimum Date requirements");
-        } else if (compareTo2 < 0) {
-            throw new BillExceptionHandler("Fee date does not meet maximum Date requirements");
-        }
     }
 
 
@@ -68,7 +62,7 @@ public class Bill {
     static void validateCustomerAddress(String customerAddress) throws BillExceptionHandler {
         //Agree Formating Rules on "Customer Address"
         //E.G. Address String must be a minimum of 10 characters and a maximum of 200 characters
-        if (customerAddress.length() == 0 || customerAddress.isEmpty()) {
+        if (customerAddress.isBlank() || customerAddress.isEmpty()) {
             throw new BillExceptionHandler("Customer Address NOT specified");
         } else if (customerAddress.length() < 10) {
             throw new BillExceptionHandler("Customer Address does not meet minimum length requirements");
@@ -80,7 +74,7 @@ public class Bill {
     static void validateCustomerName(String customerName) throws BillExceptionHandler {
         //Agree Formating Rules on "Biling Name"
         //E.G. Name String must be a minimum of 2 characters and a maximum of 50 characters
-        if (customerName.length() == 0 || customerName.isEmpty()) {
+        if (customerName.isBlank() || customerName.isEmpty()) {
             throw new BillExceptionHandler("Customer Name NOT specified");
         } else if (customerName.length() < 3) {
             throw new BillExceptionHandler("Customer Name does not meet minimum length requirements");
