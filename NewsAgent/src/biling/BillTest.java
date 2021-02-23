@@ -13,7 +13,7 @@ public class BillTest extends TestCase {
     public void testBill001() {
         try {
             DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-            Date billDate = dateFormat.parse("02-13-2021");
+            Date billDate = dateFormat.parse("01-13-2021");
             String outputDate = dateFormat.format(billDate);
             System.out.println();
 
@@ -24,7 +24,7 @@ public class BillTest extends TestCase {
             assertEquals("Belle Brown", bill.getCustomerName());
             assertEquals("1 Farburn Terrace London", bill.getCustomerAddress());
             assertEquals(100.0, bill.getFee());
-            assertEquals("02-13-2021", dateFormat.format(bill.getBillDate()));
+            assertEquals("01-13-2021", dateFormat.format(bill.getBillDate()));
 
         } catch (BillExceptionHandler | ParseException billExceptionHandler) {
             fail("Exception not expected");
@@ -46,6 +46,21 @@ public class BillTest extends TestCase {
         }
     }
 
+    //Test #: 2.4
+    //Test Objective: To catch an incorrect lower boundary value Customer Name
+    //Inputs: custName = ""
+    //Expected Output: "Customer Name NOT specified"
+
+    public void testValidateCustomerName004() {
+        try {
+            //Call method under test
+            Bill.validateCustomerName(" ");
+            fail("Exception expected");
+        } catch (BillExceptionHandler e) {
+            assertEquals("Customer Name NOT specified", e.getMessage());
+        }
+    }
+
     //Test #: 2.2
     //Test Objective: To catch an incorrect lower boundary value Customer Name
     //Inputs: custName = "Aj"
@@ -56,7 +71,7 @@ public class BillTest extends TestCase {
             Bill.validateCustomerName("AJ");
             fail("Exception expected");
         } catch (BillExceptionHandler e) {
-            assertEquals("Customer Name NOT specified", e.getMessage());
+            assertEquals("Customer Name does not meet minimum length requirements", e.getMessage());
         }
     }
 
