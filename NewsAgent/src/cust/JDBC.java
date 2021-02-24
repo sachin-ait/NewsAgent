@@ -39,8 +39,8 @@ public class JDBC {
 			preparedStatement.setString(1, c.getName());
 			preparedStatement.setString(2, c.getAddress());
 			preparedStatement.setString(3, c.getPhoneNumber());
-			preparedStatement.setDouble(5, c.getPayment());
-			preparedStatement.setString(6, c.getArea());
+			preparedStatement.setDouble(4, c.getPayment());
+			preparedStatement.setString(5, c.getArea());
 			preparedStatement.executeUpdate();
 		
 	 
