@@ -116,7 +116,7 @@ public class DeliveryOrderCommandLine {
 					if ((deleteResult == true) && (deleteDeliveryOrderId.equals("-99")))
 						System.out.println("Delivery Order Table Emptied");
 					else if (deleteResult == true)
-						System.out.println("Delivery Order  Deleted");
+						System.out.println("Delivery Order Deleted");
 					else
 						System.out.println("ERROR: Delivery Order Details NOT Deleted or Do Not Exist");
 					break;
