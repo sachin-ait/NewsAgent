@@ -74,7 +74,7 @@ public class GUIbase extends JFrame implements ActionListener {
 					login.CommandLine.main(null);
 				} 
 				else if (selectModule.equals("Delivery Agents")) {
-					da.CommandLine.main(null);
+					da.DaFrame.main(null);
 				}
 				else if (selectModule.equals("Billing")) {
 					biling.CommandLine.main(null);
