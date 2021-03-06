@@ -55,48 +55,48 @@ public class DaFrame extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 
 		nameField = new JTextField();
-		nameField.setBounds(90, 49, 96, 19);
+		nameField.setBounds(119, 49, 96, 19);
 		contentPane.add(nameField);
 		nameField.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Agent Name:");
-		lblNewLabel.setBounds(10, 52, 70, 13);
+		lblNewLabel.setBounds(10, 52, 99, 13);
 		contentPane.add(lblNewLabel);
 
 		areaField = new JTextField();
-		areaField.setBounds(90, 78, 96, 19);
+		areaField.setBounds(119, 78, 96, 19);
 		contentPane.add(areaField);
 		areaField.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Agent Area:");
-		lblNewLabel_1.setBounds(10, 81, 63, 13);
+		lblNewLabel_1.setBounds(10, 81, 99, 13);
 		contentPane.add(lblNewLabel_1);
 
 		payField = new JTextField();
-		payField.setBounds(90, 107, 96, 19);
+		payField.setBounds(119, 107, 96, 19);
 		contentPane.add(payField);
 		payField.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("Pay Rate:");
-		lblNewLabel_2.setBounds(20, 110, 63, 13);
+		lblNewLabel_2.setBounds(20, 110, 89, 13);
 		contentPane.add(lblNewLabel_2);
 
 		hourField = new JTextField();
-		hourField.setBounds(90, 136, 96, 19);
+		hourField.setBounds(119, 136, 96, 19);
 		contentPane.add(hourField);
 		hourField.setColumns(10);
 
 		JLabel lblNewLabel_3 = new JLabel("Hours Logged:");
-		lblNewLabel_3.setBounds(10, 139, 70, 13);
+		lblNewLabel_3.setBounds(10, 139, 99, 13);
 		contentPane.add(lblNewLabel_3);
 
 		idField = new JTextField();
-		idField.setBounds(298, 78, 96, 19);
+		idField.setBounds(325, 78, 96, 19);
 		contentPane.add(idField);
 		idField.setColumns(10);
 
 		JLabel lblNewLabel_4 = new JLabel("Agent ID:");
-		lblNewLabel_4.setBounds(242, 81, 46, 13);
+		lblNewLabel_4.setBounds(242, 81, 73, 13);
 		contentPane.add(lblNewLabel_4);
 
 		createButton.setBounds(53, 179, 85, 21);

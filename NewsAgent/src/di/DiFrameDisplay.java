@@ -1,4 +1,4 @@
-package da;
+package di;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -20,8 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class DaFrameDisplay extends JFrame implements ActionListener {
-	private static DaFrameDisplay single;
+public class DiFrameDisplay extends JFrame implements ActionListener {
+	private static DiFrameDisplay single;
 	private static boolean created = false;
 	private JPanel contentPane;
 	private JTable table_1;
@@ -61,7 +61,7 @@ public class DaFrameDisplay extends JFrame implements ActionListener {
 		}
 	}
 
-	private DaFrameDisplay(){
+	private DiFrameDisplay(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -81,8 +81,8 @@ public class DaFrameDisplay extends JFrame implements ActionListener {
 		contentPane.add(closeButton);
 		closeButton.addActionListener(this);
 		try {
-			MySQLAccess dao = new MySQLAccess();
-			ResultSet rSet = dao.retrieveAllDAAccounts();
+			MySQLAccess dio = new MySQLAccess();
+			ResultSet rSet = dio.retrieveAllDInvoices();
 			if (rSet == null) {
 				System.out.println("No Records Found");
 			}
@@ -91,7 +91,7 @@ public class DaFrameDisplay extends JFrame implements ActionListener {
 				TableColumnModel columnModel = table_1.getColumnModel();
 				columnModel.getColumn(0).setPreferredWidth(50);
 				columnModel.getColumn(1).setPreferredWidth(125);
-				columnModel.getColumn(2).setPreferredWidth(125);
+				columnModel.getColumn(2).setPreferredWidth(50);
 				columnModel.getColumn(3).setPreferredWidth(50);
 				columnModel.getColumn(4).setPreferredWidth(50);
 				panel.add(table_1);
@@ -102,9 +102,9 @@ public class DaFrameDisplay extends JFrame implements ActionListener {
 		}
 	}
 	
-	public static DaFrameDisplay getInstance() {
+	public static DiFrameDisplay getInstance() {
 		if (!created) {
-			single = new DaFrameDisplay();
+			single = new DiFrameDisplay();
 		}
 		return single;
 	}

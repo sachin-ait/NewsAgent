@@ -92,7 +92,7 @@ public class GUIbase extends JFrame implements ActionListener {
 					DeliveryOrder.DeliveryOrderCommandLine.main(null);
 				}
 				else if (selectModule.equals("Invoices")) {
-					di.CommandLine.main(null);
+					di.DiFrame.main(null);
 				}
 			}
 		});
