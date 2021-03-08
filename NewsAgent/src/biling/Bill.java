@@ -62,7 +62,7 @@ public class Bill {
     static void validateCustomerAddress(String customerAddress) throws BillExceptionHandler {
         //Agree Formating Rules on "Customer Address"
         //E.G. Address String must be a minimum of 10 characters and a maximum of 200 characters
-        if (customerAddress.isBlank() || customerAddress.isEmpty()) {
+        if (customerAddress.isEmpty()) {
             throw new BillExceptionHandler("Customer Address NOT specified");
         } else if (customerAddress.length() < 10) {
             throw new BillExceptionHandler("Customer Address does not meet minimum length requirements");
@@ -74,7 +74,7 @@ public class Bill {
     static void validateCustomerName(String customerName) throws BillExceptionHandler {
         //Agree Formating Rules on "Biling Name"
         //E.G. Name String must be a minimum of 2 characters and a maximum of 50 characters
-        if (customerName.isBlank() || customerName.isEmpty()) {
+        if ( customerName.isEmpty()) {
             throw new BillExceptionHandler("Customer Name NOT specified");
         } else if (customerName.length() < 3) {
             throw new BillExceptionHandler("Customer Name does not meet minimum length requirements");
