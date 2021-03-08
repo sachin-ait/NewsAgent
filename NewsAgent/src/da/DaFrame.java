@@ -24,6 +24,7 @@ public class DaFrame extends JFrame implements ActionListener {
 	private JButton deleteButton = new JButton("Delete");
 	private JButton closeButton = new JButton("Close");
 	private JButton displayButton = new JButton("Display");
+	private JButton updateButton = new JButton("Update");
 	private JTextField resultField;
 
 	/**
@@ -103,7 +104,7 @@ public class DaFrame extends JFrame implements ActionListener {
 		contentPane.add(createButton);
 		createButton.addActionListener(this);
 
-		deleteButton.setBounds(308, 106, 85, 21);
+		deleteButton.setBounds(335, 106, 85, 21);
 		contentPane.add(deleteButton);
 		deleteButton.addActionListener(this);
 
@@ -118,7 +119,11 @@ public class DaFrame extends JFrame implements ActionListener {
 		resultField.setBounds(63, 219, 303, 19);
 		contentPane.add(resultField);
 		resultField.setColumns(10);
+		
+		updateButton.setBounds(230, 106, 85, 21);
+		contentPane.add(updateButton);
 		displayButton.addActionListener(this);
+		updateButton.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -129,7 +134,7 @@ public class DaFrame extends JFrame implements ActionListener {
 		}
 		if (target == createButton) {
 			try {
-				MySQLAccess dao = new MySQLAccess();
+				AgentMySQLAccess dao = new AgentMySQLAccess();
 				String nme = nameField.getText();
 				String area = areaField.getText();
 				int payrate = Integer.parseInt(payField.getText());
@@ -141,12 +146,13 @@ public class DaFrame extends JFrame implements ActionListener {
 				else
 					resultField.setText("ERROR: Agent Details NOT Saved");
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				//e1.printStackTrace();
+				resultField.setText("Invalid Inputs");
 			}
 		}
 		if (target == deleteButton) {
 				try {
-					MySQLAccess dao = new MySQLAccess();
+					AgentMySQLAccess dao = new AgentMySQLAccess();
 					int id = Integer.parseInt(idField.getText());
 					String allID = "" + id;
 					boolean deleteResult = dao.deleteDAById(id);
@@ -157,9 +163,28 @@ public class DaFrame extends JFrame implements ActionListener {
 					else
 						resultField.setText("ERROR: Agent Details NOT Deleted or Do Not Exist");
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					//e1.printStackTrace();
+					resultField.setText("No ID inputted");
 				}
 		}
+		if (target == updateButton) {
+			try {
+				AgentMySQLAccess dao = new AgentMySQLAccess();
+				int id = Integer.parseInt(idField.getText());
+				String nme = nameField.getText();
+				String area = areaField.getText();
+				int payrate = Integer.parseInt(payField.getText());
+				int hours = Integer.parseInt(hourField.getText());
+				boolean updateResult = dao.updateDAById(id, nme, area, payrate, hours);
+				if (updateResult == true)
+					resultField.setText("Agent Details Updated");
+				else
+					resultField.setText("ERROR: Agent Details NOT Updated or do not exist");
+			} catch (Exception e1) {
+				//e1.printStackTrace();
+				resultField.setText("Invalid Inputs");
+			}
+	}
 		if (target == closeButton) {
 			this.dispose();
 			}
