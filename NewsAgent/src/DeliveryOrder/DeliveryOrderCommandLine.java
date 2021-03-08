@@ -60,7 +60,7 @@ public class DeliveryOrderCommandLine {
 
 		try {
 
-			MySQLAccess dao = new MySQLAccess();
+			DeliveryOrderMySQLAccess dao = new DeliveryOrderMySQLAccess();
 			dao.getConnectionStatement();
 
 			// Configure System for Running

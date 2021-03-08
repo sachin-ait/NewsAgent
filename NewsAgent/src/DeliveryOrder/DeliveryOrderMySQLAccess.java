@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 import OrderReport.OrderReport;
 
-public class MySQLAccess {
+public class DeliveryOrderMySQLAccess {
 
 	private Connection connect = null;
 	private Statement statement = null;
@@ -20,7 +20,7 @@ public class MySQLAccess {
 	final private String user = "root";
 	final private String password = "1234";
 
-	public MySQLAccess() {
+	public DeliveryOrderMySQLAccess() {
 
 	}
 
@@ -129,11 +129,34 @@ public class MySQLAccess {
 		return updateSucessful;
 
 	}
+	
+	public boolean updateDeliveryOrderById(int deliveryOrderID, String doName, String doPublcation, String doDate) {
+
+		boolean updateSucessful = true;
+
+		// Add Code here to call embedded SQL to insert Customer into DB
+
+		try {
+			readInfo(deliveryOrderID);
+			// Create prepared statement to issue SQL query to the database
+			preparedStatement = connect.prepareStatement("update DeliveryOrder set CustName = '" + doName + "',PublicationName  = '"
+			+ doPublcation	+ "',DeliveryDate  = '" + doDate	+ "' where DeliveryOrderID= " + deliveryOrderID);
+			preparedStatement.executeUpdate();
+			
+			OrderReport.OrderReport(resultSet, 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			updateSucessful = false;
+		}
+
+		return updateSucessful;
+
+	}
 
 	public ResultSet readInfo(int id) {
 		try {
-			resultSet = statement.executeQuery("select * from newsagent.DeliveryOrder where DeliveryOrderId = " + id);
-
+			statement = connect.createStatement();
+				resultSet = statement.executeQuery("select * from newsagent.DeliveryOrder where DeliveryOrderId = " + id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

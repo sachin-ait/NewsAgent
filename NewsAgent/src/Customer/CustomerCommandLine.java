@@ -61,7 +61,7 @@ public class CustomerCommandLine {
 		
 		try {
 			
-			MySQLAccess dao = new MySQLAccess();
+			CustomerMySQLAccess dao = new CustomerMySQLAccess();
 			dao.getConnectionStatement();
 			
 		
@@ -215,9 +215,7 @@ public class CustomerCommandLine {
 		System.out.println("3. Edit Phone Number");
 		System.out.println("4. Edit Payment");
 		System.out.println("5. Edit Area");		
-		System.out.println("99. Back");
-		
-		
+		System.out.println("99. Back");	
 	}
 	
 }

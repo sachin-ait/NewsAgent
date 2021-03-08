@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class MySQLAccess {
+public class CustomerMySQLAccess {
 	
 	private Connection connect = null;
 	private Statement statement = null;
@@ -16,7 +16,7 @@ public class MySQLAccess {
 	final private String user = "root";
 	final private String password = "1234";
 	
-	public MySQLAccess() {
+	public CustomerMySQLAccess() {
 
 	}
 
@@ -107,6 +107,32 @@ public class MySQLAccess {
 		
 	}
 	
+	public boolean updateCustomerById(int custID,String updateName,String updateAddress,String updatePhone,double updatePayment,String updateArea) {
+
+		boolean updateSucessful = true;
+		
+		//Add Code here to call embedded SQL to insert Customer into DB
+		
+		try {
+			
+			//Create prepared statement to issue SQL query to the database
+			System.out.println("update customer set Name = '" + updateName + "',Address = '" + updateAddress + "',PhoneNumber = '" + updatePhone + 
+					"',Payment = '" + updatePayment + "',Area = '" + updateArea + "' where custID= "+custID);
+			
+			preparedStatement = connect.prepareStatement("update customer set Name = '" + updateName + "',Address = '" + updateAddress + "',PhoneNumber = '"
+					+ updatePhone + "',Payment = '" + updatePayment + "',Area = '" + updateArea + "' where custID= "+custID);
+			preparedStatement.executeUpdate();
+		 
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			updateSucessful = false;
+		}
+		
+		return updateSucessful;
+		
+	}
+	
 	public boolean updateCustomerById(int custID,String updateChoice,String adjustion) {
 
 		boolean updateSucessful = true;
@@ -116,7 +142,7 @@ public class MySQLAccess {
 		try {
 			
 			//Create prepared statement to issue SQL query to the database
-			preparedStatement = connect.prepareStatement("update customer set "+ updateChoice +" = '" + adjustion + "' where custID= "+custID);
+			preparedStatement = connect.prepareStatement("update customer set " + updateChoice + " = '" + adjustion + "', where custID= "+custID);
 			preparedStatement.executeUpdate();
 		 
 		}
