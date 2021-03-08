@@ -1,16 +1,17 @@
 package login;
 
-import da.DaFrameDisplay;
+import da.DaFrame;
+import di.DiFrame;
 
 import java.sql.ResultSet;
 
 public class LoginController {
 
-    private static MySQLAccess dao = null;
+    private static LoginMySQLAccess dao = null;
 
     static {
         try {
-            dao = new MySQLAccess();
+            dao = new LoginMySQLAccess();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,11 +65,13 @@ public class LoginController {
                     System.out.println("User");
                     break;
                 case "DeliveryAgent":
-                    DaFrameDisplay instance = DaFrameDisplay.getInstance();
-                    instance.setVisible(true);
+                    DaFrame daFrame = new DaFrame();
+                    daFrame.setVisible(true);
                     System.out.println("DeliveryAgent");
                     break;
                 case "DeliveryOrder":
+                    DiFrame diFrame = new DiFrame();
+                    diFrame.setVisible(true);
                     System.out.println("DeliveryOrder");
                     break;
                 case "DI":
