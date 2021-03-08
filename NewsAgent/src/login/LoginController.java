@@ -1,5 +1,6 @@
 package login;
 
+import biling.BillFrame;
 import da.DaFrame;
 import di.DiFrame;
 
@@ -54,8 +55,9 @@ public class LoginController {
             switch (accessModel) {
                 case "Billing":
                     //Launch Billing Frame
-
-                    System.out.println("billing");
+                    BillFrame billFrame = new BillFrame();
+                    billFrame.setVisible(true);
+                    System.out.println("Access billing");
                     break;
                 case "User":
                     //Launch Billing Frame
