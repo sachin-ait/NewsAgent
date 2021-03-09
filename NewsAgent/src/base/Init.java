@@ -9,7 +9,7 @@ public class Init {
 	public static void main(String[] args) throws Exception{
 		System.out.println("Welcome to NewsAgent Application \n"
 				+ "Please login into the system \n");
-		
+
 		while(true)
 		  if (login.CommandLine.login() == 0)
 			break;
@@ -54,13 +54,13 @@ public class Init {
 				System.out.println("Please choose correct option");
 				break;
 			}
-			
+
 		}
-		
-		
+
+
 		keybrd.close();
 	}
-	
+
 	public static void main_menu_show() {
 		  System.out.println(" ");
 	        System.out.println("=============================================");

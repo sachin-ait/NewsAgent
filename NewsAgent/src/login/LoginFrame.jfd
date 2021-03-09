@@ -1,0 +1,70 @@
+JFDML JFormDesigner: "7.0.2.6.321" Java: "11.0.5" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {par l {seq l {space :p:94:p, comp label1:::p::p}, seq l {space :p:71:p, par t:::p {seq t {comp label3:::::x, space s:::p, comp comboBox1:::p:242:p}, seq t {par l:::p {comp label2:::::x, comp label4:::p:92:p}, space s:::p, par l:::p {comp userName_textField:::::x, comp passwordField1:::p:242:p}}}}, seq l {space :p:114:p, comp button1:::p:81:p, space :p:85:p, comp button2:::p:82:p}}, space ::71:x}}"
+					"$verticalGroup": "par l {seq l {space :p:20:p, comp label1:::p::p, space u:::p, par b {comp userName_textField::b:p::p, comp label4::b:p::p}, space s:::p, par b {comp label2::b:p::p, comp passwordField1::b:p::p}, space u:::p, par b {comp comboBox1::b:p::p, comp label3::b:p::p}, space :p:32:p, par b {comp button1::b:p::p, comp button2::b:p::p}, space ::164:x}}"
+				} ) {
+					name: "contentPanel"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "Newsagent Manager System"
+						"font": new java.awt.Font( "Lucida Grande", 1, 22 )
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "userName_textField"
+						"font": &Font0 new java.awt.Font( "Lucida Grande", 1, 14 )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "Password:"
+						"font": #Font0
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "passwordField1"
+						"font": #Font0
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "Model:"
+						"font": #Font0
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "comboBox1"
+						"font": #Font0
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button1"
+						"text": "Login"
+						"font": &Font1 new java.awt.Font( "Lucida Grande", 1, 18 )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button2"
+						"text": "Close"
+						"font": #Font1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "UserName:"
+						"font": #Font0
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "North"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 20, 10 )
+			"size": new java.awt.Dimension( 520, 350 )
+		} )
+	}
+}

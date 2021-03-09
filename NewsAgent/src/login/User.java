@@ -21,7 +21,7 @@ public class User {
     //Agree Formating Rules on "User Name"
     //E.G. User Name String must be a minimum of 3 characters and a maximum of 20 characters
     public static void validateUserName(String userName) throws UserExceptionHandler {
-        if (userName.isEmpty())
+        if (userName.isBlank() || userName.isEmpty())
             throw new UserExceptionHandler("user Name NOT specified");
         else if (userName.length() < 3)
             throw new UserExceptionHandler("user Name does not meet minimum length requirements");
@@ -33,7 +33,7 @@ public class User {
     //Agree Formating Rules on "password"
     //E.G. User Name String must be a minimum of 3 characters and a maximum of 20 characters
     public static void validateUserPassword(String password) throws UserExceptionHandler {
-        if (password.isEmpty())
+        if (password.isBlank() || password.isEmpty())
             throw new UserExceptionHandler("password NOT specified");
         else if (password.length() < 6)
             throw new UserExceptionHandler("password does not meet minimum length requirements");

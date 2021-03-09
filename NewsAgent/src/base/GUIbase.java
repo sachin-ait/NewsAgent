@@ -1,5 +1,7 @@
 package base;
 
+import login.LoginFrame;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -71,7 +73,9 @@ public class GUIbase extends JFrame implements ActionListener {
 				String selectModule = (String) combo.getSelectedItem();
 
 				if (selectModule.equals("Login users")) {
-					login.CommandLine.main(null);
+					LoginFrame loginFrame=new LoginFrame();
+					loginFrame.setVisible(true);
+//					login.CommandLine.main(null);
 				} 
 				else if (selectModule.equals("Delivery Agents")) {
 					da.DaFrame.main(null);

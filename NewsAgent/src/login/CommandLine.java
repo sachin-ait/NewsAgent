@@ -1,7 +1,6 @@
 package login;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class CommandLine {
@@ -55,7 +54,7 @@ public class CommandLine {
 
         try {
 
-            MySQLAccess dao = new MySQLAccess();
+            LoginMySQLAccess dao = new LoginMySQLAccess();
 
             // Configure System for Running
             Scanner keyboard = new Scanner(System.in);
@@ -126,7 +125,7 @@ public class CommandLine {
                             System.out.println("ERROR: user password set Unsuccess");
                         break;
 
-                 
+
 
                     case "99":
                         keepAppOpen = false;
@@ -150,9 +149,9 @@ public class CommandLine {
 
 
     } // end main
-    
+
     public static int login() throws Exception {
-    	 MySQLAccess dao = new MySQLAccess();
+    	 LoginMySQLAccess dao = new LoginMySQLAccess();
 
          // Configure System for Running
         Scanner keyboard = new Scanner(System.in);
