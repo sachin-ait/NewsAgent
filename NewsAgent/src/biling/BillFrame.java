@@ -4,6 +4,7 @@
 
 package biling;
 
+import java.awt.Container;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.text.DateFormat;
@@ -118,7 +119,7 @@ public class BillFrame extends JFrame {
         textArea1 = new JTextArea();
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- label1 ----
         label1.setText("Bill");

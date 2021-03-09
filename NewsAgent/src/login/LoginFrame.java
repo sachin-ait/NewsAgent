@@ -65,7 +65,7 @@ public class LoginFrame extends JFrame {
         label4 = new JLabel();
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== dialogPane ========
