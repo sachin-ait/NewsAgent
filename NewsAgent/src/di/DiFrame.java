@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import da.AgentMySQLAccess;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -27,6 +30,7 @@ public class DiFrame extends JFrame implements ActionListener {
 	private JTextField failedField;
 	private JTextField payField;
 	private JTextField idField;
+	private JButton updateButton;
 
 	/**
 	 * Launch the application.
@@ -86,7 +90,7 @@ public class DiFrame extends JFrame implements ActionListener {
 		contentPane.add(createButton);
 		createButton.addActionListener(this);
 
-		deleteButton.setBounds(296, 94, 85, 21);
+		deleteButton.setBounds(359, 94, 85, 21);
 		contentPane.add(deleteButton);
 		deleteButton.addActionListener(this);
 
@@ -101,45 +105,49 @@ public class DiFrame extends JFrame implements ActionListener {
 		resultField.setBounds(63, 219, 303, 19);
 		contentPane.add(resultField);
 		resultField.setColumns(10);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("Failed:");
 		lblNewLabel_5.setBounds(73, 144, 57, 13);
 		contentPane.add(lblNewLabel_5);
-		
+
 		dayField = new JTextField();
 		dayField.setBounds(140, 49, 96, 19);
 		contentPane.add(dayField);
 		dayField.setColumns(10);
-		
+
 		monthField = new JTextField();
 		monthField.setBounds(140, 72, 96, 19);
 		contentPane.add(monthField);
 		monthField.setColumns(10);
-		
+
 		yearField = new JTextField();
 		yearField.setBounds(140, 95, 96, 19);
 		contentPane.add(yearField);
 		yearField.setColumns(10);
-		
+
 		successField = new JTextField();
 		successField.setBounds(140, 118, 96, 19);
 		contentPane.add(successField);
 		successField.setColumns(10);
-		
+
 		failedField = new JTextField();
 		failedField.setBounds(140, 141, 96, 19);
 		contentPane.add(failedField);
 		failedField.setColumns(10);
-		
+
 		JLabel lblNewLabel_6 = new JLabel("Paydue:");
 		lblNewLabel_6.setBounds(65, 167, 65, 13);
 		contentPane.add(lblNewLabel_6);
-		
+
 		payField = new JTextField();
 		payField.setBounds(140, 164, 96, 19);
 		contentPane.add(payField);
 		payField.setColumns(10);
+		
+		updateButton.setBounds(254, 94, 85, 21);
+		contentPane.add(updateButton);
 		displayButton.addActionListener(this);
+		updateButton.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -150,7 +158,7 @@ public class DiFrame extends JFrame implements ActionListener {
 		}
 		if (target == createButton) {
 			try {
-				MySQLAccess dio = new MySQLAccess();
+				InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
 				int date1 = Integer.parseInt(dayField.getText());
 				String date2 = monthField.getText();
 				int date3 = Integer.parseInt(yearField.getText());
@@ -168,23 +176,43 @@ public class DiFrame extends JFrame implements ActionListener {
 			}
 		}
 		if (target == deleteButton) {
-				try {
-					MySQLAccess dao = new MySQLAccess();
-					int id = Integer.parseInt(idField.getText());
-					String allID = "" + id;
-					boolean deleteResult = dao.deleteDIById(id);
-					if ((deleteResult == true) && (allID.equals("-99")))
-						resultField.setText("Invoice Table Emptied");
-					else if (deleteResult == true)
-						resultField.setText("Invoices Deleted");
-					else
-						resultField.setText("ERROR: Invoice Details NOT Deleted or Do Not Exist");
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+			try {
+				InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
+				int id = Integer.parseInt(idField.getText());
+				String allID = "" + id;
+				boolean deleteResult = dio.deleteDIById(id);
+				if ((deleteResult == true) && (allID.equals("-99")))
+					resultField.setText("Invoice Table Emptied");
+				else if (deleteResult == true)
+					resultField.setText("Invoices Deleted");
+				else
+					resultField.setText("ERROR: Invoice Details NOT Deleted or Do Not Exist");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}
+		if (target == updateButton) {
+			try {
+				InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
+				int id = Integer.parseInt(idField.getText());
+				int date1 = Integer.parseInt(dayField.getText());
+				String date2 = monthField.getText();
+				int date3 = Integer.parseInt(yearField.getText());
+				int aSucc = Integer.parseInt(successField.getText());
+				int afail = Integer.parseInt(failedField.getText());
+				double paydue = Integer.parseInt(payField.getText());
+				boolean updateResult = dio.updateDIById(id, aSucc, afail, paydue);
+				if (updateResult == true)
+					resultField.setText("Agent Details Updated");
+				else
+					resultField.setText("ERROR: Agent Details NOT Updated or do not exist");
+			} catch (Exception e1) {
+				//e1.printStackTrace();
+				resultField.setText("Invalid Inputs");
+			}
+	}
 		if (target == closeButton) {
 			this.dispose();
-			}
-			}
 		}
+	}
+}

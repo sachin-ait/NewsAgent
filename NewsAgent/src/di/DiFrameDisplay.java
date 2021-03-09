@@ -81,7 +81,7 @@ public class DiFrameDisplay extends JFrame implements ActionListener {
 		contentPane.add(closeButton);
 		closeButton.addActionListener(this);
 		try {
-			MySQLAccess dio = new MySQLAccess();
+			InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
 			ResultSet rSet = dio.retrieveAllDInvoices();
 			if (rSet == null) {
 				System.out.println("No Records Found");

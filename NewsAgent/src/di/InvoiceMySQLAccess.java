@@ -9,14 +9,14 @@ import base.MysqlJDBC;
 
 import java.sql.ResultSet;
 
-public class MySQLAccess {
+public class InvoiceMySQLAccess {
 
 	private Connection connect = null;
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 
-	public MySQLAccess() throws Exception {
+	public InvoiceMySQLAccess() throws Exception {
 		connect = MysqlJDBC.getConnection();
 	}
 

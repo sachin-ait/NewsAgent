@@ -60,7 +60,7 @@ public class CommandLine {
 
 		try {
 
-			MySQLAccess dio = new MySQLAccess();
+			InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
 
 			// Configure System for Running
 			Scanner keyboard = new Scanner(System.in);

@@ -9,7 +9,7 @@ import base.MysqlJDBC;
 import java.sql.ResultSet;
 
 
-public class MySQLAccess {
+public class AgentMySQLAccess {
 	
 	private Connection connect = null;
 	private Statement statement = null;
@@ -17,7 +17,7 @@ public class MySQLAccess {
 	private ResultSet resultSet = null;
 	
 	
-	public MySQLAccess() throws Exception {
+	public AgentMySQLAccess() throws Exception {
 		connect= MysqlJDBC.getConnection();
 	}	
 
@@ -112,7 +112,6 @@ public class MySQLAccess {
 		return updateSucessfull;
 		
 	}
-
 
 }// end Class
 

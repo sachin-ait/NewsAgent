@@ -106,7 +106,7 @@ public class DATest extends TestCase {
 			try {
 					
 				//Call method under test
-				DA.validateName("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+				DA.validateName("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
 			}
 			catch (DAExceptionHandler e) {
 				fail("Exception unexpected");

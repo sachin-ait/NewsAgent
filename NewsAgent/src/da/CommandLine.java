@@ -58,7 +58,7 @@ public class CommandLine {
 		
 		try {
 			
-			MySQLAccess dao = new MySQLAccess();
+			AgentMySQLAccess dao = new AgentMySQLAccess();
 		
 			// Configure System for Running
 			Scanner keyboard = new Scanner(System.in); 
