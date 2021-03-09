@@ -3,7 +3,7 @@ package DeliveryOrder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Scanner;
-
+import OrderReport.OrderReport;
 public class DeliveryOrderCommandLine {
 
 	private static void listCustomerFuctionalityAvailable() {
@@ -17,6 +17,8 @@ public class DeliveryOrderCommandLine {
 		System.out.println("2. View ALL Delivery Order Records");
 		System.out.println("3. Delete Delivery Order Record by ID");
 		System.out.println("4. Update Delivery Order Record by ID");
+		System.out.println("5. Deleted Delivery Order Report");
+		System.out.println("6. Updated Delivery Order Report");
 		System.out.println("99. Back To main Menu");
 		System.out.println("=============================================");
 		System.out.println(" ");
@@ -58,7 +60,7 @@ public class DeliveryOrderCommandLine {
 
 		try {
 
-			MySQLAccess dao = new MySQLAccess();
+			DeliveryOrderMySQLAccess dao = new DeliveryOrderMySQLAccess();
 			dao.getConnectionStatement();
 
 			// Configure System for Running
@@ -114,7 +116,7 @@ public class DeliveryOrderCommandLine {
 					if ((deleteResult == true) && (deleteDeliveryOrderId.equals("-99")))
 						System.out.println("Delivery Order Table Emptied");
 					else if (deleteResult == true)
-						System.out.println("Delivery Order  Deleted");
+						System.out.println("Delivery Order Deleted");
 					else
 						System.out.println("ERROR: Delivery Order Details NOT Deleted or Do Not Exist");
 					break;
@@ -158,6 +160,13 @@ public class DeliveryOrderCommandLine {
 						System.out.println("Delivery Order Updated");
 					else
 						System.out.println("ERROR: Delivery Order Details NOT Updated or Do Not Exist");
+					break;
+					
+				case "5":
+					OrderReport.readDeletedReport();
+					break;
+				case "6":
+					OrderReport.readUpdatedReport();
 					break;
 				case "99":
 					keepAppOpen = false;
