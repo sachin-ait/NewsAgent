@@ -1,4 +1,13 @@
 package di;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import base.MysqlJDBC;
+import da.AgentMySQLAccess;
+import da.DA;
+import da.DAExceptionHandler;
 import junit.framework.TestCase;
 public class DITest extends TestCase{
 	
@@ -242,6 +251,80 @@ public void testValidatePayment001() {
 	}
 	catch (DIExceptionHandler e) {
 		assertEquals("Payment cannot be negative", e.getMessage());	
+	}
+}
+
+public void testinsertDInvoiceDetails001() {
+	try {
+		boolean insert = true;
+		Connection connect = null;
+		connect= MysqlJDBC.getConnection();
+		InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
+		DI DIObj = new DI(28,"February",2021, 12, 10, 40.40);
+		assertEquals(insert,InvoiceMySQLAccess.insertDInvoiceDetails(DIObj));
+	}
+	catch(DIExceptionHandler e){
+		fail("Exception unexpected");
+	}
+}
+
+public void testretrieveAllDInvoices001() {
+	try {
+		boolean insert = true;
+		Connection connect = null;
+		connect= MysqlJDBC.getConnection();
+		AgentMySQLAccess dao = new AgentMySQLAccess();
+		Statement statement = connect.createStatement();
+		ResultSet rs=statement.executeQuery("Select * from newsagent.DeliveryInvoices");
+		 assertTrue(InvoiceMySQLAccess.retrieveAllDInvoices() != null);
+	} catch (SQLException | DAExceptionHandler e) {
+		fail("Exception unexpected");
+		
+	}
+}
+
+public void testdeleteDIById001() {
+	try {
+		boolean delete = true;
+		Connection connect = null;
+		connect= MysqlJDBC.getConnection();
+		AgentMySQLAccess dao = new AgentMySQLAccess();
+		int id = 1;
+		assertEquals(delete,InvoiceMySQLAccess.deleteDIById(id));
+	}
+	catch(DAExceptionHandler e){
+		fail("Exception unexpected");
+	}
+}
+
+public void testdeleteDIById002() {
+	try {
+		boolean delete = true;
+		Connection connect = null;
+		connect= MysqlJDBC.getConnection();
+		AgentMySQLAccess dao = new AgentMySQLAccess();
+		int id =-99;
+		assertEquals(delete,InvoiceMySQLAccess.deleteDIById(id));
+	}
+	catch(DAExceptionHandler e){
+		fail("Exception unexpected");
+	}
+}
+
+public void testupdateDIById001() {
+	try {
+		boolean update = true;
+		Connection connect = null;
+		connect= MysqlJDBC.getConnection();
+		InvoiceMySQLAccess dao = new InvoiceMySQLAccess();
+		int DIID =1;
+		int DISuccess = 23;
+		int DIFailure = 56;
+		double DIPay = 10.00;
+		assertEquals(update, InvoiceMySQLAccess.updateDIById(DIID,DISuccess,DIFailure,DIPay));
+	}
+	catch(DIExceptionHandler e){
+		fail("Exception unexpected");
 	}
 }
 }

@@ -82,7 +82,7 @@ public class DiFrameDisplay extends JFrame implements ActionListener {
 		closeButton.addActionListener(this);
 		try {
 			InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
-			ResultSet rSet = dio.retrieveAllDInvoices();
+			ResultSet rSet = InvoiceMySQLAccess.retrieveAllDInvoices();
 			if (rSet == null) {
 				System.out.println("No Records Found");
 			}

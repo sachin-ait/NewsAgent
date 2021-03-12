@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -119,7 +120,7 @@ public class DaFrame extends JFrame implements ActionListener {
 		resultField.setBounds(63, 219, 303, 19);
 		contentPane.add(resultField);
 		resultField.setColumns(10);
-		
+
 		updateButton.setBounds(230, 106, 85, 21);
 		contentPane.add(updateButton);
 		displayButton.addActionListener(this);
@@ -140,53 +141,51 @@ public class DaFrame extends JFrame implements ActionListener {
 				int payrate = Integer.parseInt(payField.getText());
 				int hours = Integer.parseInt(hourField.getText());
 				DA DAObj = new DA(nme, area, payrate, hours);
-				boolean insertResult = dao.insertDADetailsAccount(DAObj);
+				boolean insertResult = AgentMySQLAccess.insertDADetailsAccount(DAObj);
 				if (insertResult == true)
 					resultField.setText("Agent Details Saved");
 				else
 					resultField.setText("ERROR: Agent Details NOT Saved");
-			} catch (Exception e1) {
-				//e1.printStackTrace();
+			} catch (DAExceptionHandler e1) {
+				// e1.printStackTrace();
 				resultField.setText("Invalid Inputs");
 			}
 		}
-		if (target == deleteButton) {
+			if (target == deleteButton) {
 				try {
 					AgentMySQLAccess dao = new AgentMySQLAccess();
 					int id = Integer.parseInt(idField.getText());
-					String allID = "" + id;
-					boolean deleteResult = dao.deleteDAById(id);
-					if ((deleteResult == true) && (allID.equals("-99")))
-						resultField.setText("Agent Table Emptied");
-					else if (deleteResult == true)
+					boolean deleteResult = AgentMySQLAccess.deleteDAById(id);
+					if (deleteResult == true)
 						resultField.setText("Agent Deleted");
 					else
 						resultField.setText("ERROR: Agent Details NOT Deleted or Do Not Exist");
-				} catch (Exception e1) {
-					//e1.printStackTrace();
+				} catch (DAExceptionHandler e1) {
+					// e1.printStackTrace();
 					resultField.setText("No ID inputted");
+				} 
+			}
+			if (target == updateButton) {
+				try {
+					AgentMySQLAccess dao = new AgentMySQLAccess();
+					int id = Integer.parseInt(idField.getText());
+					String nme = nameField.getText();
+					String area = areaField.getText();
+					int payrate = Integer.parseInt(payField.getText());
+					int hours = Integer.parseInt(hourField.getText());
+					boolean updateResult = AgentMySQLAccess.updateDAById(id, nme, area, payrate, hours);
+					if (updateResult == true)
+						resultField.setText("Agent Details Updated");
+					else
+						resultField.setText("ERROR: Agent Details NOT Updated or do not exist");
+				} catch (DAExceptionHandler e1) {
+					// e1.printStackTrace();
+					resultField.setText("Invalid Inputs");
 				}
-		}
-		if (target == updateButton) {
-			try {
-				AgentMySQLAccess dao = new AgentMySQLAccess();
-				int id = Integer.parseInt(idField.getText());
-				String nme = nameField.getText();
-				String area = areaField.getText();
-				int payrate = Integer.parseInt(payField.getText());
-				int hours = Integer.parseInt(hourField.getText());
-				boolean updateResult = dao.updateDAById(id, nme, area, payrate, hours);
-				if (updateResult == true)
-					resultField.setText("Agent Details Updated");
-				else
-					resultField.setText("ERROR: Agent Details NOT Updated or do not exist");
-			} catch (Exception e1) {
-				//e1.printStackTrace();
-				resultField.setText("Invalid Inputs");
 			}
+			if (target == closeButton) {
+				this.dispose();
+			}
+
+		}
 	}
-		if (target == closeButton) {
-			this.dispose();
-			}
-			}
-		}

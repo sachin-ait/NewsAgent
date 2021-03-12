@@ -82,7 +82,7 @@ public class DaFrameDisplay extends JFrame implements ActionListener {
 		closeButton.addActionListener(this);
 		try {
 			AgentMySQLAccess dao = new AgentMySQLAccess();
-			ResultSet rSet = dao.retrieveAllDAAccounts();
+			ResultSet rSet = AgentMySQLAccess.retrieveAllDAAccounts();
 			if (rSet == null) {
 				System.out.println("No Records Found");
 			}
@@ -97,7 +97,10 @@ public class DaFrameDisplay extends JFrame implements ActionListener {
 				panel.add(table_1);
 				rSet.close();
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (DAExceptionHandler e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
