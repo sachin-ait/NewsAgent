@@ -17,7 +17,7 @@ public class ReportSQLAccess {
 	
 	
 	public ReportSQLAccess() {
-
+		getConnectionStatement();
 	}
 
 	public Statement getConnectionStatement() {

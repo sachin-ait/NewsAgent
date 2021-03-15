@@ -1,8 +1,10 @@
 package login;
 
+import DeliveryOrder.DeliveryOrderFrame;
 import biling.BillFrame;
 import da.DaFrame;
 import di.DiFrame;
+import report.ReportFrame;
 
 import java.sql.ResultSet;
 
@@ -63,7 +65,6 @@ public class LoginController {
                     //Launch Billing Frame
                     UserFrame userFrame = new UserFrame();
                     userFrame.setVisible(true);
-
                     System.out.println("User");
                     break;
                 case "DeliveryAgent":
@@ -72,11 +73,13 @@ public class LoginController {
                     System.out.println("DeliveryAgent");
                     break;
                 case "DeliveryOrder":
-                    DiFrame diFrame = new DiFrame();
-                    diFrame.setVisible(true);
+                    DeliveryOrderFrame deliveryOrderFrame = new DeliveryOrderFrame();
+                    deliveryOrderFrame.setVisible(true);
                     System.out.println("DeliveryOrder");
                     break;
                 case "DI":
+                    DiFrame diFrame=new DiFrame();
+                    diFrame.setVisible(true);
                     System.out.println("DI");
                     break;
                 case "Docket":
@@ -86,6 +89,8 @@ public class LoginController {
                     System.out.println("Publication");
                     break;
                 case "Report":
+                    ReportFrame reportFrame = new ReportFrame();
+                    reportFrame.setVisible(true);
                     System.out.println("Report");
                     break;
             }
