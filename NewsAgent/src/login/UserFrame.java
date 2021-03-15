@@ -102,7 +102,7 @@ public class UserFrame extends JFrame {
         textArea1 = new JTextArea();
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- label1 ----
         label1.setText("User");
