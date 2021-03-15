@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import OrderReport.OrderReport;
+import OrderReport.OrderReportFrame;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -106,9 +106,9 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 		idField.setBounds(377, 50, 100, 20);
 		contentPane.add(idField);
 		idField.setColumns(10);
-
+ 
 		lblCust5.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCust5.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		lblCust5.setFont(new Font("Times New Roman", Font.PLAIN, 18)); 
 		lblCust5.setBounds(241, 50, 135, 20);
 		contentPane.add(lblCust5);
 
@@ -139,7 +139,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 
 		btnUpdate.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnUpdate.setBounds(159, 199, 90, 30);
-		contentPane.add(btnUpdate);
+		contentPane.add(btnUpdate); 
 
 		lblDeliveryOrder.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 22));
 		lblDeliveryOrder.setBounds(176, 13, 160, 30);
@@ -182,8 +182,8 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 					resultField.setText("ERROR: DeliveryOrder Details NOT Saved");
 					System.out.println("ERROR: DeliveryOrder Details NOT Saved");
 				}
-			} catch (Exception e1) {
-				e1.printStackTrace();
+			} catch (DeliveryOrderExceptionHandler e1) {
+				resultField.setText(e1.getMessage());
 			}
 		}
 		if (target == btnDelete) {
@@ -193,17 +193,17 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				boolean deleteResult = dao.deleteDeliveryOrderById(deleteDoId);
 				if ((deleteResult == true) && (deleteDoId == -99)) {
 					resultField.setText("DeliveryOrder Table Emptied");
-					System.out.println("DeliveryOrder Table Emptied");
+
 				}
 
 				else if (deleteResult == true) {
 					resultField.setText("DeliveryOrder Deleted");
-					System.out.println("DeliveryOrder Deleted");
+
 				}
 
 			} catch (Exception ex) {
 				resultField.setText("ERROR: DeliveryOrder Details NOT Deleted or Do Not Exist");
-				System.out.println("ERROR: DeliveryOrder Details NOT Deleted or Do Not Exist");
+
 			}
 
 		}
@@ -224,18 +224,20 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 					System.out.println("ERROR: DeliveryOrder Details NOT Updated or Do Not Exist");
 				}
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				resultField.setText("Invalid Input");
 			}
 
 		}
 		if (target == btnClose) {
 			this.dispose();
 		}
-		if (target == btnDeleteReport) {
-			OrderReport.readDeletedReport();
-		}
 		if (target == btnUpdateReport) {
-			OrderReport.readUpdatedReport();
+			OrderReportFrame OrderReportDisplay = OrderReportFrame.getInstance(1);
+			OrderReportDisplay.setVisible(true);
+		}
+		if (target == btnDeleteReport) {
+			OrderReportFrame OrderReportDisplay = OrderReportFrame.getInstance(2);
+			OrderReportDisplay.setVisible(true);
 		}
 	}
 

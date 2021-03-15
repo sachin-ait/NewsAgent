@@ -192,11 +192,13 @@ public class CustomerFrame extends JFrame implements ActionListener {
 					resultField.setText("ERROR: Customer Details NOT Saved");
 					System.out.println("ERROR: Customer Details NOT Saved");
 				}
-			} catch (Exception e1) {
-				e1.printStackTrace();
+			} catch (CustomerExceptionHandler e1) {
+				resultField.setText(e1.getMessage());
+			}catch(NumberFormatException e2) {
+				resultField.setText("Fields are Empty");
 			}
 		}
-		if (target == btnDelete) {
+		if (target == btnDelete) { 
 			try {
 				int deleteCustId = Integer.parseInt(idField.getText());
 
@@ -211,9 +213,8 @@ public class CustomerFrame extends JFrame implements ActionListener {
 					System.out.println("Customer Deleted");
 				}
 
-			} catch (Exception ex) {
-				resultField.setText("ERROR: Customer Details NOT Deleted or Do Not Exist");
-				System.out.println("ERROR: Customer Details NOT Deleted or Do Not Exist");
+			} catch (Exception e2) {
+				resultField.setText("Customer Id Input Empty");
 			}
 
 		}
@@ -235,8 +236,8 @@ public class CustomerFrame extends JFrame implements ActionListener {
 					resultField.setText("ERROR: Customer Details NOT Updated or Do Not Exist");
 					System.out.println("ERROR: Customer Details NOT Updated or Do Not Exist");
 				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
+			} catch (Exception e3) {
+				resultField.setText("Invalid Input");
 			}
 
 		}

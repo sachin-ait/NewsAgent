@@ -3,7 +3,6 @@ package DeliveryOrder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Scanner;
-import OrderReport.OrderReport;
 public class DeliveryOrderCommandLine {
 
 	private static void listCustomerFuctionalityAvailable() {
@@ -162,12 +161,7 @@ public class DeliveryOrderCommandLine {
 						System.out.println("ERROR: Delivery Order Details NOT Updated or Do Not Exist");
 					break;
 					
-				case "5":
-					OrderReport.readDeletedReport();
-					break;
-				case "6":
-					OrderReport.readUpdatedReport();
-					break;
+
 				case "99":
 					keepAppOpen = false;
 					System.out.println("Closing the Application");

@@ -1,5 +1,4 @@
-package DeliveryOrder;
-
+package OrderReport;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,16 +12,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.JButton;
-import javax.swing.JTable;
 
-public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener {
-	private static DeliveryOrderFrameDisplay single;
+import OrderReport.OrderReportMySQLAccess;
+
+import javax.swing.JButton;
+
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+
+public class OrderReportFrame extends JFrame implements ActionListener {
+	private static OrderReportFrame single;
 	private static boolean created = false;
 	private JPanel contentPane;
-	private JTable table_1;
 	private JButton closeButton;
-	
+	private JTextArea textArea;
+
 	public static DefaultTableModel buildTableModel(ResultSet rs)
 	        throws SQLException {
 
@@ -48,7 +52,6 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 	    return new DefaultTableModel(data, columnNames);
 
 	}
-	
 	public void actionPerformed(ActionEvent e) {
 		Object target = e.getSource();
 
@@ -57,29 +60,36 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 		}
 	}
 
-	private DeliveryOrderFrameDisplay(){
+	private OrderReportFrame(int i) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 555, 363);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 13, 515, 240);
 		contentPane.add(panel);
-		
-		table_1 = new JTable();
-		panel.add(table_1);
-		
+
+		textArea = new JTextArea();
+		panel.add(textArea);
+
 		closeButton = new JButton("Close");
 		closeButton.setBounds(225, 266, 85, 21);
 		contentPane.add(closeButton);
 		closeButton.addActionListener(this);
+
 		try {
-			DeliveryOrderMySQLAccess dao = new DeliveryOrderMySQLAccess();
+			OrderReportMySQLAccess dao = new OrderReportMySQLAccess();
 			dao.getConnectionStatement();
-			ResultSet rSet = dao.retrieveAllDeliveryOrderAccounts();
+			ResultSet rSet = null;
+			if(i==1) {
+				 rSet = dao.retrieveAllUpdatedOrderReportAccounts();
+			}else if(i==2){
+				 rSet = dao.retrieveAllDeletedOrderReportAccounts();
+			}
+			
 			if (rSet == null) {
 				System.out.println("No Records Found");
 			}
@@ -87,20 +97,21 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 				JTable table_1 = new JTable(buildTableModel(rSet));
 				TableColumnModel columnModel = table_1.getColumnModel();
 				columnModel.getColumn(0).setPreferredWidth(25);
-				columnModel.getColumn(1).setPreferredWidth(100);
-				columnModel.getColumn(2).setPreferredWidth(100);
-				columnModel.getColumn(3).setPreferredWidth(100); 
+				columnModel.getColumn(1).setPreferredWidth(75);
+				columnModel.getColumn(2).setPreferredWidth(75);
+				columnModel.getColumn(3).setPreferredWidth(75); 
+				columnModel.getColumn(4).setPreferredWidth(75); 
 				panel.add(table_1);
 				rSet.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
-	
-	public static DeliveryOrderFrameDisplay getInstance() {
+	public static OrderReportFrame getInstance(int i) {
 		if (!created) {
-			single = new DeliveryOrderFrameDisplay();
+			single = new OrderReportFrame(i);
 		}
 		return single;
 	}
