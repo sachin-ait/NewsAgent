@@ -56,19 +56,19 @@ public class PublicationFrame extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		monthField = new JTextField();
 
-		JLabel lblNewLabel = new JLabel("Invoice date of day:");
+		JLabel lblNewLabel = new JLabel(" date of day:");
 		lblNewLabel.setBounds(10, 52, 120, 13);
 		contentPane.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("Invoice month:");
+		JLabel lblNewLabel_1 = new JLabel(" month:");
 		lblNewLabel_1.setBounds(33, 75, 97, 13);
 		contentPane.add(lblNewLabel_1);
 
-		JLabel lblNewLabel_2 = new JLabel("Invoice year:");
+		JLabel lblNewLabel_2 = new JLabel(" year:");
 		lblNewLabel_2.setBounds(43, 98, 87, 13);
 		contentPane.add(lblNewLabel_2);
 
-		JLabel lblNewLabel_3 = new JLabel("Invoice ID:");
+		JLabel lblNewLabel_3 = new JLabel(" ID:");
 		lblNewLabel_3.setBounds(246, 75, 93, 13);
 		contentPane.add(lblNewLabel_3);
 
