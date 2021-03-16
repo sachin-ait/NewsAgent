@@ -1,5 +1,16 @@
 package docket;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import base.MysqlJDBC;
+import da.AgentMySQLAccess;
+import da.DAExceptionHandler;
+import di.DI;
+import di.DIExceptionHandler;
+import di.InvoiceMySQLAccess;
 import junit.framework.TestCase;
 
 public class DocketTest extends TestCase {
@@ -57,7 +68,32 @@ public class DocketTest extends TestCase {
             assertEquals("Docket Name exceeds maximum length requirements", e.getMessage());
         }
     }
+    public void testinsertData001() {
+    	try {
+    		Connection connect = null;
+    		connect= MysqlJDBC.getConnection();
+    		DocketMySQLAccess dio = new DocketMySQLAccess();
+    		Docket docket = new Docket("xtzzzzzzzz", 2);
+    		assertEquals(true, dio.insertDocket(docket));
+    	}
+    	catch(Exception e){
+    		fail("Exception unexpected");
+    	}
+    }
+
+    public void testdeleteDIById001() {
+    	try {
+    		Connection connect = null;
+    		connect= MysqlJDBC.getConnection();
+    		DocketMySQLAccess dio = new DocketMySQLAccess();
+    		Docket docket = new Docket("xtzzzzzzzz", 2);
+    		dio.insertDocket(docket);
+    		assertEquals(true, dio.deleteDocketById(1));
+    	}
+    	catch(Exception e){
+    		fail("Exception unexpected");
+    	}
+    }
+
+   
 }
-
-
-
