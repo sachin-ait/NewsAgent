@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class CommandLine {
+public class BillCommandLine {
 
     private static void listCustomerFuctionalityAvailable() {
 

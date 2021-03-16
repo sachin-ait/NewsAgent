@@ -25,7 +25,7 @@ public class PublicationFrame extends JFrame implements ActionListener {
 	private JTextField failedField;
 	private JTextField payField;
 	private JTextField idField;
-	private JButton updateButton;
+	private JButton updateButton= new JButton("Update");
 
 	/**
 	 * Launch the application.
@@ -47,7 +47,7 @@ public class PublicationFrame extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public PublicationFrame() {
-		setTitle("Delivery Agents");
+		setTitle("Publication Frame");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 469, 333);
 		contentPane = new JPanel();

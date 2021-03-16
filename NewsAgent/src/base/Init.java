@@ -30,11 +30,11 @@ public class Init {
 				da.CommandLine.main(null);
 				break;
 			case "3":
-				biling.CommandLine.main(null);
+				biling.BillCommandLine.main(null);
 				break;
-			case "4":
-				cust.CommandLine.main(null);
-				break;
+//			case "4":
+//				cust.CommandLine.main(null);
+//				break;
 			case"5":
 				publications.PublicationController.main(null);
 				break;

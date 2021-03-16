@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import base.MysqlJDBC;
 
 public class CustomerMySQLAccess {
 
@@ -12,23 +13,17 @@ public class CustomerMySQLAccess {
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
-
-	final private String host = "localhost:3306";
-	final private String user = "root";
-	final private String password = "1234";
-
+	
+	
 	public CustomerMySQLAccess() {
-
+		connect= MysqlJDBC.getConnection();
 	}
 
 	public Statement getConnectionStatement() {
 		try {
 
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			connect = DriverManager
-					.getConnection("jdbc:mysql://" + host + "/newsagent?" + "user=" + user + "&password=" + password);
-
+			
+			return connect.createStatement();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
