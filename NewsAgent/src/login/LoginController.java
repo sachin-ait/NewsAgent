@@ -5,6 +5,7 @@ import biling.BillFrame;
 import da.DaFrame;
 import di.DiFrame;
 import docket.DocketFrame;
+import publications.PublicationFrame;
 import report.ReportFrame;
 
 import java.sql.ResultSet;
@@ -94,6 +95,8 @@ public class LoginController {
 				break;
 			case "Publication":
 				System.out.println("Publication");
+				PublicationFrame pframe= new PublicationFrame();
+				pframe.setVisible(true);
 				break;
 			case "Report":
 				ReportFrame reportFrame = new ReportFrame();
