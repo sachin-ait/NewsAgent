@@ -89,16 +89,23 @@ public class PublicationController {
                         update(publication1, deleteCustId1);
                         System.out.println("update successed");
                         break;
+<<<<<<< HEAD
                     
                     case "99":
                     	keepAppOpen= false;
                     	break;
+=======
+>>>>>>> origin/dev-Weijiang
                 } // end switch
 
             }// end while
 
             //Tidy up Resources
+<<<<<<< HEAD
          //   keyboard.close();
+=======
+            keyboard.close();
+>>>>>>> origin/dev-Weijiang
 
         } catch (Exception e) {
             System.out.println("PROGRAM TERMINATED - ERROR MESSAGE:" + e.getMessage());
@@ -117,8 +124,12 @@ public class PublicationController {
         System.out.println("2. View ALL Publication Records");
         System.out.println("3. Delete Publication Record by ID");
         System.out.println("4. update Publication Record by ID");
+<<<<<<< HEAD
        // System.out.println("99. Close the NewsAgent Application");
         System.out.println("99. Go Back to Main Menu");
+=======
+        System.out.println("99. Close the NewsAgent Application");
+>>>>>>> origin/dev-Weijiang
         System.out.println("=============================================");
         System.out.println(" ");
 

@@ -17,7 +17,11 @@ public class CommandLine {
         System.out.println("2. View Docket Records");
         System.out.println("3. Delete Docket Record by ID");
         System.out.println("4. Modify Docket INFO ");
+<<<<<<< HEAD
         System.out.println("99. Go Back to Main Menu");
+=======
+        System.out.println("99. Close the NewsAgent Application");
+>>>>>>> origin/dev-Weijiang
         System.out.println("=============================================");
         System.out.println(" ");
 
@@ -144,7 +148,11 @@ public class CommandLine {
             }// end while
 
             //Tidy up Resources
+<<<<<<< HEAD
            // keyboard.close();
+=======
+            keyboard.close();
+>>>>>>> origin/dev-Weijiang
 
         } catch (Exception e) {
             System.out.println("PROGRAM TERMINATED - ERROR MESSAGE:" + e.getMessage());
