@@ -2,8 +2,9 @@
 ##  should be run under the root user)
 
 #create newsagent user
-CREATE USER IF NOT EXISTS  'agent'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON *.* TO 'agent'@'%';
+DROP USER 'agent';
+CREATE USER  'agent'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'agent'@'localhost';
 FLUSH PRIVILEGES;
 
 create database IF NOT EXISTS newsagent;
