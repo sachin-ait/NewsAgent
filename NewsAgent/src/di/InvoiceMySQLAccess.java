@@ -5,22 +5,24 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
+import com.mysql.cj.jdbc.exceptions.SQLError;
+
 import base.MysqlJDBC;
 
 import java.sql.ResultSet;
 
 public class InvoiceMySQLAccess {
 
-	private Connection connect = null;
-	private Statement statement = null;
-	private PreparedStatement preparedStatement = null;
-	private ResultSet resultSet = null;
+	private static Connection connect = null;
+	private static Statement statement = null;
+	private static PreparedStatement preparedStatement = null;
+	private static ResultSet resultSet = null;
 
-	public InvoiceMySQLAccess() throws Exception {
+	public InvoiceMySQLAccess() throws DIExceptionHandler {
 		connect = MysqlJDBC.getConnection();
 	}
 
-	public boolean insertDInvoiceDetails(DI c) {
+	public static boolean insertDInvoiceDetails(DI c) {
 
 		boolean insertSucessfull = true;
 
@@ -44,7 +46,7 @@ public class InvoiceMySQLAccess {
 
 	}// end insertCustomerDetailsAccount
 
-	public ResultSet retrieveAllDInvoices() {
+	public static ResultSet retrieveAllDInvoices() {
 
 		// Add Code here to call embedded SQL to view Customer Details
 
@@ -58,7 +60,7 @@ public class InvoiceMySQLAccess {
 		return resultSet;
 	}
 
-	public boolean deleteDIById(int DIID) {
+	public static boolean deleteDIById(int DIID) {
 
 		boolean deleteSucessfull = true;
 
@@ -67,15 +69,16 @@ public class InvoiceMySQLAccess {
 		try {
 
 			// Create prepared statement to issue SQL query to the database
-			if (DIID == -99)
+			if (DIID == -99) {
 				// Delete all entries in Table
-				preparedStatement = connect.prepareStatement("delete * from newsagent.DeliveryInvoices");
-			else
+				statement = connect.createStatement();
+				statement.executeUpdate("Delete from DeliveryInvoices");
+			} else {
 				// Delete a particular Customer
 				preparedStatement = connect.prepareCall("call delete_Invoice(?)");
 				preparedStatement.setInt(1, DIID);
 				preparedStatement.executeUpdate();
-
+			}
 		} catch (Exception e) {
 			deleteSucessfull = false;
 		}
@@ -84,7 +87,7 @@ public class InvoiceMySQLAccess {
 
 	}
 
-	public boolean updateDIById(int DIID, int DISuccess, int DIFailure, double DIPay) {
+	public static boolean updateDIById(int DIID, int DISuccess, int DIFailure, double DIPay) {
 
 		boolean updateSucessfull = true;
 
@@ -93,6 +96,9 @@ public class InvoiceMySQLAccess {
 		try {
 			// Create prepared statement to issue SQL query to the database
 			preparedStatement = connect.prepareStatement("call update_Invoice(?, ?, ?, ?)");
+			DI.validateSuccess(DISuccess);
+			DI.validateFailed(DIFailure);
+			DI.validatePay(DIPay);
 			preparedStatement.setInt(1, DIID);
 			preparedStatement.setInt(2, DISuccess);
 			preparedStatement.setInt(3, DIFailure);

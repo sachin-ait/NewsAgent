@@ -84,7 +84,7 @@ public class GUIbase extends JFrame implements ActionListener {
 					biling.CommandLine.main(null);
 				}
 				else if (selectModule.equals("Customer")) {
-					cust.CommandLine.main(null);
+					Customer.CustomerFrame.main(null);
 				}
 				else if (selectModule.equals("Publications")) {
 					publications.PublicationController.main(null);

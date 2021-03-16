@@ -1,4 +1,12 @@
 package da;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.mysql.cj.jdbc.exceptions.SQLError;
+
+import base.MysqlJDBC;
 import junit.framework.TestCase;
 
 public class DATest extends TestCase {
@@ -284,6 +292,77 @@ public class DATest extends TestCase {
 						fail("Exception unexpected");	
 					}
 				}
+				public void testinsertDADetailsAccount001() {
+					try {
+						boolean insert = true;
+						Connection connect = null;
+						connect= MysqlJDBC.getConnection();
+						AgentMySQLAccess dao = new AgentMySQLAccess();
+						DA DAObj = new DA("John Doe", "Willow Grove", 12, 50);
+						assertEquals(insert,AgentMySQLAccess.insertDADetailsAccount(DAObj));
+					}
+					catch(DAExceptionHandler e){
+						fail("Exception unexpected");
+					}
+				}
+				public void testretrieveDADetailsAccount001() {
+					try {
+						boolean insert = true;
+						Connection connect = null;
+						connect= MysqlJDBC.getConnection();
+						AgentMySQLAccess dao = new AgentMySQLAccess();
+						Statement statement = connect.createStatement();
+						ResultSet rs=statement.executeQuery("Select * from newsagent.DeliveryAgents");
+						 assertTrue(AgentMySQLAccess.retrieveAllDAAccounts() != null);
+					} catch (SQLException | DAExceptionHandler e) {
+						fail("Exception unexpected");
+						
+					}
+				}
+				public void testdeleteDAById001() {
+					try {
+						boolean delete = true;
+						Connection connect = null;
+						connect= MysqlJDBC.getConnection();
+						AgentMySQLAccess dao = new AgentMySQLAccess();
+						int id = 1;
+						assertEquals(delete,AgentMySQLAccess.deleteDAById(id));
+					}
+					catch(DAExceptionHandler e){
+						fail("Exception unexpected");
+					}
+				}
+				public void testdeleteDAById002() {
+					try {
+						boolean delete = true;
+						Connection connect = null;
+						connect= MysqlJDBC.getConnection();
+						AgentMySQLAccess dao = new AgentMySQLAccess();
+						int id =-99;
+						assertEquals(delete, AgentMySQLAccess.deleteDAById(id));
+					}
+					catch(DAExceptionHandler e){
+						fail("Exception unexpected");
+					}
+				}
+				public void testupdateDAById001() {
+					try {
+						boolean update = true;
+						Connection connect = null;
+						connect= MysqlJDBC.getConnection();
+						AgentMySQLAccess dao = new AgentMySQLAccess();
+						int id =1;
+						String name = "Tom";
+						String area = "Athlone";
+						int rate = 23;
+						int logged = 56;
+						assertEquals(update, AgentMySQLAccess.updateDAById(id,name,area,rate,logged));
+					}
+					catch(DAExceptionHandler e){
+						fail("Exception unexpected");
+					}
+				}
+
 }
 
 		

@@ -30,7 +30,7 @@ public class DiFrame extends JFrame implements ActionListener {
 	private JTextField failedField;
 	private JTextField payField;
 	private JTextField idField;
-	private JButton updateButton;
+	private JButton updateButton = new JButton("Update");
 
 	/**
 	 * Launch the application.
@@ -166,7 +166,7 @@ public class DiFrame extends JFrame implements ActionListener {
 				int afail = Integer.parseInt(failedField.getText());
 				double paydue = Integer.parseInt(payField.getText());
 				DI DIObj = new DI(date1, date2, date3, aSucc, afail, paydue);
-				boolean insertResult = dio.insertDInvoiceDetails(DIObj);
+				boolean insertResult = InvoiceMySQLAccess.insertDInvoiceDetails(DIObj);
 				if (insertResult == true)
 					resultField.setText("Invoice Details Saved");
 				else
@@ -180,7 +180,7 @@ public class DiFrame extends JFrame implements ActionListener {
 				InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
 				int id = Integer.parseInt(idField.getText());
 				String allID = "" + id;
-				boolean deleteResult = dio.deleteDIById(id);
+				boolean deleteResult = InvoiceMySQLAccess.deleteDIById(id);
 				if ((deleteResult == true) && (allID.equals("-99")))
 					resultField.setText("Invoice Table Emptied");
 				else if (deleteResult == true)
@@ -201,7 +201,7 @@ public class DiFrame extends JFrame implements ActionListener {
 				int aSucc = Integer.parseInt(successField.getText());
 				int afail = Integer.parseInt(failedField.getText());
 				double paydue = Integer.parseInt(payField.getText());
-				boolean updateResult = dio.updateDIById(id, aSucc, afail, paydue);
+				boolean updateResult = InvoiceMySQLAccess.updateDIById(id, aSucc, afail, paydue);
 				if (updateResult == true)
 					resultField.setText("Agent Details Updated");
 				else
