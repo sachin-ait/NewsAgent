@@ -8,19 +8,15 @@ public class PublicationTest extends TestCase {
 
     public void testBill001() throws DocketExceptionHandler {
         try {
-            Docket docket = new Docket("Brown", 10);
+            Publication docket = new Publication("Brown", 10);
             // Use getters to check for object creation
-            assertEquals(10, docket.getNum());
-            assertEquals("Brown", docket.getDocketName());
+            assertEquals(10, docket.getAmount());
+            assertEquals("Brown", docket.getName());
         } catch (DocketExceptionHandler docketExceptionHandler) {
             fail("Exception not expected");
         }
     }
 
-    //Test #: 2.1
-    //Test Objective: To catch an incorrect lower boundary value Customer Name
-    //Inputs: docketName = ""
-    //Expected Output: "Docket Name NOT specified"
 
     public void testValidateDocketName001() {
         try {
@@ -32,10 +28,7 @@ public class PublicationTest extends TestCase {
         }
     }
 
-    //Test #: 2.2
-    //Test Objective: To catch an incorrect lower boundary value Docket Name
-    //Inputs: docketName = "DD"
-    //Expected Output: "Docket Name does not meet minimum length requirements"
+
     public void testValidateDocketName002() {
         try {
             //Call method under test
@@ -46,10 +39,7 @@ public class PublicationTest extends TestCase {
         }
     }
 
-    //Test #: 2.3
-    //Test Objective: To catch an incorrect lower boundary value Docket Name
-    //Inputs: docketName = "AJdsfkjwfjlfqhjfkqhfjkqfhjkqfhleqlqghjdjlahjdlhfqitg jjjdlahflrqlqhdslhbafha;fhghhligihui"
-    //Expected Output: "Docket Name exceeds maximum length requirements"
+
     public void testValidateDocketName003() {
         try {
             //Call method under test

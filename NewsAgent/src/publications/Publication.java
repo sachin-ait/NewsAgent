@@ -5,6 +5,11 @@ public class Publication {
     private String name;
     private int amount;
 
+    public Publication(String name, int amount) {
+        this.name = name;
+        this.amount = amount;
+    }
+
     public int getId() {
         return id;
     }

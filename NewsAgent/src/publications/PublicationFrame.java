@@ -186,6 +186,7 @@ public class PublicationFrame extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 		}
+
 		if (target == updateButton) {
 			try {
 				InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
