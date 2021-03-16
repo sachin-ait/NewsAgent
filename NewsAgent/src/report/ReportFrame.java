@@ -123,7 +123,7 @@ public class ReportFrame extends JFrame {
 //        table1 = new JTable(new MyTableModel());
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- label1 ----
         label1.setText("Delivery Roport");

@@ -27,11 +27,8 @@ public class Docket {
         }
     }
 
-<<<<<<< HEAD
-    static void validateDocketName(String name) throws DocketExceptionHandler {
-=======
+
     public static void validateDocketName(String name) throws DocketExceptionHandler {
->>>>>>> origin/dev-Weijiang
         //Agree Formating Rules on "Biling Name"
         //E.G. Name String must be a minimum of 2 characters and a maximum of 50 characters
         if (name.length() == 0 || name.isEmpty()) {
