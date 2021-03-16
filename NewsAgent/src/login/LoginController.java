@@ -4,6 +4,7 @@ import DeliveryOrder.DeliveryOrderFrame;
 import biling.BillFrame;
 import da.DaFrame;
 import di.DiFrame;
+import docket.DocketFrame;
 import report.ReportFrame;
 
 import java.sql.ResultSet;
@@ -82,6 +83,8 @@ public class LoginController {
 				break;
 			case "Docket":
 				System.out.println("Docket");
+				DocketFrame doFrame = new DocketFrame();
+				doFrame.setVisible(true);
 				break;		
 			case "User":
 				// Launch Billing Frame
