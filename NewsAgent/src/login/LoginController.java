@@ -1,7 +1,7 @@
 package login;
 
+import Customer.CustomerFrame;
 import DeliveryOrder.DeliveryOrderFrame;
-import biling.BillFrame;
 import da.DaFrame;
 import di.DiFrame;
 import docket.DocketFrame;
@@ -9,8 +9,6 @@ import publications.PublicationFrame;
 import report.ReportFrame;
 
 import java.sql.ResultSet;
-
-import Customer.CustomerFrame;
 
 public class LoginController {
 
@@ -55,12 +53,6 @@ public class LoginController {
 		if (resultSet.next()) {
 			System.out.println("Login success");
 			switch (accessModel) {
-			case "Billing":
-				// Launch Billing Frame
-				BillFrame billFrame = new BillFrame();
-				billFrame.setVisible(true);
-				System.out.println("Access billing");
-				break;
 			case "Customer":
 				// Launch Billing Frame
 				CustomerFrame custFrame = new CustomerFrame();
