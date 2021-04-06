@@ -2,15 +2,33 @@ package DeliveryOrder;
 public class DeliveryOrder {
 	
 	private String name;
+	private int custID;
+	private String address;
 	private String publication;
 	private String date;
 	
 	public String getName() {
 		return name;
 	}
+	
+	public int getCustId() {
+		return custID;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setCustId(int cid) {
+		this.custID = cid;
+	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getPublication() {
@@ -29,7 +47,7 @@ public class DeliveryOrder {
 		this.date = date;
 	}
 
-	public DeliveryOrder(String custName, String publicationName, String deliverDate) throws DeliveryOrderExceptionHandler  {
+	public DeliveryOrder(String custName,String caddress, String publicationName, String deliveryDate) throws DeliveryOrderExceptionHandler  {
 		
 		
 		// Validate Input
@@ -37,7 +55,7 @@ public class DeliveryOrder {
 			
 			validateName(custName);
 			validatePublication(publicationName);
-			validateDate(deliverDate);
+			validateDate(deliveryDate);
 			
 		}
 		catch (DeliveryOrderExceptionHandler e) {
@@ -47,7 +65,8 @@ public class DeliveryOrder {
 		// Set Attributes
 		name = custName;
 		publication = publicationName;
-		date = deliverDate;
+		date = deliveryDate;
+		address = caddress;
 	}
 	
 	public static void validateName(String custName) throws DeliveryOrderExceptionHandler {
@@ -56,11 +75,13 @@ public class DeliveryOrder {
 		//E.G. Name String must be a minimum of 2 characters and a maximum of 50 characters
 		
 		if (custName.isEmpty())
-			throw new DeliveryOrderExceptionHandler("Customer Name NOT specified");
+			throw new DeliveryOrderExceptionHandler("DeliveryOrder Name NOT specified");
+		else if(isNumeric(custName))
+			throw new DeliveryOrderExceptionHandler("DeliveryOrder Name contains Numeric");
 		else if (custName.length() < 2)
-			throw new DeliveryOrderExceptionHandler("Customer Name does not meet minimum length requirements");
+			throw new DeliveryOrderExceptionHandler("DeliveryOrder Name does not meet minimum length requirements");
 		else if (custName.length() > 30)
-			throw new DeliveryOrderExceptionHandler("Customer Name does not exceeds maximum length requirements");
+			throw new DeliveryOrderExceptionHandler("DeliveryOrder Name does not exceeds maximum length requirements");
 		
 	}
 	
@@ -71,6 +92,8 @@ public class DeliveryOrder {
 		
 		if (publicationName.isEmpty())
 			throw new DeliveryOrderExceptionHandler("Publication Name NOT specified");
+		else if(isNumeric(publicationName))
+			throw new DeliveryOrderExceptionHandler("Publication Name contains Numeric");
 		else if (publicationName.length() < 2)
 			throw new DeliveryOrderExceptionHandler("Publication Name does not meet minimum length requirements");
 		else if (publicationName.length() > 30)
@@ -78,19 +101,30 @@ public class DeliveryOrder {
 		
 	}
 	
-	public static void validateDate(String deliverDate) throws DeliveryOrderExceptionHandler {
+	public static void validateDate(String deliveryDate) throws DeliveryOrderExceptionHandler {
 		
 		//Agree Formating Rules on "Customer PhoneNumber"
 		//E.G. Name String must be a minimum of 7 characters and a maximum of 15 characters
 		
-		if (deliverDate.isEmpty())
-			throw new DeliveryOrderExceptionHandler("Deliver Date NOT specified");
-		else if (deliverDate.length() < 9)
-			throw new DeliveryOrderExceptionHandler("Deliver Date does not meet minimum length requirements");
-		else if (deliverDate.length() > 11)
-			throw new DeliveryOrderExceptionHandler("Deliver Date does not exceeds maximum length requirements");
+		if (deliveryDate.isEmpty())
+			throw new DeliveryOrderExceptionHandler("Delivery Date NOT specified");
+		else if (deliveryDate.length() < 9)
+			throw new DeliveryOrderExceptionHandler("Delivery Date does not meet minimum length requirements");
+		else if (deliveryDate.length() > 11)
+			throw new DeliveryOrderExceptionHandler("Delivery Date does not exceeds maximum length requirements");
 		
 	}
 	
+	public static boolean isNumeric(String string) {
+		int intValue;
+
+		try {
+			intValue = Integer.parseInt(string);
+			return true;
+		} catch (NumberFormatException e) {
+
+		}
+		return false;
+	}
 
 }

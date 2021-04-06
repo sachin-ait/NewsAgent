@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import OrderReport.OrderReport;
+import OrderReport.OrderReportMySQLAccess;
+import base.MysqlJDBC;
 
 public class DeliveryOrderMySQLAccess {
 
@@ -15,29 +16,23 @@ public class DeliveryOrderMySQLAccess {
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
-
-	final private String host = "localhost:3306";
-	final private String user = "root";
-	final private String password = "1234";
-
+	private OrderReportMySQLAccess orderReportSQL;
+	
+	
 	public DeliveryOrderMySQLAccess() {
-
+		connect= MysqlJDBC.getConnection();
 	}
 
 	public Statement getConnectionStatement() {
 		try {
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			connect = DriverManager
-					.getConnection("jdbc:mysql://" + host + "/newsagent?" + "user=" + user + "&password=" + password);
-
+			return connect.createStatement();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
+
 
 	public boolean insertDeliveryOrderDetailsAccount(DeliveryOrder d) {
 
@@ -81,7 +76,7 @@ public class DeliveryOrderMySQLAccess {
 	public boolean deleteDeliveryOrderById(int deliveryOrderID) {
 
 		boolean deleteSucessful = true;
-
+		String status = "DEL";
 		// Add Code here to call embedded SQL to insert Customer into DB
 
 		try {
@@ -96,8 +91,13 @@ public class DeliveryOrderMySQLAccess {
 				preparedStatement = connect.prepareStatement(
 						"delete from newsagent.DeliveryOrder where DeliveryOrderID = " + deliveryOrderID);
 			preparedStatement.executeUpdate();
+			
+			String doName = resultSet.getString("CustName");
+			String doPublication = resultSet.getString("PublicationName");
+			String doDate = resultSet.getString("DeliveryDate");
+			orderReportSQL.insertOrderReportDetailsAccount(doName,doPublication,doDate,status,deliveryOrderID);
 
-			OrderReport.OrderReport(resultSet, 0);
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,7 +120,6 @@ public class DeliveryOrderMySQLAccess {
 			preparedStatement = connect.prepareStatement("update DeliveryOrder set " + updateChoice + " = '" + adjustion
 					+ "' where DeliveryOrderID= " + deliveryOrderID);
 			preparedStatement.executeUpdate();
-			OrderReport.OrderReport(resultSet, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			updateSucessful = false;
@@ -130,20 +129,21 @@ public class DeliveryOrderMySQLAccess {
 
 	}
 	
-	public boolean updateDeliveryOrderById(int deliveryOrderID, String doName, String doPublcation, String doDate) {
+	public boolean updateDeliveryOrderById(int deliveryOrderID, String doName, String doAddress, String doPublication, String doDate) {
 
 		boolean updateSucessful = true;
-
+		String status = "UPD";
 		// Add Code here to call embedded SQL to insert Customer into DB
 
 		try {
 			readInfo(deliveryOrderID);
 			// Create prepared statement to issue SQL query to the database
 			preparedStatement = connect.prepareStatement("update DeliveryOrder set CustName = '" + doName + "',PublicationName  = '"
-			+ doPublcation	+ "',DeliveryDate  = '" + doDate	+ "' where DeliveryOrderID= " + deliveryOrderID);
+			+ doPublication	+ "',CustAddress'"+ doAddress + "',DeliveryDate  = '" + doDate	+ "' where DeliveryOrderID= " + deliveryOrderID);
 			preparedStatement.executeUpdate();
 			
-			OrderReport.OrderReport(resultSet, 1);
+			orderReportSQL.insertOrderReportDetailsAccount(doName,doPublication,doDate,status,deliveryOrderID);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			updateSucessful = false;

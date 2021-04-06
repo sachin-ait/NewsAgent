@@ -1,7 +1,6 @@
 package DeliveryOrder;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -15,9 +14,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener {
@@ -44,7 +40,7 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 	    while (rs.next()) {
 	        Vector<Object> vector = new Vector<Object>();
 	        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-	            vector.add(rs.getObject(columnIndex));
+	            vector.add(rs.getObject(columnIndex)); 
 	        }
 	        data.add(vector);
 	    }
@@ -93,7 +89,7 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 				columnModel.getColumn(0).setPreferredWidth(25);
 				columnModel.getColumn(1).setPreferredWidth(100);
 				columnModel.getColumn(2).setPreferredWidth(100);
-				columnModel.getColumn(3).setPreferredWidth(100);
+				columnModel.getColumn(3).setPreferredWidth(100); 
 				panel.add(table_1);
 				rSet.close();
 			}
