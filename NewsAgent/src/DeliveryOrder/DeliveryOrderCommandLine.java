@@ -84,7 +84,7 @@ public class DeliveryOrderCommandLine {
 					System.out.printf("Enter Delivery Date : \n");
 					String deliveryDate = keyboard.next();
 
-					DeliveryOrder deliveryObj = new DeliveryOrder(custName, publicationName, deliveryDate);
+					DeliveryOrder deliveryObj = new DeliveryOrder(custName, 2,"Customer Address", publicationName, deliveryDate);
 
 					// Insert Customer Details into the database
 					boolean insertResult = dao.insertDeliveryOrderDetailsAccount(deliveryObj);
@@ -153,13 +153,13 @@ public class DeliveryOrderCommandLine {
 					case "99":
 						break;
 					}
-					boolean updateResult = dao.updateDeliveryOrderById(Integer.parseInt(updateDeliveryOrderId), updateChoice,
+					/*boolean updateResult = dao.updateDeliveryOrderById(Integer.parseInt(updateDeliveryOrderId), updateChoice,
 							adjustion);
 					if (updateResult == true)
 						System.out.println("Delivery Order Updated");
 					else
 						System.out.println("ERROR: Delivery Order Details NOT Updated or Do Not Exist");
-					break;
+					break;*/
 					
 
 				case "99":

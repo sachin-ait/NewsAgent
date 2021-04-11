@@ -33,11 +33,13 @@ public class BillMySQLAccess {
 
             while (resultSet.next()) {
                 int DeliveryOrderId = resultSet.getInt("DeliveryOrderId");
+                int CustomerOrderId = resultSet.getInt("DeliveryOrderId");
                 String CustName = resultSet.getString("CustName");
+                String DeliveryAddress = resultSet.getString("DeliveryAddress");
                 String PublicationName = resultSet.getString("PublicationName");
                 String DeliveryDate = resultSet.getString("DeliveryDate");
                 String DeliveryStatus = resultSet.getString("DeliveryStatus");
-                DeliveryOrder deliveryOrder = new DeliveryOrder(CustName, PublicationName, DeliveryDate);
+                DeliveryOrder deliveryOrder = new DeliveryOrder(CustName, 2,  DeliveryAddress, PublicationName, DeliveryDate);
                 list.add(deliveryOrder);
                 System.out.println();
             }// end while

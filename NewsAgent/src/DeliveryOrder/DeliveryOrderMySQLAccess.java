@@ -17,10 +17,9 @@ public class DeliveryOrderMySQLAccess {
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	private OrderReportMySQLAccess orderReportSQL;
-	
-	
+
 	public DeliveryOrderMySQLAccess() {
-		connect= MysqlJDBC.getConnection();
+		connect = MysqlJDBC.getConnection();
 	}
 
 	public Statement getConnectionStatement() {
@@ -33,7 +32,6 @@ public class DeliveryOrderMySQLAccess {
 		return null;
 	}
 
-
 	public boolean insertDeliveryOrderDetailsAccount(DeliveryOrder d) {
 
 		boolean insertSucessfull = true;
@@ -43,10 +41,12 @@ public class DeliveryOrderMySQLAccess {
 		try {
 
 			// Create prepared statement to issue SQL query to the database
-			preparedStatement = connect.prepareStatement("insert into DeliveryOrder values (DEFAULT, ?, ?, ?)");
-			preparedStatement.setString(1, d.getName());
-			preparedStatement.setString(2, d.getPublication());
-			preparedStatement.setString(3, d.getDate());
+			preparedStatement = connect.prepareStatement("insert into DeliveryOrder values (DEFAULT, ?, ?, ?, ?, ?)");
+			preparedStatement.setInt(1, d.getCustId());
+			preparedStatement.setString(2, d.getName());
+			preparedStatement.setString(3, d.getAddress());
+			preparedStatement.setString(4, d.getPublication());
+			preparedStatement.setString(5, d.getDate());
 			preparedStatement.executeUpdate();
 
 		} catch (Exception e) {
@@ -91,13 +91,11 @@ public class DeliveryOrderMySQLAccess {
 				preparedStatement = connect.prepareStatement(
 						"delete from newsagent.DeliveryOrder where DeliveryOrderID = " + deliveryOrderID);
 			preparedStatement.executeUpdate();
-			
+
 			String doName = resultSet.getString("CustName");
 			String doPublication = resultSet.getString("PublicationName");
 			String doDate = resultSet.getString("DeliveryDate");
-			orderReportSQL.insertOrderReportDetailsAccount(doName,doPublication,doDate,status,deliveryOrderID);
-
-
+			orderReportSQL.insertOrderReportDetailsAccount(doName, doPublication, doDate, status, deliveryOrderID);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,28 +106,28 @@ public class DeliveryOrderMySQLAccess {
 
 	}
 
-	public boolean updateDeliveryOrderById(int deliveryOrderID, String updateChoice, String adjustion) {
+	/*
+	 * public boolean updateDeliveryOrderById(int deliveryOrderID, String
+	 * updateChoice, String adjustion) {
+	 * 
+	 * boolean updateSucessful = true;
+	 * 
+	 * // Add Code here to call embedded SQL to insert Customer into DB
+	 * 
+	 * try { readInfo(deliveryOrderID); // Create prepared statement to issue SQL
+	 * query to the database preparedStatement =
+	 * connect.prepareStatement("update DeliveryOrder set " + updateChoice + " = '"
+	 * + adjustion + "' where DeliveryOrderID= " + deliveryOrderID);
+	 * preparedStatement.executeUpdate(); } catch (Exception e) {
+	 * e.printStackTrace(); updateSucessful = false; }
+	 * 
+	 * return updateSucessful;
+	 * 
+	 * }
+	 */
 
-		boolean updateSucessful = true;
-
-		// Add Code here to call embedded SQL to insert Customer into DB
-
-		try {
-			readInfo(deliveryOrderID);
-			// Create prepared statement to issue SQL query to the database
-			preparedStatement = connect.prepareStatement("update DeliveryOrder set " + updateChoice + " = '" + adjustion
-					+ "' where DeliveryOrderID= " + deliveryOrderID);
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-			updateSucessful = false;
-		}
-
-		return updateSucessful;
-
-	}
-	
-	public boolean updateDeliveryOrderById(int deliveryOrderID, String doName, String doPublication, String doDate) {
+	public boolean updateDeliveryOrderById(int deliveryOrderID, String doName, int CID, String doAddress,
+			String doPublication, String doDate) {
 
 		boolean updateSucessful = true;
 		String status = "UPD";
@@ -138,12 +136,13 @@ public class DeliveryOrderMySQLAccess {
 		try {
 			readInfo(deliveryOrderID);
 			// Create prepared statement to issue SQL query to the database
-			preparedStatement = connect.prepareStatement("update DeliveryOrder set CustName = '" + doName + "',PublicationName  = '"
-			+ doPublication	+ "',DeliveryDate  = '" + doDate	+ "' where DeliveryOrderID= " + deliveryOrderID);
+			preparedStatement = connect.prepareStatement("update DeliveryOrder set CustID = " + CID + ",CustName = '"
+					+ doName + "',CustAddress  = '" + doAddress + "', PublicationName = '" + doPublication
+					+ "', DeliveryDate  = '" + doDate + "' where DeliveryOrderID = " + deliveryOrderID);
 			preparedStatement.executeUpdate();
-			
-			orderReportSQL.insertOrderReportDetailsAccount(doName,doPublication,doDate,status,deliveryOrderID);
-			
+
+			//orderReportSQL.insertOrderReportDetailsAccount(doName, doPublication, doDate, status, deliveryOrderID);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			updateSucessful = false;
@@ -156,7 +155,7 @@ public class DeliveryOrderMySQLAccess {
 	public ResultSet readInfo(int id) {
 		try {
 			statement = connect.createStatement();
-				resultSet = statement.executeQuery("select * from newsagent.DeliveryOrder where DeliveryOrderId = " + id);
+			resultSet = statement.executeQuery("select * from newsagent.DeliveryOrder where DeliveryOrderId = " + id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

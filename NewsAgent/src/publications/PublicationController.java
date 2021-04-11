@@ -7,6 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import base.MysqlJDBC;
+import da.DAExceptionHandler;
+
 public class PublicationController {
 
 	public static void main(String[] args) {
@@ -37,7 +40,7 @@ public class PublicationController {
 					System.out.printf("Enter publication account: \n");
 					int amount = Integer.parseInt(keyboard.next() + "");
 
-					Publication publication = new Publication();
+					Publication publication = new Publication(name, amount, amount, name);
 					publication.setName(name);
 					publication.setAmount(amount);
 
@@ -79,8 +82,9 @@ public class PublicationController {
 					String name1 = keyboard.next();
 					System.out.printf("Enter publication update account: \n");
 					int amount1 = Integer.parseInt(keyboard.next() + "");
-
-					Publication publication1 = new Publication();
+					double price = 0.00;
+					String freq = "Daily";
+					Publication publication1 = new Publication(name1, amount1, price, freq);
 					publication1.setName(name1);
 					publication1.setAmount(amount1);
 					update(publication1, deleteCustId1);
@@ -136,7 +140,7 @@ public class PublicationController {
 	}
 
 	public static boolean insert(Publication publication) throws SQLException {
-		Connection connection = JDBCUtils.getConnection();
+		Connection connection = MysqlJDBC.getConnection();
 		Statement statement = connection.createStatement();
 		String name = publication.getName();
 		int amount = publication.getAmount();
@@ -149,7 +153,7 @@ public class PublicationController {
 	public static boolean delete(int id) {
 		boolean flag = false;
 		try {
-			Connection connection = JDBCUtils.getConnection();
+			Connection connection = MysqlJDBC.getConnection();
 			Statement statement = connection.createStatement();
 			String insertSql = "DELETE FROM publication WHERE id='" + id + "'";
 			statement.execute(insertSql);
@@ -165,7 +169,7 @@ public class PublicationController {
 		boolean flag = false;
 
 		try {
-			Connection connection = JDBCUtils.getConnection();
+			Connection connection = MysqlJDBC.getConnection();
 			Statement statement = connection.createStatement();
 			String insertSql = "UPDATE publication SET name = '" + publication.getName() + "', amount= "
 					+ publication.getAmount() + " WHERE id = " + id + "";
@@ -177,15 +181,15 @@ public class PublicationController {
 		return flag;
 	}
 
-	public static ArrayList<Publication> queryResource() throws SQLException {
-		Connection connection = JDBCUtils.getConnection();
+	public static ArrayList<Publication> queryResource() throws SQLException, DAExceptionHandler {
+		Connection connection = MysqlJDBC.getConnection();
 		Statement statement = connection.createStatement();
 		String querySql = "SELECT * FROM newsagent.publication";
 		ResultSet rs = statement.executeQuery(querySql);
 		ArrayList<Publication> publications = new ArrayList<>();
 		while (rs.next()) { // Each time next() is performed, the value of a row of attributes will be
 							// traversed
-			Publication publication = new Publication();
+			Publication publication = new Publication(querySql, 0, 0, querySql);
 			int id = rs.getInt("id"); // Get the data of the first column (id)
 			String name = rs.getString("name"); // Get the data in the second column (userName)
 			int amount = rs.getInt("amount");

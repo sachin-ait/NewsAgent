@@ -6,3 +6,4 @@ source bill.sql;
 source CustomerTable.sql;
 source DeliveryOrder.sql;
 source DeliveryInvoices.sql;
+source newsagent_publication.sql;

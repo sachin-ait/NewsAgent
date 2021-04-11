@@ -172,7 +172,7 @@ public class DiFrame extends JFrame implements ActionListener {
 				else
 					resultField.setText("ERROR: Invoice Details NOT Saved");
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				resultField.setText("ERROR: Invoice Details NOT Saved");
 			}
 		}
 		if (target == deleteButton) {
@@ -188,7 +188,7 @@ public class DiFrame extends JFrame implements ActionListener {
 				else
 					resultField.setText("ERROR: Invoice Details NOT Deleted or Do Not Exist");
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				resultField.setText("ERROR: Invoice Details NOT Deleted or Do Not Exist");
 			}
 		}
 		if (target == updateButton) {

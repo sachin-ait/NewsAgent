@@ -74,8 +74,8 @@ public class PublicationFrameDisplay extends JFrame implements ActionListener {
 		contentPane.add(closeButton);
 		closeButton.addActionListener(this);
 		try {
-			InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
-			ResultSet rSet = dio.retrieveAllDInvoices();
+			PubMySQLAccess dio = new PubMySQLAccess();
+			ResultSet rSet = PubMySQLAccess.retrieveAllPub();
 			if (rSet == null) {
 				System.out.println("No Records Found");
 			}
