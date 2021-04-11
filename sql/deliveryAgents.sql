@@ -11,7 +11,8 @@ CREATE TABLE DeliveryAgents (
     Agent_Area VARCHAR(60),
 	Agent_Pay_Rate DECIMAL(4),
     Agent_Hours_Logged DECIMAL(3),
-    primary key (Agent_ID)
+    primary key (Agent_ID),
+    UNIQUE (Agent_Area)
     );
 
 Drop Function if exists create_Agent
