@@ -1,0 +1,58 @@
+JFDML JFormDesigner: "7.0.2.6.321" Java: "11.0.5" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:52:p, par l:::p {comp panel1::l:::x, comp panel2::t:::x, comp panel3::l:::x}, space ::5:x}}"
+			"$verticalGroup": "par l {seq l {space :p:17:p, comp panel1:::p::p, space s:::p, comp panel2:::p::p, space :::p, comp panel3:::p::p, space ::53:x}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :p:305:p, comp label1:::p:94:p, space ::352:x}}"
+				"$verticalGroup": "par l {seq t {space :::p, comp label1:::::x, space :::p}}"
+			} ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Invoice"
+					"font": new java.awt.Font( "Lucida Grande", 1, 22 )
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :p:31:p, comp comboBox1:::p:187:p, space :p:47:p, comp comboBox2:::p:202:p, space :p:38:p, comp button1:::p:95:p, space ::151:x}}"
+				"$verticalGroup": "par l {seq {space :::p, par b {comp comboBox1::b:p::p, comp button1::b::30:x, comp comboBox2::b:p::p}, space :0:6:x}}"
+			} ) {
+				name: "panel2"
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "comboBox1"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "comboBox1ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "comboBox2"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "comboBox2ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "Search"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq t {space ::35:x, comp scrollPane1:::p:692:p, space :p:24:p}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp scrollPane1:::p:250:p, space ::30:x}}"
+			} ) {
+				name: "panel3"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "table1"
+					} )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 10, 0 )
+			"size": new java.awt.Dimension( 810, 485 )
+		} )
+	}
+}
