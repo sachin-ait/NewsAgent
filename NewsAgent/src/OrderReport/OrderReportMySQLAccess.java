@@ -19,17 +19,12 @@ public class OrderReportMySQLAccess {
 	final private String password = "1234";
 
 	public OrderReportMySQLAccess() {
-
+		connect= base.MysqlJDBC.getConnection();
 	}
 
 	public Statement getConnectionStatement() {
 		try {
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			connect = DriverManager
-					.getConnection("jdbc:mysql://" + host + "/newsagent?" + "user=" + user + "&password=" + password);
-
+			return connect.createStatement();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

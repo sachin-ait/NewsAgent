@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import OrderReport.OrderReportMySQLAccess;
+import base.MysqlJDBC;
 
 public class DeliveryOrderMySQLAccess {
 
@@ -15,30 +16,23 @@ public class DeliveryOrderMySQLAccess {
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
-
-	final private String host = "localhost:3306";
-	final private String user = "root";
-	final private String password = "1234"; 
 	private OrderReportMySQLAccess orderReportSQL;
-
+	
+	
 	public DeliveryOrderMySQLAccess() {
-
+		connect= MysqlJDBC.getConnection();
 	}
 
 	public Statement getConnectionStatement() {
 		try {
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			connect = DriverManager
-					.getConnection("jdbc:mysql://" + host + "/newsagent?" + "user=" + user + "&password=" + password);
-
+			return connect.createStatement();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
+
 
 	public boolean insertDeliveryOrderDetailsAccount(DeliveryOrder d) {
 

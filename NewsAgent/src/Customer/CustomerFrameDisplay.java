@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.ScrollPane;
 
 public class CustomerFrameDisplay extends JFrame implements ActionListener {
 	private static CustomerFrameDisplay single;
@@ -38,6 +39,7 @@ public class CustomerFrameDisplay extends JFrame implements ActionListener {
 	    for (int column = 1; column <= columnCount; column++) {
 	        columnNames.add(metaData.getColumnName(column));
 	    }
+	    
 
 	    // data of the table
 	    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
@@ -50,7 +52,6 @@ public class CustomerFrameDisplay extends JFrame implements ActionListener {
 	    }
 
 	    return new DefaultTableModel(data, columnNames);
-
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -72,10 +73,7 @@ public class CustomerFrameDisplay extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 13, 515, 240);
 		contentPane.add(panel);
-		
-		table_1 = new JTable();
-		panel.add(table_1);
-		
+			
 		closeButton = new JButton("Close");
 		closeButton.setBounds(225, 266, 85, 21);
 		contentPane.add(closeButton);
@@ -88,7 +86,7 @@ public class CustomerFrameDisplay extends JFrame implements ActionListener {
 				System.out.println("No Records Found");
 			}
 			else {
-				JTable table_1 = new JTable(buildTableModel(rSet));
+				table_1 = new JTable(buildTableModel(rSet));
 				TableColumnModel columnModel = table_1.getColumnModel();
 				columnModel.getColumn(0).setPreferredWidth(25);
 				columnModel.getColumn(1).setPreferredWidth(100);
@@ -96,12 +94,14 @@ public class CustomerFrameDisplay extends JFrame implements ActionListener {
 				columnModel.getColumn(3).setPreferredWidth(100);
 				columnModel.getColumn(4).setPreferredWidth(50);
 				columnModel.getColumn(5).setPreferredWidth(100);
-				panel.add(table_1);
 				rSet.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		panel.add(new JScrollPane(table_1));
+
 	}
 	
 	public static CustomerFrameDisplay getInstance() {

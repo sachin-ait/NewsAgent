@@ -5,10 +5,13 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
@@ -39,10 +42,9 @@ public class CustomerFrame extends JFrame implements ActionListener {
 	private JLabel lblCust1 = new JLabel("Name");
 	private JLabel lblCust2 = new JLabel("Address");
 	
-	private String[] choices = {"","Athlone","Galway", "Dublin","Cork"};
-	DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>(choices);
+	DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
 
-	private JComboBox areaField = new JComboBox(comboModel);
+	private JComboBox<String> areaField = new JComboBox<String>(comboModel);
 	//private JComboBox<String> comboBox = new JComboBox<String>(choices);
 
 	/**
@@ -170,6 +172,8 @@ public class CustomerFrame extends JFrame implements ActionListener {
 		contentPane.add(areaField);
 		btnDisplay.addActionListener(this);
 		btnUpdate.addActionListener(this);
+		
+		readArea();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -251,5 +255,19 @@ public class CustomerFrame extends JFrame implements ActionListener {
 			this.dispose();
 		}
 
+	}
+	
+	public void readArea() {
+		ResultSet rSet = dao.retrieveAllArea();
+		try {
+			while (rSet.next()) {
+			    String item = rSet.getString("Agent_Area");
+			    areaField.addItem(item);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
