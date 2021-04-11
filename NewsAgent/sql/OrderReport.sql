@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS OrderReport;
 CREATE TABLE OrderReport(
     OrderId int NOT NULL AUTO_INCREMENT,
     CustName varchar(30),
+    CustAddress varchar(30),
     PublicationName varchar(30),
     DeliveryDate varchar(12), 
     Status varchar(3),

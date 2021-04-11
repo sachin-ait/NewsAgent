@@ -2,7 +2,7 @@
 ##  should be run under the root user)
 
 #create newsagent user
-DROP USER 'agent';
+DROP USER 'agent'@'localhost';
 CREATE USER  'agent'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'agent'@'localhost';
 FLUSH PRIVILEGES;

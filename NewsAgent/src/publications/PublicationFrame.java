@@ -1,11 +1,13 @@
 package publications;
 
-import di.DI;
 import di.DiFrameDisplay;
 import di.InvoiceMySQLAccess;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import da.AgentMySQLAccess;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,14 +20,18 @@ public class PublicationFrame extends JFrame implements ActionListener {
 	private JButton closeButton = new JButton("Close");
 	private JButton displayButton = new JButton("Display");
 	private JTextField resultField;
-	private JTextField dayField;
 	private JTextField monthField;
-	private JTextField yearField;
-	private JTextField successField;
-	private JTextField failedField;
-	private JTextField payField;
+	private JTextField nameField;
+	private JTextField stockField;
+	private JTextField priceField;
 	private JTextField idField;
 	private JButton updateButton= new JButton("Update");
+	private String months[] = new String[] {
+			"Daily",
+			"Weekly",
+			"Monthly"
+	};
+	private JComboBox freqcomboBox = new JComboBox(months);
 
 	/**
 	 * Launch the application.
@@ -45,8 +51,10 @@ public class PublicationFrame extends JFrame implements ActionListener {
 
 	/**
 	 * Create the frame.
+	 * @throws PubExceptionHandler 
 	 */
-	public PublicationFrame() {
+	public PublicationFrame() throws PubExceptionHandler {
+		PubMySQLAccess dao = new PubMySQLAccess();
 		setTitle("Publication Frame");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 469, 333);
@@ -56,36 +64,36 @@ public class PublicationFrame extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		monthField = new JTextField();
 
-		JLabel lblNewLabel = new JLabel("Invoice date of day:");
+		JLabel lblNewLabel = new JLabel("Publication ID:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setBounds(10, 52, 120, 13);
 		contentPane.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("Invoice month:");
-		lblNewLabel_1.setBounds(33, 75, 97, 13);
+		JLabel lblNewLabel_1 = new JLabel("Publication Name:");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1.setBounds(20, 75, 110, 13);
 		contentPane.add(lblNewLabel_1);
 
-		JLabel lblNewLabel_2 = new JLabel("Invoice year:");
-		lblNewLabel_2.setBounds(43, 98, 87, 13);
+		JLabel lblNewLabel_2 = new JLabel("Publication Stock:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_2.setBounds(10, 98, 120, 13);
 		contentPane.add(lblNewLabel_2);
 
-		JLabel lblNewLabel_3 = new JLabel("Invoice ID:");
-		lblNewLabel_3.setBounds(246, 75, 93, 13);
-		contentPane.add(lblNewLabel_3);
-
 		idField = new JTextField();
-		idField.setBounds(349, 72, 96, 19);
+		idField.setBounds(140, 49, 96, 19);
 		contentPane.add(idField);
 		idField.setColumns(10);
 
-		JLabel lblNewLabel_4 = new JLabel("Success:");
-		lblNewLabel_4.setBounds(63, 121, 67, 13);
+		JLabel lblNewLabel_4 = new JLabel("Publication Price:");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_4.setBounds(10, 121, 120, 13);
 		contentPane.add(lblNewLabel_4);
 
-		createButton.setBounds(55, 188, 85, 21);
+		createButton.setBounds(254, 94, 85, 21);
 		contentPane.add(createButton);
 		createButton.addActionListener(this);
 
-		deleteButton.setBounds(359, 94, 85, 21);
+		deleteButton.setBounds(254, 48, 85, 21);
 		contentPane.add(deleteButton);
 		deleteButton.addActionListener(this);
 
@@ -93,7 +101,7 @@ public class PublicationFrame extends JFrame implements ActionListener {
 		contentPane.add(closeButton);
 		closeButton.addActionListener(this);
 
-		displayButton.setBounds(309, 188, 85, 21);
+		displayButton.setBounds(165, 188, 85, 21);
 		contentPane.add(displayButton);
 
 		resultField = new JTextField();
@@ -101,46 +109,31 @@ public class PublicationFrame extends JFrame implements ActionListener {
 		contentPane.add(resultField);
 		resultField.setColumns(10);
 
-		JLabel lblNewLabel_5 = new JLabel("Failed:");
-		lblNewLabel_5.setBounds(73, 144, 57, 13);
+		JLabel lblNewLabel_5 = new JLabel("Publication Frequency:");
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_5.setBounds(10, 144, 120, 13);
 		contentPane.add(lblNewLabel_5);
 
-		dayField = new JTextField();
-		dayField.setBounds(140, 49, 96, 19);
-		contentPane.add(dayField);
-		dayField.setColumns(10);
+		nameField = new JTextField();
+		nameField.setBounds(140, 72, 96, 19);
+		contentPane.add(nameField);
+		nameField.setColumns(10);
 
-		monthField = new JTextField();
-		monthField.setBounds(140, 72, 96, 19);
-		contentPane.add(monthField);
-		monthField.setColumns(10);
+		stockField = new JTextField();
+		stockField.setBounds(140, 95, 96, 19);
+		contentPane.add(stockField);
+		stockField.setColumns(10);
 
-		yearField = new JTextField();
-		yearField.setBounds(140, 95, 96, 19);
-		contentPane.add(yearField);
-		yearField.setColumns(10);
-
-		successField = new JTextField();
-		successField.setBounds(140, 118, 96, 19);
-		contentPane.add(successField);
-		successField.setColumns(10);
-
-		failedField = new JTextField();
-		failedField.setBounds(140, 141, 96, 19);
-		contentPane.add(failedField);
-		failedField.setColumns(10);
-
-		JLabel lblNewLabel_6 = new JLabel("Paydue:");
-		lblNewLabel_6.setBounds(65, 167, 65, 13);
-		contentPane.add(lblNewLabel_6);
-
-		payField = new JTextField();
-		payField.setBounds(140, 164, 96, 19);
-		contentPane.add(payField);
-		payField.setColumns(10);
+		priceField = new JTextField();
+		priceField.setBounds(140, 118, 96, 19);
+		contentPane.add(priceField);
+		priceField.setColumns(10);
 		
-		updateButton.setBounds(254, 94, 85, 21);
+		updateButton.setBounds(254, 71, 85, 21);
 		contentPane.add(updateButton);
+		
+		freqcomboBox.setBounds(140, 140, 96, 21);
+		contentPane.add(freqcomboBox);
 		displayButton.addActionListener(this);
 		updateButton.addActionListener(this);
 	}
@@ -148,20 +141,19 @@ public class PublicationFrame extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object target = e.getSource();
 		if (target == displayButton) {
-			DiFrameDisplay newdisplay = DiFrameDisplay.getInstance();
+			PublicationFrameDisplay newdisplay = PublicationFrameDisplay.getInstance();
 			newdisplay.setVisible(true);
 		}
 		if (target == createButton) {
 			try {
-				InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
-				int date1 = Integer.parseInt(dayField.getText());
-				String date2 = monthField.getText();
-				int date3 = Integer.parseInt(yearField.getText());
-				int aSucc = Integer.parseInt(successField.getText());
-				int afail = Integer.parseInt(failedField.getText());
-				double paydue = Integer.parseInt(payField.getText());
-				DI DIObj = new DI(date1, date2, date3, aSucc, afail, paydue);
-				boolean insertResult = dio.insertDInvoiceDetails(DIObj);
+				//InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
+				//int pid = Integer.parseInt(idField.getText());
+				String name = nameField.getText();
+				int stock = Integer.parseInt(stockField.getText());
+				double price = Double.parseDouble(priceField.getText());
+				String frequency = (String) freqcomboBox.getSelectedItem();
+				Publication DIObj = new Publication(name, stock, price, frequency);
+				boolean insertResult = PubMySQLAccess.insertPub(DIObj);
 				if (insertResult == true)
 					resultField.setText("Invoice Details Saved");
 				else
@@ -175,7 +167,7 @@ public class PublicationFrame extends JFrame implements ActionListener {
 				InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
 				int id = Integer.parseInt(idField.getText());
 				String allID = "" + id;
-				boolean deleteResult = dio.deleteDIById(id);
+				boolean deleteResult = PubMySQLAccess.deletePubById(id);
 				if ((deleteResult == true) && (allID.equals("-99")))
 					resultField.setText("Invoice Table Emptied");
 				else if (deleteResult == true)
@@ -188,15 +180,13 @@ public class PublicationFrame extends JFrame implements ActionListener {
 		}
 		if (target == updateButton) {
 			try {
-				InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
+				//InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
 				int id = Integer.parseInt(idField.getText());
-				int date1 = Integer.parseInt(dayField.getText());
-				String date2 = monthField.getText();
-				int date3 = Integer.parseInt(yearField.getText());
-				int aSucc = Integer.parseInt(successField.getText());
-				int afail = Integer.parseInt(failedField.getText());
-				double paydue = Integer.parseInt(payField.getText());
-				boolean updateResult = dio.updateDIById(id, aSucc, afail, paydue);
+				String name = nameField.getText();
+				int amount = Integer.parseInt(stockField.getText());
+				double price = Integer.parseInt(priceField.getText());
+				String frequency = (String) freqcomboBox.getSelectedItem();
+				boolean updateResult = PubMySQLAccess.updatePubById(id, name, amount, price, frequency);
 				if (updateResult == true)
 					resultField.setText("Agent Details Updated");
 				else

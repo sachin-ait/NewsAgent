@@ -2,15 +2,33 @@ package DeliveryOrder;
 public class DeliveryOrder {
 	
 	private String name;
+	private int custID;
+	private String address;
 	private String publication;
 	private String date;
 	
 	public String getName() {
 		return name;
 	}
+	
+	public int getCustId() {
+		return custID;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setCustId(int cid) {
+		this.custID = cid;
+	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getPublication() {
@@ -29,7 +47,7 @@ public class DeliveryOrder {
 		this.date = date;
 	}
 
-	public DeliveryOrder(String custName, String publicationName, String deliveryDate) throws DeliveryOrderExceptionHandler  {
+	public DeliveryOrder(String custName, int CustID,String caddress, String publicationName, String deliveryDate) throws DeliveryOrderExceptionHandler  {
 		
 		
 		// Validate Input
@@ -46,8 +64,10 @@ public class DeliveryOrder {
 		
 		// Set Attributes
 		name = custName;
+		custID = CustID;
 		publication = publicationName;
 		date = deliveryDate;
+		address = caddress;
 	}
 	
 	public static void validateName(String custName) throws DeliveryOrderExceptionHandler {
@@ -89,7 +109,7 @@ public class DeliveryOrder {
 		
 		if (deliveryDate.isEmpty())
 			throw new DeliveryOrderExceptionHandler("Delivery Date NOT specified");
-		else if (deliveryDate.length() < 9)
+		else if (deliveryDate.length() < 1)
 			throw new DeliveryOrderExceptionHandler("Delivery Date does not meet minimum length requirements");
 		else if (deliveryDate.length() > 11)
 			throw new DeliveryOrderExceptionHandler("Delivery Date does not exceeds maximum length requirements");

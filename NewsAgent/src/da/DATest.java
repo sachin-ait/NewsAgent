@@ -319,6 +319,20 @@ public class DATest extends TestCase {
 						
 					}
 				}
+				public void testdeleteDADetailsAccount001() {
+					try {
+						boolean insert = true;
+						Connection connect = null;
+						connect= MysqlJDBC.getConnection();
+						AgentMySQLAccess dao = new AgentMySQLAccess();
+						Statement statement = connect.createStatement();
+						statement.executeUpdate("Delete * from newsagent.DeliveryAgents where");
+						 assertTrue(AgentMySQLAccess.retrieveAllDAAccounts() != null);
+					} catch (SQLException | DAExceptionHandler e) {
+						fail("Exception unexpected");
+						
+					}
+				}
 				public void testdeleteDAById001() {
 					try {
 						boolean delete = true;
