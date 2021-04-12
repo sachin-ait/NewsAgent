@@ -6,6 +6,7 @@ CREATE TABLE DeliveryOrder(
     CustID int(4),
     CustAddress varchar(30),
     PublicationName varchar(30),
+    PAmount int(4),
     DeliveryDate varchar(12),     
     PRIMARY KEY (DeliveryOrderId)
 );

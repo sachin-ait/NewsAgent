@@ -84,7 +84,7 @@ public class DeliveryOrderCommandLine {
 					System.out.printf("Enter Delivery Date : \n");
 					String deliveryDate = keyboard.next();
 
-					DeliveryOrder deliveryObj = new DeliveryOrder(custName, 2,"Customer Address", publicationName, deliveryDate);
+					DeliveryOrder deliveryObj = new DeliveryOrder(custName, 2,"Customer Address", publicationName, deliveryDate, 4);
 
 					// Insert Customer Details into the database
 					boolean insertResult = dao.insertDeliveryOrderDetailsAccount(deliveryObj);
