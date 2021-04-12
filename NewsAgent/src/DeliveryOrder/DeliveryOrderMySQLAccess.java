@@ -143,7 +143,7 @@ public class DeliveryOrderMySQLAccess {
 			// Create prepared statement to issue SQL query to the database
 			preparedStatement = connect.prepareStatement("update DeliveryOrder set CustID = " + CID + ",CustName = '"
 					+ doName + "',CustAddress  = '" + doAddress + "', PublicationName = '" + doPublication
-					+ "', PublicationAmount  = '" + doPubamount	+ "', DeliveryDate  = '" + doDate + "' where DeliveryOrderID = " + deliveryOrderID);
+					+ "', PAmount  = '" + doPubamount	+ "', DeliveryDate  = '" + doDate + "' where DeliveryOrderID = " + deliveryOrderID);
 			preparedStatement.executeUpdate();
 
 			//orderReportSQL.insertOrderReportDetailsAccount(doName, doPublication, doDate, status, deliveryOrderID);
