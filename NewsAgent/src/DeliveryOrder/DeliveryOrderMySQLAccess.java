@@ -17,9 +17,10 @@ public class DeliveryOrderMySQLAccess {
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	private OrderReportMySQLAccess orderReportSQL;
-
+	
+	
 	public DeliveryOrderMySQLAccess() {
-		connect = MysqlJDBC.getConnection();
+		connect= MysqlJDBC.getConnection();
 	}
 
 	public Statement getConnectionStatement() {
@@ -31,6 +32,7 @@ public class DeliveryOrderMySQLAccess {
 		}
 		return null;
 	}
+
 
 	public boolean insertDeliveryOrderDetailsAccount(DeliveryOrder d) {
 

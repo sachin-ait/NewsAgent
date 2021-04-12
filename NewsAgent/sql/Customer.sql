@@ -6,7 +6,8 @@ CREATE TABLE Customer (
     PhoneNumber int,
     Payment int,
     Area varchar(25),    
-    PRIMARY KEY (CustID)
+    PRIMARY KEY (CustID),
+    FOREIGN KEY (Area) REFERENCES deliveryAgents(Agent_Area)
 );
 
 

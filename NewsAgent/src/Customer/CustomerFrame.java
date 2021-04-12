@@ -5,15 +5,20 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 
 public class CustomerFrame extends JFrame implements ActionListener {
 
@@ -28,7 +33,6 @@ public class CustomerFrame extends JFrame implements ActionListener {
 	private JButton btnClose = new JButton("Close");
 	private JButton btnDisplay = new JButton("Display");
 	private JTextField resultField;
-	private JTextField areaField;
 	static CustomerMySQLAccess dao;
 	private JLabel lblCustomer = new JLabel("Customer");
 	private JButton btnUpdate = new JButton("Update");
@@ -37,6 +41,11 @@ public class CustomerFrame extends JFrame implements ActionListener {
 	private JLabel lblCust4 = new JLabel("Payment");
 	private JLabel lblCust1 = new JLabel("Name");
 	private JLabel lblCust2 = new JLabel("Address");
+	
+	DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+
+	private JComboBox<String> areaField = new JComboBox<String>(comboModel);
+	//private JComboBox<String> comboBox = new JComboBox<String>(choices);
 
 	/**
 	 * Launch the application.
@@ -130,12 +139,6 @@ public class CustomerFrame extends JFrame implements ActionListener {
 		lblCust6.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblCust6.setBounds(10, 170, 120, 20);
 		contentPane.add(lblCust6);
-
-		areaField = new JTextField();
-		areaField.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		areaField.setColumns(10);
-		areaField.setBounds(129, 170, 100, 20);
-		contentPane.add(areaField);
 		btnCreate.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 
 		btnCreate.setBounds(57, 224, 90, 30);
@@ -163,8 +166,14 @@ public class CustomerFrame extends JFrame implements ActionListener {
 		lblCustomer.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 22));
 		lblCustomer.setBounds(192, 17, 100, 20);
 		contentPane.add(lblCustomer);
+		
+
+		areaField.setBounds(129, 171, 100, 20);
+		contentPane.add(areaField);
 		btnDisplay.addActionListener(this);
 		btnUpdate.addActionListener(this);
+		
+		readArea();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -179,7 +188,8 @@ public class CustomerFrame extends JFrame implements ActionListener {
 				String custAddr = addressField.getText();
 				String custphoneNumber = phoneField.getText();
 				double custPayment = Double.parseDouble(paymentField.getText());
-				String custArea = areaField.getText();
+				String custArea = areaField.getSelectedItem().toString();
+
 				Customer custObj = new Customer(custName, custAddr, custphoneNumber, custPayment, custArea);
 
 				// Insert Customer Details into the database
@@ -225,7 +235,7 @@ public class CustomerFrame extends JFrame implements ActionListener {
 				String custAddr = addressField.getText();
 				String custphoneNumber = phoneField.getText();
 				double custPayment = Double.parseDouble(paymentField.getText());
-				String custArea = areaField.getText();
+				String custArea = areaField.getSelectedItem().toString();
 
 				boolean updateResult = dao.updateCustomerById(custId, custName, custAddr, custphoneNumber, custPayment,
 						custArea);
@@ -246,5 +256,18 @@ public class CustomerFrame extends JFrame implements ActionListener {
 		}
 
 	}
-
+	
+	public void readArea() {
+		ResultSet rSet = dao.retrieveAllArea();
+		try {
+			while (rSet.next()) {
+			    String item = rSet.getString("Agent_Area");
+			    areaField.addItem(item);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }

@@ -148,5 +148,18 @@ public class CustomerMySQLAccess {
 		return updateSucessful;
 
 	}
+	public ResultSet retrieveAllArea() {
 
+		// Add Code here to call embedded SQL to view Customer Details
+
+		try {
+			statement = connect.createStatement();
+			resultSet = statement.executeQuery("Select Agent_Area from newsagent.deliveryAgents;");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultSet = null;
+		}
+		return resultSet;
+	}
 }
