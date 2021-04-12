@@ -69,6 +69,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 			"December"
 			};
 	private JComboBox comboMonthBox = new JComboBox(months);
+	private JTextField pubamountField;
 	/**
 	 * Launch the application.
 	 */
@@ -114,10 +115,12 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 		nameField.setBounds(129, 50, 100, 20);
 		contentPane.add(nameField);
 		nameField.setColumns(10);
+		lblCust1.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		lblCust1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblCust1.setBounds(10, 50, 120, 20);
 		contentPane.add(lblCust1);
+		lblCust2.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		lblCust2.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblCust2.setBounds(10, 80, 120, 20);
@@ -130,8 +133,9 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 		dateField.setColumns(10);
 
 		JLabel lblCust3 = new JLabel("Date");
+		lblCust3.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCust3.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblCust3.setBounds(10, 110, 120, 20);
+		lblCust3.setBounds(10, 110, 109, 20);
 		contentPane.add(lblCust3);
 
 		idField = new JTextField();
@@ -190,17 +194,28 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 		
 		addressField = new JTextField();
 		addressField.setEditable(false);
-		addressField.setBounds(97, 147, 196, 19);
+		addressField.setBounds(84, 175, 196, 19);
 		contentPane.add(addressField);
 		addressField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Address:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 150, 77, 13);
+		lblNewLabel.setBounds(10, 176, 77, 13);
 		contentPane.add(lblNewLabel);
 		
 		comboMonthBox.setBounds(129, 110, 100, 21);
 		contentPane.add(comboMonthBox);
+		
+		pubamountField = new JTextField();
+		pubamountField.setBounds(129, 140, 100, 19);
+		contentPane.add(pubamountField);
+		pubamountField.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Pub amount");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1.setBounds(10, 143, 109, 13);
+		contentPane.add(lblNewLabel_1);
 		btnDisplay.addActionListener(this);
 		btnUpdate.addActionListener(this);
 		btnDeleteReport.addActionListener(this);
@@ -221,6 +236,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				//String doDate = dateField.getText();
 				String doDate = (String) comboMonthBox.getSelectedItem();
 				String doAddress = null;
+				int doAmount = Integer.parseInt(pubamountField.getText());
 				Connection connect = MysqlJDBC.getConnection();
 				preparedStatement = connect.prepareStatement("SELECT Address FROM NewsAgent.Customer where Name = ?");
 				preparedStatement.setString(1, doName);
@@ -235,7 +251,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				while (rs2.next()) {
 					doCID += Integer.parseInt(rs2.getString("CustID"));
 				}
-				DeliveryOrder DoObj = new DeliveryOrder(doName, doCID, doAddress, doPublication, doDate);
+				DeliveryOrder DoObj = new DeliveryOrder(doName, doCID, doAddress, doPublication, doDate, doAmount);
 
 				// Insert DeliveryOrder Details into the database
 				boolean insertResult = dao.insertDeliveryOrderDetailsAccount(DoObj);
@@ -250,6 +266,8 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 			} catch (DeliveryOrderExceptionHandler | SQLException e1) {
 				resultField.setText(e1.getMessage());
 				System.out.println(e1);
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
 		}
 		if (target == btnDelete) {
@@ -282,6 +300,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				//String doDate = dateField.getText();
 				String doDate = (String) comboMonthBox.getSelectedItem();
 				String doAddress = null;
+				int doAmount = Integer.parseInt(pubamountField.getText());
 				Connection connect = MysqlJDBC.getConnection();
 				preparedStatement = connect.prepareStatement("SELECT Address FROM NewsAgent.Customer where Name = ?");
 				preparedStatement.setString(1, doName);
@@ -297,7 +316,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 					doCID = Integer.parseInt(rs2.getString("custID"));
 					System.out.println(doCID);
 				}
-				boolean updateResult = dao.updateDeliveryOrderById(doId, doName, doCID, doAddress, doPublication, doDate);
+				boolean updateResult = dao.updateDeliveryOrderById(doId, doName, doCID, doAddress, doPublication, doDate, doAmount);
 				if (updateResult == true) {
 					resultField.setText("DeliveryOrder Updated");
 					System.out.println("DeliveryOrder Updated");

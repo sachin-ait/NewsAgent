@@ -22,15 +22,15 @@ public class DeliveryOrderTest extends TestCase {
 	// Expected Output: Delivery Order Object created with custName = "Jack",
 	// publicationName = "StarryNight", date = "13/2/2021"
 
-	public void testPublication001() {
+	public void testPublication001() throws Exception {
 
 		// Create the Publication Object
 
 		try {
 
 			// Call method under test
-			DeliveryOrder deliveryObj = new DeliveryOrder("Jack", 2, "Athlone, 12 Cartrontroy", "StarryNight", "February");
-
+			DeliveryOrder deliveryObj = new DeliveryOrder("Jack", 2, "Athlone, 12 Cartrontroy", "StarryNight", "February", 4);
+ 
 			// Use getters to check for object creation
 			assertEquals("Jack", deliveryObj.getName());
 			assertEquals("12 Cartrontroy", deliveryObj.getAddress());
@@ -38,7 +38,7 @@ public class DeliveryOrderTest extends TestCase {
 			assertEquals("February", deliveryObj.getDate());
 		} catch (DeliveryOrderExceptionHandler e) {
 			fail("Exception not expected");
-		}
+		} 
 
 	}
 
@@ -207,14 +207,14 @@ public class DeliveryOrderTest extends TestCase {
 	// Inputs: custName = "Jack", "StarryNight", "13/2/2021"
 	// Expected Output: "DeliveryOrder Object created "Jack", "StarryNight",
 	// "13/2/2021""
-	public void testInsertDeliveryOrderDetailsAccount001() {
+	public void testInsertDeliveryOrderDetailsAccount001() throws Exception {
 		try {
 			boolean insert = true;
 
 			DeliveryOrderMySQLAccess dao = new DeliveryOrderMySQLAccess();
 			dao.getConnectionStatement();
 
-			DeliveryOrder DeliveryOrderObj = new DeliveryOrder("Jack", 2, "Athlone, 12 Cartrontroy", "StarryNight", "February");
+			DeliveryOrder DeliveryOrderObj = new DeliveryOrder("Jack", 2, "Athlone, 12 Cartrontroy", "StarryNight", "February", 4);
 			assertEquals(insert, dao.insertDeliveryOrderDetailsAccount(DeliveryOrderObj));
 		} catch (DeliveryOrderExceptionHandler e) {
 			fail("Exception unexpected");
@@ -346,7 +346,7 @@ public class DeliveryOrderTest extends TestCase {
 			String doPublication = "ring";
 			String doDate = "12/02/2021";
 
-			assertEquals(update, dao.updateDeliveryOrderById(id, doName, 2, "Willow Park", doPublication,doDate));
+			assertEquals(update, dao.updateDeliveryOrderById(id, doName, 2, "Willow Park", doPublication,doDate, 4));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Exception not expected");

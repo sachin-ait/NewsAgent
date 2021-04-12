@@ -87,7 +87,7 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 				JTable table_1 = new JTable(buildTableModel(rSet));
 				TableColumnModel columnModel = table_1.getColumnModel();
 				columnModel.getColumn(0).setPreferredWidth(25);
-				columnModel.getColumn(1).setPreferredWidth(100);
+				columnModel.getColumn(1).setPreferredWidth(25);
 				columnModel.getColumn(2).setPreferredWidth(100);
 				columnModel.getColumn(3).setPreferredWidth(100); 
 				panel.add(table_1);

@@ -1,4 +1,8 @@
 package DeliveryOrder;
+
+import da.DA;
+import da.DAExceptionHandler;
+
 public class DeliveryOrder {
 	
 	private String name;
@@ -6,6 +10,7 @@ public class DeliveryOrder {
 	private String address;
 	private String publication;
 	private String date;
+	private int pubamount;
 	
 	public String getName() {
 		return name;
@@ -46,8 +51,15 @@ public class DeliveryOrder {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	public int getOrderamount() {
+        return pubamount;
+    }
 
-	public DeliveryOrder(String custName, int CustID,String caddress, String publicationName, String deliveryDate) throws DeliveryOrderExceptionHandler  {
+    public void setOrderAmount(int oa) {
+        this.pubamount = oa;
+    }
+
+	public DeliveryOrder(String custName, int CustID,String caddress, String publicationName, String deliveryDate, int oa) throws Exception  {
 		
 		
 		// Validate Input
@@ -56,9 +68,10 @@ public class DeliveryOrder {
 			validateName(custName);
 			validatePublication(publicationName);
 			validateDate(deliveryDate);
+			DA.validateLoggedHrs(oa);
 			
 		}
-		catch (DeliveryOrderExceptionHandler e) {
+		catch (DeliveryOrderExceptionHandler | DAExceptionHandler e) {
 			throw e;
 		}
 		
@@ -68,6 +81,7 @@ public class DeliveryOrder {
 		publication = publicationName;
 		date = deliveryDate;
 		address = caddress;
+		pubamount = oa;
 	}
 	
 	public static void validateName(String custName) throws DeliveryOrderExceptionHandler {

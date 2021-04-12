@@ -35,18 +35,23 @@ public class DeliveryOrderMySQLAccess {
 	public boolean insertDeliveryOrderDetailsAccount(DeliveryOrder d) {
 
 		boolean insertSucessfull = true;
-
+		System.out.println(d.getCustId());
+		System.out.println(d.getName());
+		System.out.println(d.getAddress());
+		System.out.println(d.getPublication());
+		System.out.println(d.getOrderamount());
+		System.out.println(d.getDate());
 		// Add Code here to call embedded SQL to insert Customer into DB
 
 		try {
-
 			// Create prepared statement to issue SQL query to the database
-			preparedStatement = connect.prepareStatement("insert into DeliveryOrder values (DEFAULT, ?, ?, ?, ?, ?)");
+			preparedStatement = connect.prepareStatement("insert into DeliveryOrder(DeliveryOrderId,CustID,CustName,CustAddress,PublicationName,PAmount,DeliveryDate) values (DEFAULT, ?, ?, ?, ?, ?, ?)");
 			preparedStatement.setInt(1, d.getCustId());
 			preparedStatement.setString(2, d.getName());
 			preparedStatement.setString(3, d.getAddress());
 			preparedStatement.setString(4, d.getPublication());
-			preparedStatement.setString(5, d.getDate());
+			preparedStatement.setInt(5, d.getOrderamount());
+			preparedStatement.setString(6, d.getDate());
 			preparedStatement.executeUpdate();
 
 		} catch (Exception e) {
@@ -92,10 +97,10 @@ public class DeliveryOrderMySQLAccess {
 						"delete from newsagent.DeliveryOrder where DeliveryOrderID = " + deliveryOrderID);
 			preparedStatement.executeUpdate();
 
-			String doName = resultSet.getString("CustName");
-			String doPublication = resultSet.getString("PublicationName");
-			String doDate = resultSet.getString("DeliveryDate");
-			orderReportSQL.insertOrderReportDetailsAccount(doName, doPublication, doDate, status, deliveryOrderID);
+			//String doName = resultSet.getString("CustName");
+			//String doPublication = resultSet.getString("PublicationName");
+			//String doDate = resultSet.getString("DeliveryDate");
+			//orderReportSQL.insertOrderReportDetailsAccount(doName, doPublication, doDate, status, deliveryOrderID);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,7 +132,7 @@ public class DeliveryOrderMySQLAccess {
 	 */
 
 	public boolean updateDeliveryOrderById(int deliveryOrderID, String doName, int CID, String doAddress,
-			String doPublication, String doDate) {
+			String doPublication, String doDate, int doPubamount) {
 
 		boolean updateSucessful = true;
 		String status = "UPD";
@@ -138,7 +143,7 @@ public class DeliveryOrderMySQLAccess {
 			// Create prepared statement to issue SQL query to the database
 			preparedStatement = connect.prepareStatement("update DeliveryOrder set CustID = " + CID + ",CustName = '"
 					+ doName + "',CustAddress  = '" + doAddress + "', PublicationName = '" + doPublication
-					+ "', DeliveryDate  = '" + doDate + "' where DeliveryOrderID = " + deliveryOrderID);
+					+ "', PublicationAmount  = '" + doPubamount	+ "', DeliveryDate  = '" + doDate + "' where DeliveryOrderID = " + deliveryOrderID);
 			preparedStatement.executeUpdate();
 
 			//orderReportSQL.insertOrderReportDetailsAccount(doName, doPublication, doDate, status, deliveryOrderID);
