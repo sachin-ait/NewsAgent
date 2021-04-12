@@ -1,8 +1,5 @@
 package publications;
 
-import DeliveryOrder.DeliveryOrderExceptionHandler;
-import da.DAExceptionHandler;
-
 public class Publication {
     private int id;
     private String name;
@@ -76,8 +73,6 @@ public class Publication {
     public static void validateName(String pubName) throws PubExceptionHandler {
         if (pubName.isEmpty())
             throw new PubExceptionHandler("Publication Name NOT specified");
-        else if (isNumeric(pubName))
-            throw new PubExceptionHandler("Publication Name contains Numeric");
         else if (pubName.length() < 2)
             throw new PubExceptionHandler("Publication Name does not meet minimum length requirements");
         else if (pubName.length() > 20)
@@ -93,35 +88,15 @@ public class Publication {
 
     public static void validateFreq(String pfreq) throws PubExceptionHandler {
         if (!(pfreq.equals("Daily") || pfreq.equals("Weekly") || pfreq.equals("Monthly")))
-            throw new PubExceptionHandler("Publication frequency NOT specified");
+            throw new PubExceptionHandler("Publication frequency should be Daily,Weekly or Monthly");
 
     }
 
     public static void validatePrice(double pprice) throws PubExceptionHandler {
         if (pprice < 0)
-            throw new PubExceptionHandler("Publication amount does not meet minimum length requirements");
+            throw new PubExceptionHandler("Publication price does not meet minimum length requirements");
         else if (pprice > 1000)
-            throw new PubExceptionHandler("Publication amount does not exceeds maximum length requirements");
+            throw new PubExceptionHandler("Publication price does not exceeds maximum length requirements");
     }
 
-    @Override
-    public String toString() {
-        return "Publication{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", amount=" + amount +
-                '}';
-    }
-
-    public static boolean isNumeric(String string) {
-        int intValue;
-
-        try {
-            intValue = Integer.parseInt(string);
-            return true;
-        } catch (NumberFormatException e) {
-
-        }
-        return false;
-    }
 }
