@@ -181,7 +181,7 @@ public class PublicationController {
 		return flag;
 	}
 
-	public static ArrayList<Publication> queryResource() throws SQLException, DAExceptionHandler {
+	public static ArrayList<Publication> queryResource() throws SQLException, DAExceptionHandler, PubExceptionHandler {
 		Connection connection = MysqlJDBC.getConnection();
 		Statement statement = connection.createStatement();
 		String querySql = "SELECT * FROM newsagent.publication";

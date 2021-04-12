@@ -120,7 +120,7 @@ public class PubMySQLAccess {
 				Publication.validateFreq(PubFreq);
 				preparedStatement.executeUpdate();
 
-			} catch (SQLException | DAExceptionHandler e) {
+			} catch (SQLException e) {
 				updateSucessfull = false;
 				System.out.println(e);
 			}
