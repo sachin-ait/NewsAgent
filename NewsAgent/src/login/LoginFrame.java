@@ -21,7 +21,6 @@ public class LoginFrame extends JFrame {
     }
 
     private void initComboBox1() {
-        comboBox1.addItem("Billing");
         comboBox1.addItem("Customer");
         comboBox1.addItem("DeliveryAgent");
         comboBox1.addItem("DeliveryOrder");

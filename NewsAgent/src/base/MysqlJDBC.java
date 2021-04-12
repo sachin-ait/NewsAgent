@@ -3,6 +3,8 @@ package base;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import da.DAExceptionHandler;
+
 public class MysqlJDBC {
 
 	final static String userName = "agent";
@@ -30,7 +32,7 @@ public class MysqlJDBC {
 		return connection;
 	}
 
-	public static void closeConnection() {
+	public static void closeConnection() throws DAExceptionHandler {
 		try {
 			if (connection != null && !connection.isClosed()) {
 				connection.close();
