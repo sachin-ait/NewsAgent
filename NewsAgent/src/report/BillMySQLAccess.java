@@ -1,10 +1,12 @@
 package report;
 
 import DeliveryOrder.DeliveryOrder;
-import biling.Bill;
 import com.mysql.cj.util.StringUtils;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,8 @@ public class BillMySQLAccess {
                 String PublicationName = resultSet.getString("PublicationName");
                 String DeliveryDate = resultSet.getString("DeliveryDate");
                 String DeliveryStatus = resultSet.getString("DeliveryStatus");
-                DeliveryOrder deliveryOrder = new DeliveryOrder(CustName, 2,  DeliveryAddress, PublicationName, DeliveryDate);
+
+                DeliveryOrder deliveryOrder = new DeliveryOrder(CustName, 2,  DeliveryAddress, PublicationName, DeliveryDate,0);
                 list.add(deliveryOrder);
                 System.out.println();
             }// end while
