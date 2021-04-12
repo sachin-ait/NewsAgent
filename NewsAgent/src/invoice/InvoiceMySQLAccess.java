@@ -3,8 +3,7 @@ package invoice;
 import base.MysqlJDBC;
 import com.mysql.cj.util.StringUtils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,19 @@ public class InvoiceMySQLAccess {
         connect = MysqlJDBC.getConnection();
     }
 
+    public List<String> retrieveAllUsers() throws SQLException {
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT CustName FROM newsagent.DeliveryOrder group by CustName;";
+        preparedStatement = connect.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String CustName = resultSet.getString("CustName");
+            list.add(CustName);
+        }
+        return list;
+    }
+
+
     public PreparedStatement retrieveAllInvoices(String customerName, String frequency) {
         List<Invoice> invoiceList = new ArrayList<>();
         String whereCondition = "";
@@ -28,8 +40,8 @@ public class InvoiceMySQLAccess {
             whereCondition = "where frequency=?";
         }
         try {
-            String sql = "select DeliveryOrderId,CustName,CustID,amount,name,price,frequency,(amount*price) as money from (\n" +
-                    "SELECT DeliveryOrderId,CustName,CustID,amount,name,price,frequency FROM newsagent.DeliveryOrder \n" +
+            String sql = "select DeliveryOrderId,CustName,CustID,pAmount,name,price,frequency,(pAmount*price) as money from (\n" +
+                    "SELECT DeliveryOrderId,CustName,CustID,pAmount,name,price,frequency FROM newsagent.DeliveryOrder \n" +
                     "inner join newsagent.publication\n" +
                     "on DeliveryOrder.PublicationId=publication.id\n" +
                     whereCondition +
@@ -63,8 +75,8 @@ public class InvoiceMySQLAccess {
                 whereCondition = "where frequency=?";
             }
             String sql2 = "SELECT CustID,CustName,sum(money) totalMoney from (\n" +
-                    "select DeliveryOrderId,CustName,CustID,amount,name,price,frequency,(amount*price) as money from (\n" +
-                    "SELECT DeliveryOrderId,CustName,CustID,amount,name,price,frequency FROM newsagent.DeliveryOrder \n" +
+                    "select DeliveryOrderId,CustName,CustID,pAmount,name,price,frequency,(pAmount*price) as money from (\n" +
+                    "SELECT DeliveryOrderId,CustName,CustID,pAmount,name,price,frequency FROM newsagent.DeliveryOrder \n" +
                     "inner join newsagent.publication\n" +
                     "on DeliveryOrder.PublicationId=publication.id\n" +
                     whereCondition +

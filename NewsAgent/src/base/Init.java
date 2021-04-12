@@ -2,8 +2,6 @@ package base;
 
 import java.util.Scanner;
 
-import login.User;
-
 public class Init {
 
 	public static void main(String[] args) throws Exception{
@@ -30,7 +28,7 @@ public class Init {
 				da.CommandLine.main(null);
 				break;
 			case "3":
-				biling.BillCommandLine.main(null);
+//				biling.BillCommandLine.main(null);
 				break;
 //			case "4":
 //				cust.CommandLine.main(null);

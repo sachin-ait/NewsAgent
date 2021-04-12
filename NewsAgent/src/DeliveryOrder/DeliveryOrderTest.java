@@ -1,17 +1,12 @@
 package DeliveryOrder;
 
+import base.MysqlJDBC;
+import junit.framework.TestCase;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import org.junit.Test;
-
-import DeliveryOrder.DeliveryOrder;
-import DeliveryOrder.DeliveryOrderExceptionHandler;
-import DeliveryOrder.DeliveryOrderMySQLAccess;
-import base.MysqlJDBC;
-import junit.framework.TestCase;
 
 public class DeliveryOrderTest extends TestCase {
 

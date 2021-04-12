@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.PreparedStatement;
+import java.util.List;
 
 /**
  * @author kmzjhpt pbev
@@ -24,8 +25,16 @@ public class InvoiceFrame extends JFrame {
     private void initComboBox() {
         comboBox1.addItem("select user");
         comboBox1.addItem("All");
-        comboBox1.addItem("Jack");
-        comboBox1.addItem("Tom");
+        try {
+            InvoiceMySQLAccess invoiceMySQLAccess = new InvoiceMySQLAccess();
+            List<String> users = invoiceMySQLAccess.retrieveAllUsers();
+            for(String userName:users){
+                comboBox1.addItem(userName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         comboBox2.addItem("select frequency");
         comboBox2.addItem("All");
         comboBox2.addItem("Day");
