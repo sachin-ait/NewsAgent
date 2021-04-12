@@ -21,7 +21,7 @@ public class LoginFrame extends JFrame {
     }
 
     private void initComboBox1() {
-        comboBox1.addItem("Billing");
+//        comboBox1.addItem("Billing");
         comboBox1.addItem("Customer");
         comboBox1.addItem("DeliveryAgent");
         comboBox1.addItem("DeliveryOrder");
@@ -29,7 +29,7 @@ public class LoginFrame extends JFrame {
         comboBox1.addItem("User");
         comboBox1.addItem("Docket");
         comboBox1.addItem("Publication");
-        comboBox1.addItem("Report");
+//        comboBox1.addItem("Report");
     }
 
     private void button1ActionPerformed(ActionEvent e) {

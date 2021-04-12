@@ -3,10 +3,9 @@ package login;
 import Customer.CustomerFrame;
 import DeliveryOrder.DeliveryOrderFrame;
 import da.DaFrame;
-import di.DiFrame;
 import docket.DocketFrame;
+import invoice.InvoiceFrame;
 import publications.PublicationFrame;
-import report.ReportFrame;
 
 import java.sql.ResultSet;
 
@@ -70,8 +69,8 @@ public class LoginController {
 				System.out.println("DeliveryOrder");
 				break;
 			case "DeliveryInvoice":
-				DiFrame diFrame = new DiFrame();
-				diFrame.setVisible(true);
+				InvoiceFrame invoiceFrame = new InvoiceFrame();
+				invoiceFrame.setVisible(true);
 				System.out.println("DI");
 				break;
 			case "Docket":
@@ -90,11 +89,11 @@ public class LoginController {
 				PublicationFrame pframe= new PublicationFrame();
 				pframe.setVisible(true);
 				break;
-			case "Report":
-				ReportFrame reportFrame = new ReportFrame();
-				reportFrame.setVisible(true);
-				System.out.println("Report");
-				break;
+//			case "Report":
+//				ReportFrame reportFrame = new ReportFrame();
+//				reportFrame.setVisible(true);
+//				System.out.println("Report");
+//				break;
 			}
 			return 0;
 		} else
