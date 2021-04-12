@@ -37,9 +37,15 @@ public class InvoiceFrame extends JFrame {
 
         comboBox2.addItem("select frequency");
         comboBox2.addItem("All");
-        comboBox2.addItem("Day");
-        comboBox2.addItem("Week");
-        comboBox2.addItem("Month");
+        try {
+            InvoiceMySQLAccess invoiceMySQLAccess = new InvoiceMySQLAccess();
+            List<String> users = invoiceMySQLAccess.retrieveAllFrequency();
+            for(String frequency:users){
+                comboBox2.addItem(frequency);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void refreshTable() throws Exception {

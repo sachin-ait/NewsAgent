@@ -28,6 +28,17 @@ public class InvoiceMySQLAccess {
         return list;
     }
 
+    public List<String> retrieveAllFrequency() throws SQLException {
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT frequency FROM newsagent.publication group by frequency;";
+        preparedStatement = connect.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String CustName = resultSet.getString("frequency");
+            list.add(CustName);
+        }
+        return list;
+    }
 
     public PreparedStatement retrieveAllInvoices(String customerName, String frequency) {
         List<Invoice> invoiceList = new ArrayList<>();
@@ -43,7 +54,7 @@ public class InvoiceMySQLAccess {
             String sql = "select DeliveryOrderId,CustName,CustID,pAmount,name,price,frequency,(pAmount*price) as money from (\n" +
                     "SELECT DeliveryOrderId,CustName,CustID,pAmount,name,price,frequency FROM newsagent.DeliveryOrder \n" +
                     "inner join newsagent.publication\n" +
-                    "on DeliveryOrder.PublicationId=publication.id\n" +
+                    "on DeliveryOrder.PublicationName=publication.name\n" +
                     whereCondition +
                     ") as newvewer1\n" +
                     ";";
@@ -78,7 +89,7 @@ public class InvoiceMySQLAccess {
                     "select DeliveryOrderId,CustName,CustID,pAmount,name,price,frequency,(pAmount*price) as money from (\n" +
                     "SELECT DeliveryOrderId,CustName,CustID,pAmount,name,price,frequency FROM newsagent.DeliveryOrder \n" +
                     "inner join newsagent.publication\n" +
-                    "on DeliveryOrder.PublicationId=publication.id\n" +
+                    "on DeliveryOrder.PublicationName=publication.name\n" +
                     whereCondition +
                     ") as newvewer1\n" +
                     ")as newvewer2 group by CustID\n" +
