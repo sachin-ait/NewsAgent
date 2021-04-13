@@ -30,7 +30,7 @@ public class InvoiceMySQLAccess {
 
     public List<String> retrieveAllFrequency() throws SQLException {
         List<String> list = new ArrayList<>();
-        String sql = "SELECT frequency FROM newsagent.publication group by frequency;";
+        String sql = "SELECT frequency FROM newsagent.publication group by frequence;";
         preparedStatement = connect.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {

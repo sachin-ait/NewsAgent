@@ -5,6 +5,7 @@ import DeliveryOrder.DeliveryOrderFrame;
 import da.DaFrame;
 import docket.DocketFrame;
 import docket.DocketFrameNew;
+import invoice.InvoiceFrame;
 import publications.PublicationFrame;
 
 import java.sql.ResultSet;
@@ -68,11 +69,11 @@ public class LoginController {
 				deliveryOrderFrame.setVisible(true);
 				System.out.println("DeliveryOrder");
 				break;
-//			case "DeliveryInvoice":
-//				InvoiceFrame invoiceFrame = new InvoiceFrame();
-//				invoiceFrame.setVisible(true);
-//				System.out.println("DI");
-//				break;
+			case "DeliveryInvoice":
+				InvoiceFrame invoiceFrame = new InvoiceFrame();
+				invoiceFrame.setVisible(true);
+				System.out.println("DI");
+				break;
 			case "Docket":
 				System.out.println("Docket");
 				DocketFrameNew doFrame = new DocketFrameNew();

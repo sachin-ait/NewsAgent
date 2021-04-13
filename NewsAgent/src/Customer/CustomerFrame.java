@@ -70,6 +70,8 @@ public class CustomerFrame extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public CustomerFrame() {
+		dao = new CustomerMySQLAccess();
+		dao.getConnectionStatement();
 		setTitle("Customer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 523, 437);
