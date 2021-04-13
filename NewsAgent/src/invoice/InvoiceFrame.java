@@ -15,7 +15,20 @@ import java.util.List;
  */
 public class InvoiceFrame extends JFrame {
     private static QueryTableModel TableModel = new QueryTableModel();
-
+    private String months[] = new String[] {
+			"January",
+			"February",
+			"March",
+			"April",
+			"May",
+			"June",
+			"July",
+			"August",
+			"September",
+			"October",
+			"November",
+			"December"
+			};
     public InvoiceFrame() throws Exception {
         initComponents();
         initComboBox();
@@ -35,14 +48,15 @@ public class InvoiceFrame extends JFrame {
             e.printStackTrace();
         }
 
-        comboBox2.addItem("select frequency");
-        comboBox2.addItem("All");
+        //comboBox2.addItem("select Month");
+        //comboBox2.addItem("All");
         try {
             InvoiceMySQLAccess invoiceMySQLAccess = new InvoiceMySQLAccess();
-            List<String> users = invoiceMySQLAccess.retrieveAllFrequency();
-            for(String frequency:users){
-                comboBox2.addItem(frequency);
-            }
+           // List<String> users = invoiceMySQLAccess.retrieveAllFrequency();
+            //comboBox2.addItem(months);
+            //for(String frequency:users){
+            //    comboBox2.addItem(frequency);
+            //}
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,7 +121,7 @@ public class InvoiceFrame extends JFrame {
         label1 = new JLabel();
         panel2 = new JPanel();
         comboBox1 = new JComboBox();
-        comboBox2 = new JComboBox();
+        comboBox2 = new JComboBox(months);
         button1 = new JButton();
         panel3 = new JPanel();
         scrollPane1 = new JScrollPane();
