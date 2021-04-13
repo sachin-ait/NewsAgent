@@ -1,6 +1,11 @@
-package DeliveryOrder;
+package publications;
 
+import di.InvoiceMySQLAccess;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -8,22 +13,13 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-import javax.swing.JButton;
-import javax.swing.JTable;
-
-public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener {
-	private static DeliveryOrderFrameDisplay single;
+public class PublicationFrameDisplay extends JFrame implements ActionListener {
+	private static PublicationFrameDisplay single;
 	private static boolean created = false;
 	private JPanel contentPane;
 	private JTable table_1;
 	private JButton closeButton;
-	
+
 	public static DefaultTableModel buildTableModel(ResultSet rs)
 	        throws SQLException {
 
@@ -41,7 +37,7 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 	    while (rs.next()) {
 	        Vector<Object> vector = new Vector<Object>();
 	        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-	            vector.add(rs.getObject(columnIndex)); 
+	            vector.add(rs.getObject(columnIndex));
 	        }
 	        data.add(vector);
 	    }
@@ -49,7 +45,7 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 	    return new DefaultTableModel(data, columnNames);
 
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		Object target = e.getSource();
 
@@ -58,51 +54,51 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 		}
 	}
 
-	private DeliveryOrderFrameDisplay(){
+	private PublicationFrameDisplay(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 555, 363);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 13, 515, 240);
+		panel.setBounds(10, 47, 416, 206);
 		contentPane.add(panel);
 		
 		table_1 = new JTable();
 		panel.add(table_1);
 		
 		closeButton = new JButton("Close");
-		closeButton.setBounds(225, 266, 85, 21);
+		closeButton.setBounds(183, 10, 85, 21);
 		contentPane.add(closeButton);
 		closeButton.addActionListener(this);
 		try {
-			DeliveryOrderMySQLAccess dao = new DeliveryOrderMySQLAccess();
-			dao.getConnectionStatement();
-			ResultSet rSet = dao.retrieveAllDeliveryOrderAccounts();
+			InvoiceMySQLAccess dio = new InvoiceMySQLAccess();
+			ResultSet rSet = dio.retrieveAllDInvoices();
 			if (rSet == null) {
 				System.out.println("No Records Found");
 			}
 			else {
 				JTable table_1 = new JTable(buildTableModel(rSet));
 				TableColumnModel columnModel = table_1.getColumnModel();
-				columnModel.getColumn(0).setPreferredWidth(25);
-				columnModel.getColumn(1).setPreferredWidth(100);
-				columnModel.getColumn(2).setPreferredWidth(100);
-				columnModel.getColumn(3).setPreferredWidth(100); 
+				columnModel.getColumn(0).setPreferredWidth(50);
+				columnModel.getColumn(1).setPreferredWidth(125);
+				columnModel.getColumn(2).setPreferredWidth(50);
+				columnModel.getColumn(3).setPreferredWidth(50);
+				columnModel.getColumn(4).setPreferredWidth(50);
 				
 				rSet.close();
-				panel.add(new JScrollPane(table_1));
 			}
+			panel.add(new JScrollPane(table_1));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static DeliveryOrderFrameDisplay getInstance() {
+	public static PublicationFrameDisplay getInstance() {
 		if (!created) {
-			single = new DeliveryOrderFrameDisplay();
+			single = new PublicationFrameDisplay();
 		}
 		return single;
 	}
