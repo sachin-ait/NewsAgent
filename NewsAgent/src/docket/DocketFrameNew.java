@@ -70,8 +70,8 @@ public class DocketFrameNew {
 		datePicker.setBounds(523, 112, 250, 250);
 		frame.getContentPane().add(datePicker);
 
-		JLabel lblPleaseSelectYour = new JLabel("Please Select Your Name");
-		lblPleaseSelectYour.setBounds(98, 39, 230, 27);
+		JLabel lblPleaseSelectYour = new JLabel("Please Select Delivery Agent Name");
+		lblPleaseSelectYour.setBounds(98, 39, 282, 27);
 		frame.getContentPane().add(lblPleaseSelectYour);
 
 		JButton btnPrintDocket = new JButton("Print Docket");
@@ -104,7 +104,7 @@ public class DocketFrameNew {
 			}
 			cmbBoxNames = new JComboBox();
 			cmbBoxNames.setModel(new DefaultComboBoxModel(da));
-			cmbBoxNames.setBounds(361, 40, 217, 24);
+			cmbBoxNames.setBounds(436, 40, 217, 24);
 			frame.getContentPane().add(cmbBoxNames);
 
 			JLabel lblSelectDate = new JLabel("Select Date");

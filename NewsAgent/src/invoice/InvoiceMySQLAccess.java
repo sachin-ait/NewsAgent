@@ -55,11 +55,11 @@ public class InvoiceMySQLAccess {
         List<Invoice> invoiceList = new ArrayList<>();
         String whereCondition = "";
         if ((!StringUtils.isNullOrEmpty(customerName)) && (!StringUtils.isNullOrEmpty(frequence))) {
-            whereCondition = "where CustName=? and frequence=?";
+            whereCondition = "where CustName=? and DeliveryOrder.DeliveryDate=?";
         } else if ((!StringUtils.isNullOrEmpty(customerName))) {
             whereCondition = "where CustName=?";
         } else if ((!StringUtils.isNullOrEmpty(frequence))) {
-            whereCondition = "where frequence=?";
+            whereCondition = "where DeliveryOrder.DeliveryDate=?";
         }
         try {
             String sql = "select DeliveryOrderId,CustName,CustID,pAmount,name,price,frequence,(pAmount*price) as money from (\n" +
@@ -90,11 +90,11 @@ public class InvoiceMySQLAccess {
         try {
             String whereCondition = "";
             if ((!StringUtils.isNullOrEmpty(customerName)) && (!StringUtils.isNullOrEmpty(frequence))) {
-                whereCondition = "where CustName=? and frequence=?";
+                whereCondition = "where CustName=? and DeliveryOrder.DeliveryDate=?";
             } else if ((!StringUtils.isNullOrEmpty(customerName))) {
                 whereCondition = "where CustName=?";
             } else if ((!StringUtils.isNullOrEmpty(frequence))) {
-                whereCondition = "where frequence=?";
+                whereCondition = "where DeliveryOrder.DeliveryDate=?";
             }
             String sql2 = "SELECT CustID,CustName,sum(money) totalMoney from (\n" +
                     "select DeliveryOrderId,CustName,CustID,pAmount,name,price,frequence,(pAmount*price) as money from (\n" +

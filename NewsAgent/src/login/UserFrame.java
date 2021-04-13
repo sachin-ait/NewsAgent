@@ -133,7 +133,7 @@ public class UserFrame extends JFrame {
         button4 = new JButton();
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- label1 ----
         label1.setText("User");
