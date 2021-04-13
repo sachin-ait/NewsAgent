@@ -107,19 +107,21 @@ public class UserFrame extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         label1 = new JLabel();
+        panel1 = new JPanel();
+        scrollPane1 = new JScrollPane();
+        table1 = new JTable(TableModel);
+        panel2 = new JPanel();
         label2 = new JLabel();
         ID_textField1 = new JTextField();
         label3 = new JLabel();
-        label5 = new JLabel();
         userName_textField2 = new JTextField();
+        label5 = new JLabel();
         passwordField1 = new JPasswordField();
-        button1 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
-        button4 = new JButton();
-        scrollPane1 = new JScrollPane();
-        textArea1 = new JTextArea();
         label4 = new JLabel();
+        button1 = new JButton();
+        button3 = new JButton();
+        button2 = new JButton();
+        button4 = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -128,117 +130,158 @@ public class UserFrame extends JFrame {
         label1.setText("User");
         label1.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 
-        //---- label2 ----
-        label2.setText("ID:");
-
-        //---- label3 ----
-        label3.setText("UserName");
-
-        //---- label5 ----
-        label5.setText("Password");
-
-        //---- button1 ----
-        button1.setText("Create");
-        button1.addAncestorListener(new AncestorListener() {
-            @Override
-            public void ancestorAdded(AncestorEvent e) {
-                button1AncestorAdded(e);
-            }
-            @Override
-            public void ancestorMoved(AncestorEvent e) {}
-            @Override
-            public void ancestorRemoved(AncestorEvent e) {}
-        });
-        button1.addActionListener(e -> button1ActionPerformed(e));
-
-        //---- button2 ----
-        button2.setText("Delete by ID");
-        button2.addActionListener(e -> button2ActionPerformed(e));
-
-        //---- button3 ----
-        button3.setText("Update");
-        button3.addActionListener(e -> button3ActionPerformed(e));
-
-        //---- button4 ----
-        button4.setText("View");
-        button4.addActionListener(e -> button4ActionPerformed(e));
-
-        //======== scrollPane1 ========
+        //======== panel1 ========
         {
-            scrollPane1.setViewportView(textArea1);
+
+            //======== scrollPane1 ========
+            {
+                scrollPane1.setViewportView(table1);
+            }
+
+            GroupLayout panel1Layout = new GroupLayout(panel1);
+            panel1.setLayout(panel1Layout);
+            panel1Layout.setHorizontalGroup(
+                panel1Layout.createParallelGroup()
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 328, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(14, Short.MAX_VALUE))
+            );
+            panel1Layout.setVerticalGroup(
+                panel1Layout.createParallelGroup()
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
         }
 
-        //---- label4 ----
-        label4.setText("text");
+        //======== panel2 ========
+        {
+
+            //---- label2 ----
+            label2.setText("ID:");
+
+            //---- label3 ----
+            label3.setText("UserName");
+
+            //---- label5 ----
+            label5.setText("Password");
+
+            //---- label4 ----
+            label4.setText("text");
+            label4.setForeground(Color.red);
+
+            //---- button1 ----
+            button1.setText("Create");
+            button1.addAncestorListener(new AncestorListener() {
+                @Override
+                public void ancestorAdded(AncestorEvent e) {
+                    button1AncestorAdded(e);
+                }
+                @Override
+                public void ancestorMoved(AncestorEvent e) {}
+                @Override
+                public void ancestorRemoved(AncestorEvent e) {}
+            });
+            button1.addActionListener(e -> button1ActionPerformed(e));
+
+            //---- button3 ----
+            button3.setText("Update");
+            button3.addActionListener(e -> button3ActionPerformed(e));
+
+            //---- button2 ----
+            button2.setText("Delete by ID");
+            button2.addActionListener(e -> button2ActionPerformed(e));
+
+            //---- button4 ----
+            button4.setText("View");
+            button4.addActionListener(e -> button4ActionPerformed(e));
+
+            GroupLayout panel2Layout = new GroupLayout(panel2);
+            panel2.setLayout(panel2Layout);
+            panel2Layout.setHorizontalGroup(
+                panel2Layout.createParallelGroup()
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(panel2Layout.createParallelGroup()
+                            .addGroup(panel2Layout.createSequentialGroup()
+                                .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(button1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(button3, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(button2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(button4, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panel2Layout.createSequentialGroup()
+                                    .addGroup(panel2Layout.createParallelGroup()
+                                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(label2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label5, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(label3, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(27, 27, 27)
+                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addComponent(ID_textField1, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(userName_textField2, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(22, Short.MAX_VALUE))
+            );
+            panel2Layout.setVerticalGroup(
+                panel2Layout.createParallelGroup()
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(ID_textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label2))
+                        .addGap(9, 9, 9)
+                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(userName_textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label3))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label5))
+                        .addGap(23, 23, 23)
+                        .addComponent(label4)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(button2)
+                            .addComponent(button1))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(button4)
+                            .addComponent(button3))
+                        .addContainerGap(23, Short.MAX_VALUE))
+            );
+        }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(95, 95, 95)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addContainerGap()
+                    .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(label2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(label3, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(label5, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-                            .addGap(22, 22, 22)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(passwordField1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                .addComponent(ID_textField1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                .addComponent(userName_textField2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                .addGroup(GroupLayout.Alignment.LEADING, contentPaneLayout.createSequentialGroup()
-                                    .addGap(29, 29, 29)
-                                    .addComponent(label1, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addComponent(button3, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                            .addGap(64, 64, 64)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addComponent(button2, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                                .addComponent(button4, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
-                        .addComponent(label4, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
-                    .addGap(18, 18, 18)
-                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(19, Short.MAX_VALUE))
+                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 289, Short.MAX_VALUE))
+                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(50, 50, 50)
+                    .addGap(42, 42, 42)
                     .addComponent(label1)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(label2)
-                                .addComponent(ID_textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGap(16, 16, 16)
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(label3)
-                                .addComponent(userName_textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(17, 17, 17)
-                                    .addComponent(label5))
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                            .addGap(12, 12, 12)
-                            .addComponent(label4)
-                            .addGap(18, 18, 18)
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(button1)
-                                .addComponent(button2))
-                            .addGap(18, 18, 18)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(button3)
-                                .addComponent(button4)))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addComponent(scrollPane1)))
-                    .addContainerGap(186, Short.MAX_VALUE))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(contentPaneLayout.createParallelGroup()
+                        .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap(43, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -267,18 +310,20 @@ public class UserFrame extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel label1;
+    private JPanel panel1;
+    private JScrollPane scrollPane1;
+    private JTable table1;
+    private JPanel panel2;
     private JLabel label2;
     private JTextField ID_textField1;
     private JLabel label3;
-    private JLabel label5;
     private JTextField userName_textField2;
+    private JLabel label5;
     private JPasswordField passwordField1;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JScrollPane scrollPane1;
-    private JTextArea textArea1;
     private JLabel label4;
+    private JButton button1;
+    private JButton button3;
+    private JButton button2;
+    private JButton button4;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
