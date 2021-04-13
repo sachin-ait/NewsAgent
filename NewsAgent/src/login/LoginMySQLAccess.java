@@ -19,7 +19,7 @@ public class LoginMySQLAccess {
 
     public LoginMySQLAccess() throws Exception {
 
-    	connect= MysqlJDBC.getConnection();
+        connect = MysqlJDBC.getConnection();
 
     }
 
@@ -34,7 +34,10 @@ public class LoginMySQLAccess {
             preparedStatement = connect.prepareStatement("insert into newsagent.user values (default ,?, ?)");
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getPassword());
-            preparedStatement.executeUpdate();
+            int i = preparedStatement.executeUpdate();
+            if (i == 0) {
+                insertSucessfull = false;
+            }
 
         } catch (Exception e) {
             insertSucessfull = false;
@@ -59,7 +62,7 @@ public class LoginMySQLAccess {
     }
 
 
-    public ResultSet retrieveUser(String userName,String password) {
+    public ResultSet retrieveUser(String userName, String password) {
 
         //Add Code here to call embedded SQL to view Customer Details
 
@@ -68,7 +71,7 @@ public class LoginMySQLAccess {
             preparedStatement = connect.prepareStatement("select * from newsagent.user where userName  = ? and password = ?");
             preparedStatement.setString(1, userName);
             preparedStatement.setString(2, password);
-            resultSet= preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
         } catch (Exception e) {
             resultSet = null;
@@ -91,7 +94,10 @@ public class LoginMySQLAccess {
             else
                 //Delete a particular Customer
                 preparedStatement = connect.prepareStatement("delete from newsagent.user where id = " + userId);
-            preparedStatement.executeUpdate();
+            int i = preparedStatement.executeUpdate();
+            if (i == 0) {
+                deleteSucessfull = false;
+            }
 
         } catch (Exception e) {
             deleteSucessfull = false;
@@ -101,9 +107,9 @@ public class LoginMySQLAccess {
 
     }
 
-    public boolean updateUserDetailsAccount(int id,String password) {
+    public boolean updateUserDetailsAccount(int id, String password) {
 
-        boolean insertSucessfull = true;
+        boolean updateSucessfull = true;
 
         //Add Code here to call embedded SQL to insert Customer into DB
 
@@ -111,17 +117,18 @@ public class LoginMySQLAccess {
             preparedStatement = connect.prepareStatement("UPDATE newsagent.user SET password = ? WHERE id=?;");
             preparedStatement.setString(1, password);
             preparedStatement.setString(2, String.valueOf(id));
-            preparedStatement.executeUpdate();
-
+            int i = preparedStatement.executeUpdate();
+            if (i == 0) {
+                updateSucessfull = false;
+            }
 
         } catch (Exception e) {
-            insertSucessfull = false;
+            updateSucessfull = false;
         }
 
-        return insertSucessfull;
+        return updateSucessfull;
 
     }// end insertCustomerDetailsAccount
-
 
 
 }// end Class
