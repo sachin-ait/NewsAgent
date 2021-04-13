@@ -34,8 +34,6 @@ import javax.swing.JComboBox;
 public class DeliveryOrderFrame extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JTextField nameField;
-	private JTextField dateField;
 	private JTextField idField;
 	private JButton btnCreate = new JButton("Create");
 	private JButton btnDelete = new JButton("Delete");
@@ -51,6 +49,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 	private final JButton btnUpdateReport = new JButton("Update Report");
 	private final JButton btnDeleteReport = new JButton("Delete Report");
 	private JComboBox pubcomboBox = new JComboBox();
+	private JComboBox cusnamecomboBox = new JComboBox();
 	private JTextField addressField;
 	private String pubChoice;
 	private String monthChoice;
@@ -102,6 +101,13 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 			String name = rs.getString("name");
 			pubcomboBox.addItem(name);
 		}
+		String querySql2 = "SELECT Name FROM NewsAgent.customer";
+		ResultSet cusrs = statement.executeQuery(querySql2);
+		ArrayList<String> cusnames = new ArrayList<>();
+		while (cusrs.next()) {
+			String name = cusrs.getString("Name");
+			cusnamecomboBox.addItem(name);
+		}
 		setTitle("DeliveryOrder");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 523, 381);
@@ -109,28 +115,16 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		nameField = new JTextField();
-		nameField.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		nameField.setBounds(129, 50, 100, 20);
-		contentPane.add(nameField);
-		nameField.setColumns(10);
 		lblCust1.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		lblCust1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblCust1.setBounds(10, 50, 120, 20);
+		lblCust1.setBounds(0, 50, 120, 20);
 		contentPane.add(lblCust1);
 		lblCust2.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		lblCust2.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblCust2.setBounds(10, 80, 120, 20);
 		contentPane.add(lblCust2);
-
-		dateField = new JTextField();
-		dateField.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		dateField.setBounds(357, 314, 100, 20);
-		contentPane.add(dateField);
-		dateField.setColumns(10);
 
 		JLabel lblCust3 = new JLabel("Date");
 		lblCust3.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -216,6 +210,9 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1.setBounds(10, 143, 109, 13);
 		contentPane.add(lblNewLabel_1);
+		
+		cusnamecomboBox.setBounds(130, 52, 101, 21);
+		contentPane.add(cusnamecomboBox);
 		btnDisplay.addActionListener(this);
 		btnUpdate.addActionListener(this);
 		btnDeleteReport.addActionListener(this);
@@ -231,7 +228,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 		if (target == btnCreate) {
 			try {
 				PreparedStatement preparedStatement = null;
-				String doName = nameField.getText();
+				String doName = cusnamecomboBox.getSelectedItem() + "";
 				String doPublication = pubcomboBox.getSelectedItem() + "";
 				//String doDate = dateField.getText();
 				String doDate = (String) comboMonthBox.getSelectedItem();
@@ -244,6 +241,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				while (rs.next()) {
 					doAddress = rs.getString("Address");
 				}
+				addressField.setText(doAddress);
 				int doCID = 0;
 				preparedStatement = connect.prepareStatement("SELECT CustID from NewsAgent.Customer where Name = ?");
 				preparedStatement.setString(1, doName);
@@ -264,10 +262,9 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 					//System.out.println("ERROR: DeliveryOrder Details NOT Saved");
 				}
 			} catch (DeliveryOrderExceptionHandler | SQLException e1) {
-				resultField.setText(e1.getMessage());
-				System.out.println(e1);
+				resultField.setText("Invalid inputs");
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				resultField.setText("Invalid inputs");
 			}
 		}
 		if (target == btnDelete) {
@@ -295,7 +292,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 			try {
 				PreparedStatement preparedStatement = null;
 				int doId = Integer.parseInt(idField.getText());
-				String doName = nameField.getText();
+				String doName = cusnamecomboBox.getSelectedItem() + "";
 				String doPublication = pubcomboBox.getSelectedItem() + "";
 				//String doDate = dateField.getText();
 				String doDate = (String) comboMonthBox.getSelectedItem();
@@ -308,24 +305,21 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				while (rs.next()) {
 					doAddress = rs.getString("Address");
 				}
+				addressField.setText(doAddress);
 				int doCID = 0;
 				preparedStatement = connect.prepareStatement("SELECT CustID FROM NewsAgent.Customer where Name = ?");
 				preparedStatement.setString(1, doName);
 				ResultSet rs2 = preparedStatement.executeQuery();
 				while (rs2.next()) {
 					doCID = Integer.parseInt(rs2.getString("custID"));
-					System.out.println(doCID);
 				}
 				boolean updateResult = dao.updateDeliveryOrderById(doId, doName, doCID, doAddress, doPublication, doDate, doAmount);
 				if (updateResult == true) {
 					resultField.setText("DeliveryOrder Updated");
-					System.out.println("DeliveryOrder Updated");
 				} else {
 					resultField.setText("ERROR: DeliveryOrder Details NOT Updated or Do Not Exist");
-					System.out.println("ERROR: DeliveryOrder Details NOT Updated or Do Not Exist");
 				}
 			} catch (Exception ex) {
-				ex.printStackTrace();
 				resultField.setText("Invalid Input");
 			}
 
