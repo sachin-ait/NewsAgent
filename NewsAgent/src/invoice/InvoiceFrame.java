@@ -27,7 +27,8 @@ public class InvoiceFrame extends JFrame {
 			"September",
 			"October",
 			"November",
-			"December"
+			"December",
+			"all"
 			};
     public InvoiceFrame() throws Exception {
         initComponents();

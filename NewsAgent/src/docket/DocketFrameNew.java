@@ -213,13 +213,15 @@ public class DocketFrameNew {
 						pub_amount.clear();
 						return;
 					}
+					
 				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("\n");
+		System.out.println("\n");
 	}
 
 	public void setVisible(boolean b) {

@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.JScrollBar;
 
 public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener {
 	private static DeliveryOrderFrameDisplay single;
@@ -60,21 +61,21 @@ public class DeliveryOrderFrameDisplay extends JFrame implements ActionListener 
 
 	private DeliveryOrderFrameDisplay(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 555, 363);
+		setBounds(100, 100, 555, 533);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 13, 515, 240);
+		panel.setBounds(10, 13, 515, 430);
 		contentPane.add(panel);
 		
 		table_1 = new JTable();
 		panel.add(table_1);
 		
 		closeButton = new JButton("Close");
-		closeButton.setBounds(225, 266, 85, 21);
+		closeButton.setBounds(218, 465, 85, 21);
 		contentPane.add(closeButton);
 		closeButton.addActionListener(this);
 		try {
