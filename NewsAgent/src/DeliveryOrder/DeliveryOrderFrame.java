@@ -94,14 +94,14 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 	public DeliveryOrderFrame() throws SQLException {
 		Connection connection = MysqlJDBC.getConnection();
 		Statement statement = connection.createStatement();
-		String querySql = "SELECT name FROM NewsAgent.publication";
+		String querySql = "SELECT name FROM newsagent.publication";
 		ResultSet rs = statement.executeQuery(querySql);
 		ArrayList<String> pubnames = new ArrayList<>();
 		while (rs.next()) {
 			String name = rs.getString("name");
 			pubcomboBox.addItem(name);
 		}
-		String querySql2 = "SELECT Name FROM NewsAgent.customer";
+		String querySql2 = "SELECT Name FROM newsagent.Customer";
 		ResultSet cusrs = statement.executeQuery(querySql2);
 		ArrayList<String> cusnames = new ArrayList<>();
 		while (cusrs.next()) {
@@ -235,7 +235,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				String doAddress = null;
 				int doAmount = Integer.parseInt(pubamountField.getText());
 				Connection connect = MysqlJDBC.getConnection();
-				preparedStatement = connect.prepareStatement("SELECT Address FROM NewsAgent.Customer where Name = ?");
+				preparedStatement = connect.prepareStatement("SELECT Address FROM newsagent.Customer where Name = ?");
 				preparedStatement.setString(1, doName);
 				ResultSet rs = preparedStatement.executeQuery();
 				while (rs.next()) {
@@ -243,7 +243,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				}
 				addressField.setText(doAddress);
 				int doCID = 0;
-				preparedStatement = connect.prepareStatement("SELECT CustID from NewsAgent.Customer where Name = ?");
+				preparedStatement = connect.prepareStatement("SELECT CustID from newsagent.Customer where Name = ?");
 				preparedStatement.setString(1, doName);
 				ResultSet rs2 = preparedStatement.executeQuery();
 				while (rs2.next()) {
@@ -299,7 +299,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				String doAddress = null;
 				int doAmount = Integer.parseInt(pubamountField.getText());
 				Connection connect = MysqlJDBC.getConnection();
-				preparedStatement = connect.prepareStatement("SELECT Address FROM NewsAgent.Customer where Name = ?");
+				preparedStatement = connect.prepareStatement("SELECT Address FROM newsagent.Customer where Name = ?");
 				preparedStatement.setString(1, doName);
 				ResultSet rs = preparedStatement.executeQuery();
 				while (rs.next()) {
@@ -307,7 +307,7 @@ public class DeliveryOrderFrame extends JFrame implements ActionListener {
 				}
 				addressField.setText(doAddress);
 				int doCID = 0;
-				preparedStatement = connect.prepareStatement("SELECT CustID FROM NewsAgent.Customer where Name = ?");
+				preparedStatement = connect.prepareStatement("SELECT CustID FROM newsagent.Customer where Name = ?");
 				preparedStatement.setString(1, doName);
 				ResultSet rs2 = preparedStatement.executeQuery();
 				while (rs2.next()) {

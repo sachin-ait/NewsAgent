@@ -114,7 +114,7 @@ public class InvoiceFrame extends JFrame {
         table1 = new JTable(TableModel);
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== panel1 ========
         {
