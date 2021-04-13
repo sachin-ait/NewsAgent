@@ -61,6 +61,20 @@ public class LoginMySQLAccess {
         return resultSet;
     }
 
+    public ResultSet retrieveAllUserById(String id) {
+
+        //Add Code here to call embedded SQL to view Customer Details
+
+        try {
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("Select * from newsagent.user where id='" + id + "'");
+
+        } catch (Exception e) {
+            resultSet = null;
+        }
+        return resultSet;
+    }
+
 
     public ResultSet retrieveUser(String userName, String password) {
 

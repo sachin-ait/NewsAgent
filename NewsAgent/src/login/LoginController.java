@@ -27,6 +27,11 @@ public class LoginController {
 		return resultSet;
 	}
 
+	public static ResultSet retrieveAllUserById(String id) {
+		ResultSet resultSet = dao.retrieveAllUserById(id);
+		return resultSet;
+	}
+
 	public static Boolean update(int ID, String updatePassword) {
 		boolean updateResult = dao.updateUserDetailsAccount(ID, updatePassword);
 		return updateResult;
