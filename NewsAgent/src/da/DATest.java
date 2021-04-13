@@ -313,7 +313,7 @@ public class DATest extends TestCase {
 						AgentMySQLAccess dao = new AgentMySQLAccess();
 						Statement statement = connect.createStatement();
 						ResultSet rs=statement.executeQuery("Select * from newsagent.DeliveryAgents");
-						 assertTrue(AgentMySQLAccess.retrieveAllDAAccounts() != null);
+						 assertTrue(dao.retrieveAllDAAccounts() != null);
 					} catch (SQLException | DAExceptionHandler e) {
 						fail("Exception unexpected");
 						
@@ -327,7 +327,7 @@ public class DATest extends TestCase {
 						AgentMySQLAccess dao = new AgentMySQLAccess();
 						Statement statement = connect.createStatement();
 						statement.executeUpdate("Delete * from newsagent.DeliveryAgents where");
-						 assertTrue(AgentMySQLAccess.retrieveAllDAAccounts() != null);
+						 assertTrue(dao.retrieveAllDAAccounts() != null);
 					} catch (SQLException | DAExceptionHandler e) {
 						fail("Exception unexpected");
 						

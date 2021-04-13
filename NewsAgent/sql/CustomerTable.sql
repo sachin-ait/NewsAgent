@@ -11,4 +11,7 @@ CREATE TABLE if not exists Customer (
 );
 
 
-INSERT INTO Customer (CustId,Name,Address,PhoneNumber,Payment,Area) VALUES (1,'Van', 'Willow Park',0885667095,50,'Willow Park');
+INSERT INTO Customer (CustId,Name,Address,PhoneNumber,Payment,Area) VALUES (1,'Van', '03 Willow Park',0885667095,50,'willow park');
+INSERT INTO Customer (CustId,Name,Address,PhoneNumber,Payment,Area) VALUES (2,'John', 'International Office, Ait',0885667097,50,'ait');
+INSERT INTO Customer (CustId,Name,Address,PhoneNumber,Payment,Area) VALUES (3,'Mike', 'Apartment 1, Croi Oige',0885667098,50,'croi oige');
+INSERT INTO Customer (CustId,Name,Address,PhoneNumber,Payment,Area) VALUES (4,'Peter', '2, GarryCastle',0885667099,50,'athlone town');

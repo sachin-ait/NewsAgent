@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS DeliveryAgents;
 CREATE TABLE DeliveryAgents (
 	Agent_ID int NOT NULL AUTO_INCREMENT,
 	Agent_Name VARCHAR(50),
-    Agent_Area VARCHAR(60),
+    Agent_Area VARCHAR(60) unique,
 	Agent_Pay_Rate DECIMAL(4),
     Agent_Hours_Logged DECIMAL(3),
     primary key (Agent_ID),
@@ -66,3 +66,8 @@ begin
 end
 //
 DELIMITER ;
+
+call create_Agent("Sachin", "willow park", 20, 20);
+call create_Agent("Leon", "croi oige", 20, 20);
+call create_Agent("Li", "ait", 20, 20);
+call create_Agent("Huang", "athlone town", 20, 20);

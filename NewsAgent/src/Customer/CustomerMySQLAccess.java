@@ -154,7 +154,7 @@ public class CustomerMySQLAccess {
 
 		try {
 			statement = connect.createStatement();
-			resultSet = statement.executeQuery("Select Agent_Area from newsagent.deliveryAgents;");
+			resultSet = statement.executeQuery("Select Agent_Area from newsagent.DeliveryAgents;");
 
 		} catch (Exception e) {
 			e.printStackTrace();

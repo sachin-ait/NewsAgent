@@ -1,5 +1,6 @@
 package base;
 import java.sql.Connection;
+import da.AgentMySQLAccess;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,7 +26,8 @@ public class MysqlJDBCTest extends TestCase {
 					try {
 						connect= MysqlJDBC.getConnection();
 						connect.close();
-						da.AgentMySQLAccess.retrieveAllDAAccounts();
+						AgentMySQLAccess aa= new AgentMySQLAccess();
+						aa.retrieveAllDAAccounts();
 						fail("Exception expected");
 					} catch (Exception e) {
 						System.out.println("Error");

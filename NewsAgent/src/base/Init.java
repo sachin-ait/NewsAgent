@@ -32,7 +32,7 @@ public class Init {
 //			case "3":
 //				biling.BillCommandLine.main(null);
 //				break;
-////			case "4":
+//			case "4":
 //				cust.CommandLine.main(null);
 //				break;
 			case"5":

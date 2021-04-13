@@ -44,7 +44,7 @@ public class AgentMySQLAccess {
 
 	}// end insertCustomerDetailsAccount
 
-	public static ResultSet retrieveAllDAAccounts() throws DAExceptionHandler {
+	public ResultSet retrieveAllDAAccounts() throws DAExceptionHandler {
 
 		// Add Code here to call embedded SQL to view Customer Details
 

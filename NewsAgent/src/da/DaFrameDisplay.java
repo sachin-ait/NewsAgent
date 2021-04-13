@@ -82,7 +82,7 @@ public class DaFrameDisplay extends JFrame implements ActionListener {
 		closeButton.addActionListener(this);
 		try {
 			AgentMySQLAccess dao = new AgentMySQLAccess();
-			ResultSet rSet = AgentMySQLAccess.retrieveAllDAAccounts();
+			ResultSet rSet = dao.retrieveAllDAAccounts();
 			if (rSet == null) {
 				System.out.println("No Records Found");
 			}

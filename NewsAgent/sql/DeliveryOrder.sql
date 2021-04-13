@@ -10,6 +10,7 @@ CREATE TABLE DeliveryOrder(
     DeliveryDate varchar(18),     
     PRIMARY KEY (DeliveryOrderId)
 );
-/*
-INSERT INTO DeliveryOrder(DeliveryOrderId,CustID,CustName,PublicationName,DeliveryDate) VALUES (1,'Jack', 'Athlone','Starry', '13/2/2021');
-*/
+
+insert into DeliveryOrder values(1, 1, "Van", '03 Willow Park', "Fox News", 2, "April");
+insert into DeliveryOrder values(2, 2, "John", 'International Office, Ait', "Digits Now", 2, "April");
+insert into DeliveryOrder values(3, 3, "Mike", 'Apartment 1, Croi Oige', "IEEE Explore", 1, "April");
