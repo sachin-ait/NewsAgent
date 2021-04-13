@@ -39,6 +39,17 @@ public class InvoiceMySQLAccess {
         }
         return list;
     }
+    public List<String> retrieveAllMonths() throws SQLException {
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT frequence FROM newsagent.publication group by frequence;";
+        preparedStatement = connect.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String CustName = resultSet.getString("frequence");
+            list.add(CustName);
+        }
+        return list;
+    }
 
     public PreparedStatement retrieveAllInvoices(String customerName, String frequence) {
         List<Invoice> invoiceList = new ArrayList<>();

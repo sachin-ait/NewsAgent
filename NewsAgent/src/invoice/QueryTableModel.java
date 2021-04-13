@@ -61,13 +61,24 @@ class QueryTableModel extends AbstractTableModel {
             while (rs.next()) {
                 record = new String[colCount];
                 for (int i = 0; i < colCount; i++) {
-                    if (i == 5) {
+                    if (i == 5 ) {
                         double aDouble = rs.getDouble(i + 1);
                         record[i] = String.format("%.1f", aDouble);
                         System.out.println();
-                    } else {
+                    }
+                    if (i  == 7 )
+                    {
+                    	if(rs.getString("frequence").equals("Daily"))
+                    		record[i]= "" +30 * rs.getDouble(i+1);
+                    	if(rs.getString("frequence").equals("Weekly"))
+                    		record[i]= "" +4 * rs.getDouble(i+1);
+                    	if(rs.getString("frequence").equals("Monthly"))
+                    		record[i]= "" + rs.getDouble(i+1);
+                    }
+                    else {
                         record[i] = rs.getString(i + 1);
                     }
+                   
                 }//end for loop
                 modelData.addElement(record);
             }// end while loop
